@@ -50,7 +50,16 @@ class HeaderStyle extends React.Component {
                                 style={styles.button}
                                 //this.props.navigation.navigate('CommonArea')}>
                                 onPress={() => { this._updateScreen(0); this.props.navigation.navigate('CommonArea') }}>
-                                <Text style={styles.buttonText}>Homes</Text>
+                                <Text style={styles.buttonText}>Início</Text>
+                            </TouchableOpacity>
+                            <Icon style={styles.icon} name='keyboard-arrow-right' />
+                        </View>
+
+                        <View style={[styles.viewButton, this.state.currentScreen === 7 ? styles.backViewButton2 : styles.backViewButton1]}>
+                            <TouchableOpacity
+                                style={styles.button}
+                                onPress={() => { this._updateScreen(7); this.props.navigation.navigate('Calendar') }}>
+                                <Text style={styles.buttonText}>Regras de Etiqueta</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
                         </View>
@@ -67,7 +76,7 @@ class HeaderStyle extends React.Component {
                         <View style={[styles.viewButton, this.state.currentScreen === 2 ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => { this._updateScreen(2); this.props.navigation.navigate('Calendar') }}>
+                                onPress={() => { this._updateScreen(2); this.props.navigation.navigate('Degree') }}>
                                 <Text style={styles.buttonText}>Área de Ensino</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
@@ -143,7 +152,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     viewButton: {
-        height: 90,
+        height: 65,
         width: Dimensions.get("window").width * 0.7,
         justifyContent: 'space-between',
         alignItems: 'center',

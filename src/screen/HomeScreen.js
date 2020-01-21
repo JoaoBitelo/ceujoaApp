@@ -9,24 +9,25 @@ import {
   Dimensions,
   Alert,
   BackHandler,
-  ActivityIndicator
+  ActivityIndicator,
+  KeyboardAvoidingView
 } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import FetchService from "../services/FetchService";
 import { NavigationEvents } from 'react-navigation';
+import { AsyncStorage } from "react-native";
 
 class HomeScreen extends React.Component<Props, State> {
   constructor() {
     super();
     this.FetchService = new FetchService();
-    this.state = { login: "ceujoa", loading: false };
+    this.state = { login: "joao", password: "123", loading: false };
   }
 
   _loginButtonMethod = async () => {
     this.setState({ loading: true })
-    const res = await this.FetchService.login(this.state.login);
+    const res = await this.FetchService.login(this.state.login, this.state.password);
     this.setState({ loading: false })
-
     if (res === false) {
       Alert.alert(
         "Erro durante a autenticação",
@@ -34,15 +35,9 @@ class HomeScreen extends React.Component<Props, State> {
         [{ text: "OK" }]
       );
     } else {
-      if (res === "continue") {
-        this.props.navigation.navigate("CommonArea");
-      } else {
-        Alert.alert(
-          "Erro durante a autenticação",
-          "A chave informada está incorreta",
-          [{ text: "OK" }]
-        );
-      }
+      AsyncStorage.setItem('ID_l', this.state.login);
+      AsyncStorage.setItem('ID_p', this.state.password);
+      this.props.navigation.navigate("CommonArea");
     }
 
   }
@@ -69,7 +64,7 @@ class HomeScreen extends React.Component<Props, State> {
       );
     } else {
       return (
-        <View style={styles.viewBackground}>
+        <KeyboardAvoidingView style={styles.viewBackground} behavior="padding" enabled>
           <NavigationEvents
             onWillFocus={() => this._start()}
             onWillBlur={() => this._end()} />
@@ -85,21 +80,28 @@ class HomeScreen extends React.Component<Props, State> {
             </View>
 
             <View style={styles.viewMiddleGround}>
-              <Text style={styles.textInfo}>
-                Por motivos de privacidade solicite a chave de acesso aos dirigentes
-                    </Text>
-            </View>
-
-            <View style={styles.viewBottomGround}>
               <TextInput style={styles.textField}
+                onSubmitEditing={() => { this.secondTextInput.focus(); }}
                 value={this.state.text}
                 autoCapitalize='none'
-                placeholder="CHAVE"
+                placeholder="LOGIN "
                 placeholderTextColor="black"
                 onChangeText={(login) => { this.setState({ login }) }}
                 textAlign={'center'}
               >
               </TextInput>
+              <TextInput style={styles.textField}
+                ref={(input) => { this.secondTextInput = input; }}
+                value={this.state.text}
+                autoCapitalize='none'
+                placeholder="SENHA"
+                placeholderTextColor="black"
+                onChangeText={(password) => { this.setState({ password }) }}
+                textAlign={'center'}
+              />
+            </View>
+
+            <View style={styles.viewBottomGround}>
               <TouchableOpacity
                 style={styles.button}
                 onPress={this._loginButtonMethod}>
@@ -107,10 +109,10 @@ class HomeScreen extends React.Component<Props, State> {
               </TouchableOpacity>
             </View>
 
-            <View style={{ flex: 0.30 }}></View>
+            <View style={{ flex: 0.1 }}></View>
           </ImageBackground>
 
-        </View>
+        </KeyboardAvoidingView>
       );
     }
   }
@@ -124,7 +126,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   viewUpperGround: {
-    flex: 3,
+    flex: 2,
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -135,13 +137,6 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     borderRadius: 200,
   },
-  viewMiddleGround: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 10,
-  },
   textInfo: {
     flex: 1,
     color: "white",
@@ -149,15 +144,20 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     textAlign: "center",
   },
-  viewBottomGround: {
+  viewMiddleGround: {
     flex: 1,
-    justifyContent: 'space-around',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  viewBottomGround: {
+    flex: 0.5,
+    justifyContent: 'center',
     alignItems: 'center',
   },
   textField: {
     color: "#000",
-    marginBottom: 40,
-    width: Dimensions.get("window").width * 0.7,
+    marginBottom: 20,
+    width: Dimensions.get("window").width * 0.8,
     height: Dimensions.get("window").height * 0.07,
     backgroundColor: "rgba(255,255,255,0.6)",
     borderRadius: 50,

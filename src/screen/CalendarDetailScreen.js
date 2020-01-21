@@ -81,7 +81,7 @@ class CalendarDetailScreen extends React.Component {
               <View style={{ flex: 1, paddingBottom: 5, paddingTop: 10, paddingHorizontal: 10 }}>
                 <Text style={styles.titulo}>
                   Atividade:
-                          </Text>
+                </Text>
               </View>
               <View style={{ flex: 1, paddingBottom: 14, paddingTop: 7, paddingHorizontal: 10 }}>
                 <Text style={styles.descricao}>
@@ -100,7 +100,7 @@ class CalendarDetailScreen extends React.Component {
                           </Text>
               </View>
               <View style={{ flex: 1, paddingBottom: 14, paddingTop: 7, paddingHorizontal: 10 }}>
-                <Text style={styles.descricao2}>
+                <Text style={styles.descricao}>
                   {this.state.event.DataProvavel} - {this.state.event.Hora}
                 </Text>
               </View>

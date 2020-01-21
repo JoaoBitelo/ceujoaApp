@@ -11,6 +11,9 @@ import NormsRegulationsHeader from './src/headers/screenHeaders/NormsRegulations
 import RegulationsHeader from './src/headers/screenHeaders/RegulationsHeader';
 import PrincipalLetterHeader from './src/headers/screenHeaders/PrincipalLetterHeader';
 import LetterMagnaHeader from './src/headers/screenHeaders/LetterMagnaHeader';
+import DegreeHeader from './src/headers/screenHeaders/DegreeHeader';
+import SpecificDegreeHeader from './src/headers/screenHeaders/SpecificDegreeHeader';
+import SpecificDegreeDetailHeader from './src/headers/screenHeaders/SpecificDegreeDetailHeader';
 
 
 const homeScreen = HomeHeader;
@@ -21,6 +24,9 @@ const normsRegulationsScreen = NormsRegulationsHeader;
 const regulationsScreen = RegulationsHeader;
 const principalLetter = PrincipalLetterHeader;
 const letterMagna = LetterMagnaHeader;
+const degree = DegreeHeader;
+const specificDegree = SpecificDegreeHeader;
+const specificDegreeDetail = SpecificDegreeDetailHeader;
 
 const DrawerConfig = {
   drawerWidth: Dimensions.get('window').width * 0.7,
@@ -44,8 +50,10 @@ const DrawerNavigator = createDrawerNavigator(
     NormsRegulations: { screen: normsRegulationsScreen },
     Regulations: { screen: regulationsScreen },
     PrincipalLetter: { screen: principalLetter },
-    LetterMagna: { screen: letterMagna }
-
+    LetterMagna: { screen: letterMagna },
+    Degree: { screen: degree },
+    SpecificDegree: { screen : specificDegree },
+    SpecificDegreeDetail: { screen: specificDegreeDetail },
   },
   DrawerConfig
 );

@@ -38,7 +38,9 @@ class HomeScreen extends React.Component {
         [{ text: "OK", onPress: () => this.props.navigation.navigate("Home") }]
       );
     } else {
-      this.setState({ phrase: res })
+      var response = res[0].areaComum;
+      response = response.replace(/\\n/g,'\n');
+      this.setState({ phrase: response })
       this.setState({ loading: false })
     }
   }
@@ -123,13 +125,13 @@ const styles = StyleSheet.create({
   },
   warning: {
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 16,
     flexWrap: 'wrap',
     color: "white"
   },
   phrase: {
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 19,
     flexWrap: 'wrap',
     color: "white",
     fontStyle: 'italic',
