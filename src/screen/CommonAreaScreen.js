@@ -28,7 +28,7 @@ class HomeScreen extends React.Component {
 
   _loadClient = async () => {
     this.setState({ loading: true })
-    const res = await this.FetchService.getPhrase();
+    const res = await this.FetchService.getSource("AreaComum");
 
     if (res === false) {
       Alert.alert(
@@ -37,7 +37,7 @@ class HomeScreen extends React.Component {
         [{ text: "OK", onPress: () => this.props.navigation.navigate("Home") }]
       );
     } else {
-      var response = res[0].areaComum;
+      var response = res.texto;
       response = response.replace(/\\n/g,'\n');
       this.setState({ phrase: response })
       this.setState({ loading: false })

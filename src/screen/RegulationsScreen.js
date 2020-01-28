@@ -2,14 +2,16 @@ import React from "react";
 import {
   StyleSheet,
   View,
-  Text,
-  ImageBackground,
-  Dimensions,
   BackHandler,
   ActivityIndicator,
+  WebView,
+  Alert,
+  Text,
+  ImageBackground
 } from "react-native";
 import FetchService from "../services/FetchService";
 import { NavigationEvents } from 'react-navigation';
+import { Linking } from 'expo';
 
 class RegulationsScreen extends React.Component {
   constructor() {
@@ -23,25 +25,40 @@ class RegulationsScreen extends React.Component {
     this._loadClient();
   }
 
+  backButtonHandler = () => {
+    this.props.navigation.navigate("NormsRegulations");
+    return true;
+  }
+
   _loadClient = async () => {
     this.setState({ loading: true })
-    const res = await this.FetchService.getRegulation();
-
+    //const res = await this.FetchService.getSource("CartaDePrincipios");
+    const res = true;
     if (res === false) {
       Alert.alert(
         "Erro de autenticação de sessão",
         "Faça login novamente no aplicativo",
-        [{ text: "OK", onPress: () => this.props.navigation.navigate("Home") }]
+        [{ text: "ABRIR", onPress: () => this.props.navigation.navigate("Home") }]
       );
     } else {
-      this.setState({ phrase: res })
+      this.setState({ phrase: res.link })
       this.setState({ loading: false })
     }
   }
 
-  backButtonHandler = () => {
-    this.props.navigation.navigate("NormsRegulations");
-    return true;
+  error = async () => {
+    Alert.alert(
+      "Erro ao abrir",
+      "Não foi possível abrir o arquivo a partir deste dispositivo. Tente entrar diretamente pressionando 'abrir' abaixo. Se o erro persistir, verifique sua conexão com a internet",
+      [
+        {
+           text: "ABRIR", onPress: () => Linking.openURL(this.state.phrase)
+        },
+        {
+          text: "VOLTAR", onPress: () => this.props.navigation.navigate("CommonArea")
+        }
+      ]
+    );
   }
 
   _end() {
@@ -64,12 +81,13 @@ class RegulationsScreen extends React.Component {
           <ImageBackground
             source={require("../../assets/backgroundCalendar.jpg")}
             style={styles.imageBackGround}>
-            <View style={styles.middleView}>
-              <View style={styles.textBox}>
-                <Text style={styles.phrase}>"{this.state.phrase}"</Text>
+            <View style={styles.upperView}>
+              <View style={[styles.textBox]}>
+                <Text style={styles.text}>
+                  Este conteúdo ainda não está disponivel
+                </Text>
               </View>
             </View>
-            <View style={{ flex: 1 }}></View>
           </ImageBackground>
         </View>
       );
@@ -85,22 +103,21 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  middleView: {
-    flex: 3,
+  upperView: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-
   },
   textBox: {
-    width: Dimensions.get("window").width,
     backgroundColor: 'rgba(53, 87, 35, 0.5)',
     padding: 5
   },
-  phrase: {
+  text: {
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 20,
     flexWrap: 'wrap',
-    color: "white"
+    color: "white",
+    fontWeight: 'bold',
   }
 });
 

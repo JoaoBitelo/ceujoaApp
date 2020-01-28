@@ -20,18 +20,6 @@ class FetchService {
       });
   }
 
-  getPhrase = async () => {
-    let url = BASE_URL + global.GET_PHRASE
-    return fetch(url)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        return responseJson
-      })
-      .catch((error) =>{
-        return false;
-      });
-  }
-
   login = async (login, password) =>{
     let url = BASE_URL + global.LOGIN
       return fetch(url, {
