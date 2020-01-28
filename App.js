@@ -14,7 +14,9 @@ import LetterMagnaHeader from './src/headers/screenHeaders/LetterMagnaHeader';
 import DegreeHeader from './src/headers/screenHeaders/DegreeHeader';
 import SpecificDegreeHeader from './src/headers/screenHeaders/SpecificDegreeHeader';
 import SpecificDegreeDetailHeader from './src/headers/screenHeaders/SpecificDegreeDetailHeader';
-
+import NotificationHeader from './src/headers/screenHeaders/NotificationHeader';
+import EtiquetteRulesHeader from './src/headers/screenHeaders/EtiquetteRulesHeader';
+import DonationsHeader from './src/headers/screenHeaders/DonationsHeader';
 
 const homeScreen = HomeHeader;
 const commonAreaScreen = CommonAreaHeader;
@@ -27,6 +29,9 @@ const letterMagna = LetterMagnaHeader;
 const degree = DegreeHeader;
 const specificDegree = SpecificDegreeHeader;
 const specificDegreeDetail = SpecificDegreeDetailHeader;
+const notification = NotificationHeader;
+const etiquetteRules = EtiquetteRulesHeader;
+const donations = DonationsHeader
 
 const DrawerConfig = {
   drawerWidth: Dimensions.get('window').width * 0.7,
@@ -54,6 +59,9 @@ const DrawerNavigator = createDrawerNavigator(
     Degree: { screen: degree },
     SpecificDegree: { screen : specificDegree },
     SpecificDegreeDetail: { screen: specificDegreeDetail },
+    Notification: { screen: notification },
+    EtiquetteRules: { screen: etiquetteRules },
+    Donations: { screen: donations }
   },
   DrawerConfig
 );

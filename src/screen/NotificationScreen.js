@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import {
   StyleSheet,
   View,
@@ -7,17 +7,17 @@ import {
   Dimensions,
   BackHandler,
   ActivityIndicator,
-  Alert
+  Alert,
+  TouchableOpacity
 } from "react-native";
-import { AsyncStorage } from "react-native";
+import { Icon } from 'react-native-elements';
+import FetchService from "../services/FetchService";
 import { NavigationEvents } from 'react-navigation';
 
-class SpecificDegreeDetailScreen extends React.Component {
+class NotificationScreen extends React.Component {
   constructor() {
     super();
-    this.state = {
-      loading: false, dados: [], Descricao: "", FontesAdicionais: ""
-    };
+    this.state = { dados: [] };
   }
 
   _start() {
@@ -28,17 +28,17 @@ class SpecificDegreeDetailScreen extends React.Component {
   _loadClient = async () => {
     this.setState({ loading: true })
     try {
-        const value = await AsyncStorage.getItem('SpecificDegreeDetail');
-        var res = JSON.parse(value)
-        if (value !== null) {
-            var temp = res.Adicional.replace(/\\n/g,'\n');
-            this.setState({ FontesAdicionais: temp })
-            temp = res.Descricao.replace(/\\n/g,'\n');
-            this.setState({ Descricao: temp })
-
+        //const res = await this.FetchService.getSource("RegrasDeEtiqueta");
+        const res = true;
+        if (res === false) {
+            Alert.alert(
+                "Erro de autenticação de sessãossssssssssssssssss",
+                "Faça login novamente no aplicativo",
+                [{ text: "OK", onPress: () => this.props.navigation.navigate("Home") }]
+            );
+        }else{
             this.setState({ dados: res })
             this.setState({ loading: false })
-          return value;
         }
       } catch (error) {
         Alert.alert(
@@ -49,8 +49,16 @@ class SpecificDegreeDetailScreen extends React.Component {
       }
   }
 
+  buttonMethod = async () => {
+
+  }
+
+  iconMethod = async () => {
+    
+  }
+
   backButtonHandler = () => {
-    this.props.navigation.navigate("SpecificDegree");
+    this.props.navigation.navigate("CommonArea");
     return true;
   }
 
@@ -74,43 +82,41 @@ class SpecificDegreeDetailScreen extends React.Component {
           <ImageBackground
             source={require("../../assets/backgroundCalendar.jpg")}
             style={styles.imageBackGround}>
-            <View style={{ flex: 0.08 }}></View>
 
-            <View style={styles.viewFrontGround}>
-              <View style={styles.textBox}>
-                <Text style={styles.textTitle}>
-                  Titulo:
-                </Text>
+          <View style={{ flex: 0.08 }}></View>
+          
+          <View style={styles.box}>
+            <TouchableOpacity style={styles.textoView}
+              onPress={() => this.buttonMethod()}>
+              <View style={styles.mountTextView}>
                 <Text style={styles.textCenter}>
-                  {this.state.dados.Nome}
+                  Nova atualização em:{" "}<Text style={styles.textTitle}>Grau 1, Aula 1</Text>
                 </Text>
               </View>
-              <View style={styles.textBox}>
-                <Text style={styles.textTitle}>
-                  Descrição:
-                </Text>
+                
+              <View style={styles.mountTextView}>
                 <Text style={styles.textCenter}>
-                  {this.state.Descricao} 
+                  Atualizado em:{" "}<Text style={styles.textTitle}>03/01/01</Text>
                 </Text>
               </View>
-              <View style={styles.textBox}>
-                <Text style={styles.textTitle}>
-                  Fontes Adicionais:
-                </Text>
-                <Text style={styles.textCenter}>
-                  {this.state.FontesAdicionais} 
-                </Text>
-              </View>
-              
+            </TouchableOpacity>
+
+            <View style={styles.iconView}>
+              <Icon
+                name='close'
+                color='red'
+                onPress={() => this.iconMethod()} />
             </View>
-            
-            <View style={{ flex: 0.1 }}></View>
+          </View>
+
+          <View style={{ flex: 0.1 }}></View>             
           </ImageBackground>
         </View>
       );
     }
   }
 }
+
 const styles = StyleSheet.create({
   viewBackground: {
     flex: 1,
@@ -119,33 +125,46 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  viewFrontGround:{
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textBox:{
+  box:{
     backgroundColor: 'rgba(53, 87, 35, 0.5)',
     marginBottom: 20,
     borderRadius: 10,
     paddingBottom: 5, 
-    paddingTop: 10, 
-    paddingHorizontal: 10,
+    paddingTop: 5, 
+    paddingLeft: 10,
     alignSelf: "center",
-    width: Dimensions.get("window").width * 0.75,
+    flexDirection: 'row',
+    width: Dimensions.get("window").width * 0.9,
+  },
+  textoView:{
+    flex: 4,
+    //justifyContent: 'center',
+    //alignItems: 'center'
+  },
+  mountTextView:{
+    //flex: 1,
+    flexDirection: 'row',
+    paddingVertical: 5,
   },
   textTitle:{
+    //flex: 1,
     fontSize: 20,
     flexWrap: 'wrap',
     fontWeight: 'bold',
-    color: "white"
+    color: "white",
+    //textAlign: 'center',
   },
   textCenter:{
+    //flex: 1,
     fontSize: 19,
     flexWrap: 'wrap',
     color: "white",
-    //paddingLeft: 20
-  }
+  },
+   iconView:{
+    flex:1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
 });
 
-export default SpecificDegreeDetailScreen;
+export default NotificationScreen;

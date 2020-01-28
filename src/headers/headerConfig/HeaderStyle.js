@@ -58,7 +58,7 @@ class HeaderStyle extends React.Component {
                         <View style={[styles.viewButton, this.state.currentScreen === 7 ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => { this._updateScreen(7); this.props.navigation.navigate('Calendar') }}>
+                                onPress={() => { this._updateScreen(7); this.props.navigation.navigate('EtiquetteRules') }}>
                                 <Text style={styles.buttonText}>Regras de Etiqueta</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
@@ -103,8 +103,8 @@ class HeaderStyle extends React.Component {
                         <View style={[styles.viewButton, this.state.currentScreen === 5 ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => { this._updateScreen(5); this.props.navigation.navigate('Calendar') }}>
-                                <Text style={styles.buttonText}>Doações</Text>
+                                onPress={() => { this._updateScreen(5); this.props.navigation.navigate('Donations') }}>
+                                <Text style={styles.buttonText}>Ações sociais - Projeto Joaquinas</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
                         </View>
@@ -113,7 +113,7 @@ class HeaderStyle extends React.Component {
                             <TouchableOpacity
                                 style={styles.button}
                                 onPress={() => { this._updateScreen(6); this.props.navigation.navigate('NormsRegulations') }}>
-                                <Text style={styles.buttonText}>Normas e Regulamentos</Text>
+                                <Text style={styles.buttonText}>Estatuto Social e Regimento Interno</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
                         </View>

@@ -4,7 +4,6 @@ import {
   View,
   Text,
   ImageBackground,
-  Dimensions,
   BackHandler,
   ActivityIndicator,
 } from "react-native";
@@ -66,7 +65,7 @@ class HomeScreen extends React.Component {
         </View>
       );
     } else {
-      return (
+      return(
         <View style={styles.viewBackground}>
           <NavigationEvents
             onWillFocus={() => this._start()}
@@ -119,7 +118,6 @@ const styles = StyleSheet.create({
 
   },
   textBox: {
-    width: Dimensions.get("window").width,
     backgroundColor: 'rgba(53, 87, 35, 0.5)',
     padding: 5
   },

@@ -7,16 +7,19 @@ import {
   Dimensions,
   BackHandler,
   ActivityIndicator,
-  Alert
+  Alert,
+  SafeAreaView,
+  ScrollView 
 } from "react-native";
-import { AsyncStorage } from "react-native";
+import FetchService from "../services/FetchService";
 import { NavigationEvents } from 'react-navigation';
 
-class SpecificDegreeDetailScreen extends React.Component {
+class DonationsScreen extends React.Component {
   constructor() {
     super();
+    this.FetchService = new FetchService();
     this.state = {
-      loading: false, dados: [], Descricao: "", FontesAdicionais: ""
+      loading: false, titulo: "", texto: ""
     };
   }
 
@@ -28,17 +31,20 @@ class SpecificDegreeDetailScreen extends React.Component {
   _loadClient = async () => {
     this.setState({ loading: true })
     try {
-        const value = await AsyncStorage.getItem('SpecificDegreeDetail');
-        var res = JSON.parse(value)
-        if (value !== null) {
-            var temp = res.Adicional.replace(/\\n/g,'\n');
-            this.setState({ FontesAdicionais: temp })
-            temp = res.Descricao.replace(/\\n/g,'\n');
-            this.setState({ Descricao: temp })
+        const res = await this.FetchService.getSource("Doacoes");
 
-            this.setState({ dados: res })
+        if (res === false) {
+            Alert.alert(
+                "Erro de autenticação de sessão",
+                "Faça login novamente no aplicativo",
+                [{ text: "OK", onPress: () => this.props.navigation.navigate("Home") }]
+            );
+        }else{
+            var temp = res.titulo.replace(/\\n/g,'\n');
+            this.setState({ titulo: temp })
+            temp = res.texto.replace(/\\n/g,'\n');
+            this.setState({ texto: temp })
             this.setState({ loading: false })
-          return value;
         }
       } catch (error) {
         Alert.alert(
@@ -50,7 +56,7 @@ class SpecificDegreeDetailScreen extends React.Component {
   }
 
   backButtonHandler = () => {
-    this.props.navigation.navigate("SpecificDegree");
+    this.props.navigation.navigate("CommonArea");
     return true;
   }
 
@@ -74,37 +80,22 @@ class SpecificDegreeDetailScreen extends React.Component {
           <ImageBackground
             source={require("../../assets/backgroundCalendar.jpg")}
             style={styles.imageBackGround}>
-            <View style={{ flex: 0.08 }}></View>
 
-            <View style={styles.viewFrontGround}>
-              <View style={styles.textBox}>
-                <Text style={styles.textTitle}>
-                  Titulo:
-                </Text>
-                <Text style={styles.textCenter}>
-                  {this.state.dados.Nome}
-                </Text>
-              </View>
-              <View style={styles.textBox}>
-                <Text style={styles.textTitle}>
-                  Descrição:
-                </Text>
-                <Text style={styles.textCenter}>
-                  {this.state.Descricao} 
-                </Text>
-              </View>
-              <View style={styles.textBox}>
-                <Text style={styles.textTitle}>
-                  Fontes Adicionais:
-                </Text>
-                <Text style={styles.textCenter}>
-                  {this.state.FontesAdicionais} 
-                </Text>
-              </View>
-              
-            </View>
-            
-            <View style={{ flex: 0.1 }}></View>
+            <SafeAreaView style={styles.viewFrontGround}>
+                <ScrollView>
+                    <View style={styles.textBox}>
+                        <Text style={styles.textTitle}>
+                            {this.state.titulo}
+                        </Text>
+                    </View>
+
+                    <View style={styles.textBox}>
+                        <Text style={styles.textCenter}>
+                            {this.state.texto} 
+                        </Text>
+                    </View>   
+                </ScrollView>
+            </SafeAreaView >    
           </ImageBackground>
         </View>
       );
@@ -123,29 +114,28 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingTop: 10,
   },
   textBox:{
     backgroundColor: 'rgba(53, 87, 35, 0.5)',
     marginBottom: 20,
     borderRadius: 10,
-    paddingBottom: 5, 
-    paddingTop: 10, 
     paddingHorizontal: 10,
     alignSelf: "center",
-    width: Dimensions.get("window").width * 0.75,
+    width: Dimensions.get("window").width * 0.9,
   },
   textTitle:{
     fontSize: 20,
     flexWrap: 'wrap',
     fontWeight: 'bold',
-    color: "white"
+    color: "white",
+    textAlign: 'center',
   },
   textCenter:{
     fontSize: 19,
     flexWrap: 'wrap',
     color: "white",
-    //paddingLeft: 20
   }
 });
 
-export default SpecificDegreeDetailScreen;
+export default DonationsScreen;

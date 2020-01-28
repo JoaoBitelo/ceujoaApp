@@ -21,7 +21,7 @@ class HomeScreen extends React.Component<Props, State> {
   constructor() {
     super();
     this.FetchService = new FetchService();
-    this.state = { login: "joao", password: "123", loading: false };
+    this.state = { login: "joao2", password: "123", loading: false };
   }
 
   _loginButtonMethod = async () => {
@@ -37,7 +37,7 @@ class HomeScreen extends React.Component<Props, State> {
     } else {
       AsyncStorage.setItem('ID_l', this.state.login);
       AsyncStorage.setItem('ID_p', this.state.password);
-      this.props.navigation.navigate("CommonArea");
+      this.props.navigation.navigate('CommonArea');
     }
 
   }

@@ -2,8 +2,12 @@ import React from 'react';
 import { View, Dimensions } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import CommonAreaScreen from '../../screen/CommonAreaScreen';
-import NavigationDrawerStructure from '../headerConfig/Structure'
+import NavigationDrawerStructure from '../headerConfig/Structure';
+import { Icon } from 'react-native-elements';
+import NotificationStatus from '../../services/NotificationStatus';
 
+this.NotificationStatus = new NotificationStatus();
+var status = this.NotificationStatus.getStatus();
 
 const CommonAreaHeader = createStackNavigator({
     CommonArea: {
@@ -28,8 +32,20 @@ const CommonAreaHeader = createStackNavigator({
                 </View>
             ),
             headerRight: (
-                <View style={{ flex: 1 }}>
-
+                <View style={{ flex: 1, alignItems: 'center', paddingRight: 15 }}>
+                    {status===true ? (
+                        <Icon
+                            name='notifications-active'
+                            color='#FFEF00'
+                            onPress={() => navigation.navigate('Notification')}
+                        />
+                    ) : (
+                        <Icon
+                            name='notifications'
+                            color='white'
+                            onPress={() => navigation.navigate('Notification')}
+                        />
+                    )}
                 </View>
             )
         }),

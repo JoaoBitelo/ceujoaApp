@@ -54,39 +54,24 @@ class FetchService {
       });
   }
 
-  getRegulation = async () => {
-    let url = BASE_URL + global.GET_REGULATIONS
-    return fetch(url)
+  getSource = async (name) => {
+    let url = BASE_URL + global.GET_SOURCE
+      return fetch(url, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: name
+        }),
+      })
       .then((response) => response.json())
       .then((responseJson) => {
         return responseJson
       })
       .catch((error) =>{
-        return false;
-      });
-  }
-
-  getPrincipalLetter = async () => {
-    let url = BASE_URL + global.GET_PRINCIPAL_LETTER
-    return fetch(url)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        return responseJson
-      })
-      .catch((error) =>{
-        return false;
-      });
-  }
-
-  getLetterMagna = async () => {
-    let url = BASE_URL + global.GET_LETTER_MAGNA
-    return fetch(url)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        return responseJson
-      })
-      .catch((error) =>{
-        return false;
+        return false
       });
   }
 
@@ -134,6 +119,5 @@ class FetchService {
         return false
       });
   }
-
 }
 export default FetchService;

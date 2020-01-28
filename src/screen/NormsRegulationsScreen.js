@@ -45,7 +45,7 @@ class NormsRegulationsScreen extends React.Component {
             <TouchableOpacity
               style={styles.textBox}
               onPress={() => this.props.navigation.navigate("Regulations")}>
-              <Text style={styles.phrase}>REGULAMENTO</Text>
+              <Text style={styles.phrase}>ESTATUTO SOCIAL E REGIMENTO INTERNO</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.textBox}
