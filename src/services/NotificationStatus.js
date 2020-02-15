@@ -4,12 +4,12 @@ const global = require('../util/Url');
 var status = false
 
 class NotificationStatus {
-  getStatus = () => {//async () => {
+  getStatus = () => {
     this.updateStatus();
     return status;
   }
 
-  updateStatus = () => {//async () => {
+  updateStatus = () => {
     if(status===true){
       status = false;
     }else{
