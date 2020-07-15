@@ -1,8 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import EtiquetteRulesScreen from '../../screen/EtiquetteRulesScreen';
-import { HeaderBackButton } from 'react-navigation-stack';
+import NavigationDrawerStructure from '../headerConfig/Structure';
 
 
 const EtiquetteRulesHeader = createStackNavigator({
@@ -23,8 +23,9 @@ const EtiquetteRulesHeader = createStackNavigator({
                 fontWeight: 'bold'
             },
             headerLeft: (
-                <HeaderBackButton tintColor={'white'}
-                    onPress={() => navigation.navigate("CommonArea")} />
+                <View style={{ paddingHorizontal: Dimensions.get("window").width * 0.05 }}>
+                    <NavigationDrawerStructure navigation={navigation} />
+                </View>
             ),
             headerRight: (
                 <View style={{ flex: 1 }}>

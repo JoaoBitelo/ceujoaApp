@@ -48,7 +48,6 @@ class HeaderStyle extends React.Component {
                         <View style={[styles.viewButton, this.state.currentScreen === 0 ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                //this.props.navigation.navigate('CommonArea')}>
                                 onPress={() => { this._updateScreen(0); this.props.navigation.navigate('CommonArea') }}>
                                 <Text style={styles.buttonText}>Início</Text>
                             </TouchableOpacity>
@@ -86,7 +85,7 @@ class HeaderStyle extends React.Component {
                             <TouchableOpacity
                                 style={styles.button}
                                 onPress={() => { this._updateScreen(3); this.props.navigation.navigate('Calendar') }}>
-                                <Text style={styles.buttonText}>Área Financeira</Text>
+                                <Text style={styles.buttonText}>Área Financeira(por fazer)</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
                         </View>
@@ -95,7 +94,7 @@ class HeaderStyle extends React.Component {
                             <TouchableOpacity
                                 style={styles.button}
                                 onPress={() => { this._updateScreen(4); this.props.navigation.navigate('Calendar') }}>
-                                <Text style={styles.buttonText}>Área Ritualística</Text>
+                                <Text style={styles.buttonText}>Área Ritualística(por fazer)</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
                         </View>
