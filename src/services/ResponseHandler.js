@@ -19,7 +19,7 @@ class ResponseHandler {
         Alert.alert(
             "Erro de internet",
             "Não foi possível realizar esta solicitação. Verifique sua conexão com a internet",
-            [{ text: "OK", onPress: () => this.props.navigation.navigate("Home") }]
+            [{ text: "OK"}]
         );
     }
     trueResponse = async (token) => {

@@ -12,11 +12,12 @@ import {
 import FetchService from "../../services/FetchService";
 import { NavigationEvents } from 'react-navigation';
 import { Linking } from 'expo';
+import ResponseHandler from "../../services/ResponseHandler";
 
 class RegulationsScreen extends React.Component {
   constructor() {
     super();
-    this.FetchService = new FetchService();
+    this.ResponseHandler = new ResponseHandler();
     this.state = { phrase: "", loading: false };
   }
 
@@ -34,14 +35,17 @@ class RegulationsScreen extends React.Component {
     this.setState({ loading: true })
     //const res = await this.FetchService.getSource("CartaDePrincipios");
     const res = true;
-    if (res === false) {
-      Alert.alert(
-        "Erro de autenticação de sessão",
-        "Faça login novamente no aplicativo",
-        [{ text: "ABRIR", onPress: () => this.props.navigation.navigate("Home") }]
-      );
+    if (res === null) {
+      this.ResponseHandler.nullResponse();
+      this.setState({ loading: false })
+      this.props.navigation.navigate('Home');
+    } else if (res === false) {
+      this.ResponseHandler.falseResponse();
+      this.setState({ loading: false })
+      this.props.navigation.navigate('Home');
     } else {
-      this.setState({ phrase: res.link })
+      //this.setState({ phrase: res.content.link })
+      //await this.ResponseHandler.trueResponse(res.token);
       this.setState({ loading: false })
     }
   }

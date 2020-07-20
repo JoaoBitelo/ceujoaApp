@@ -10,18 +10,19 @@ import {
 import { Icon } from 'react-native-elements';
 import FetchService from "../services/FetchService";
 import { NavigationEvents } from 'react-navigation';
-import CurrentIndexMenu from '../headers/headerConfig/CurrentIndexMenu';
+import ResponseHandler from "../services/ResponseHandler";
 
 class HomeScreen extends React.Component {
   constructor() {
     super();
     this.FetchService = new FetchService();
-    this.CurrentIndexMenu = new CurrentIndexMenu();
+    this.ResponseHandler = new ResponseHandler();
     this.state = { phrase: "", loading: false };
   }
 
   _start() {
     BackHandler.addEventListener('hardwareBackPress', this.backButtonHandler);
+    this.updateIndexMenu();
     this._loadClient();    
   }
 
@@ -37,11 +38,16 @@ class HomeScreen extends React.Component {
       this.setState({ loading: false })
       this.props.navigation.navigate('Home');
     } else {
+      await this.ResponseHandler.trueResponse(res.token);
       var response = res.content.texto;
       response = response.replace(/\\n/g, '\n');
       this.setState({ phrase: response })
       this.setState({ loading: false })
     }
+  }
+
+  updateIndexMenu = async () => {
+    //colocar o index em primeiro
   }
 
   backButtonHandler = () => {

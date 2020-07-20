@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Dimensions } from "react-native";
+import { View, Dimensions, Text } from "react-native";
 import { createStackNavigator } from 'react-navigation-stack';
 import CalendarScreen from '../../screen/CalendarScreen';
 import NavigationDrawerStructure from '../headerConfig/Structure'
@@ -27,7 +27,9 @@ const CalendarHeader = createStackNavigator({
                 </View>
             ),
             headerRight: (
-                <View style={{ flex: 1 }}></View>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
+                    <Text style={{flex:1 , color: 'white', textAlign: 'center', flexWrap: 'wrap'}}>filtro</Text>
+                </View>
             )
         }),
     },

@@ -15,13 +15,15 @@ import {
 import FetchService from "../services/FetchService";
 import { AsyncStorage } from "react-native";
 import { NavigationEvents } from 'react-navigation';
+import ResponseHandler from "../services/ResponseHandler";
 
 class CalendarScreen extends React.Component {
   constructor() {
     super();
     this.FetchService = new FetchService();
+    this.ResponseHandler = new ResponseHandler();
     this.state = {
-      loading: false, dados: []
+      loading: false, dados: [], nextEvent: ""
     };
   }
 
@@ -34,16 +36,25 @@ class CalendarScreen extends React.Component {
     this.setState({ loading: true })
     const res = await this.FetchService.getCalendar();
 
-    if (res === false) {
-      Alert.alert(
-        "Erro de autenticação de sessão",
-        "Faça login novamente no aplicativo",
-        [{ text: "OK", onPress: () => this.props.navigation.navigate("Home") }]
-      );
+    if (res === null) {
+      this.ResponseHandler.nullResponse();
+      this.setState({ loading: false })
+      this.props.navigation.navigate('Home');
+    } else if (res === false) {
+      this.ResponseHandler.falseResponse();
+      this.setState({ loading: false })
+      this.props.navigation.navigate('Home');
     } else {
-      this.setState({ dados: res })
+      console.log(res)
+      await this.ResponseHandler.trueResponse(res.token);
+      this.setState({ dados: res.content })
+      await this.findNextEvent(res);
       this.setState({ loading: false })
     }
+  }
+
+  findNextEvent = async (res) => {
+    this.setState({ dados: res.content })
   }
 
   backButtonHandler = () => {
@@ -89,24 +100,24 @@ class CalendarScreen extends React.Component {
                 <ScrollView>
                   <View style={styles.textBox}>
                     <Text style={styles.textTitle}>
-                      Evento mai próximo
+                      Evento mais próximo
                     </Text>
                   </View>
                   <FlatList style={{ flex: 3 }}
-                    data={this.state.dados}
+                    data={this.state.nextEvent}
                     renderItem={({ item, index }) => (
                       <TouchableOpacity
                         style={styles.TouchableOpacityEvent}
                         onPress={() => this._buttonMethod(item)}>
                         <View style={{ flex: 3, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
                           <Text style={styles.atividade}>
-                            {item.Atividade}
+                            {item.atividade}
                           </Text>
                         </View>
 
                         <View style={{ flex: 2, paddingBottom: 14, paddingTop: 14, paddingHorizontal: 2 }}>
                           <Text style={styles.data}>
-                            {item.DataProvavel}
+                            {item.dataProvavel}
                           </Text>
                         </View>
                       </TouchableOpacity>
@@ -126,13 +137,13 @@ class CalendarScreen extends React.Component {
                         onPress={() => this._buttonMethod(item)}>
                         <View style={{ flex: 3, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
                           <Text style={styles.atividade}>
-                            {item.Atividade}
+                            {item.atividade}
                           </Text>
                         </View>
 
                         <View style={{ flex: 2, paddingBottom: 14, paddingTop: 14, paddingHorizontal: 2 }}>
                           <Text style={styles.data}>
-                            {item.DataProvavel}
+                            {item.dataProvavel}
                           </Text>
                         </View>
                       </TouchableOpacity>

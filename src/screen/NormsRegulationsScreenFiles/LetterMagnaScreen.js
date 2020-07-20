@@ -10,11 +10,13 @@ import {
 import FetchService from "../../services/FetchService";
 import { NavigationEvents } from 'react-navigation';
 import { Linking } from 'expo';
+import ResponseHandler from "../../services/ResponseHandler";
 
 class LetterMagnaScreen extends React.Component {
   constructor() {
     super();
     this.FetchService = new FetchService();
+    this.ResponseHandler = new ResponseHandler();
     this.state = { phrase: "", loading: false };
   }
 
@@ -35,6 +37,7 @@ class LetterMagnaScreen extends React.Component {
       this.setState({ loading: false })
       this.props.navigation.navigate('Home');
     } else {
+      await this.ResponseHandler.trueResponse(res.token);
       this.setState({ phrase: res.content.link })
       this.setState({ loading: false })
     }
