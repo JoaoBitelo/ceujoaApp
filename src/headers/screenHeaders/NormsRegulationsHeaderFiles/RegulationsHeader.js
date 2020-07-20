@@ -1,15 +1,15 @@
 import React from 'react';
 import { View } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
-import LetterMagnaScreen from '../../screen/LetterMagnaScreen';
+import RegulationsScreen from '../../../screen/NormsRegulationsScreenFiles/RegulationsScreen';
 import { HeaderBackButton } from 'react-navigation-stack';
 
 
-const LetterMagnaHeader = createStackNavigator({
-    LetterMagna: {
-        screen: LetterMagnaScreen,
+const RegulationsHeader = createStackNavigator({
+    Regulations: {
+        screen: RegulationsScreen,
         navigationOptions: ({ navigation }) => ({
-            title: "Princípios",
+            title: "Regulamento",
             //header todo
             headerStyle: {
                 backgroundColor: '#c7282d',
@@ -35,4 +35,4 @@ const LetterMagnaHeader = createStackNavigator({
     },
 });
 
-export default LetterMagnaHeader
+export default RegulationsHeader

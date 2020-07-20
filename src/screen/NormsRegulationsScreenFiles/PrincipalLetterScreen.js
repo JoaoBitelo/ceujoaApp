@@ -7,11 +7,11 @@ import {
   WebView,
   Alert
 } from "react-native";
-import FetchService from "../services/FetchService";
+import FetchService from "../../services/FetchService";
 import { NavigationEvents } from 'react-navigation';
 import { Linking } from 'expo';
 
-class LetterMagnaScreen extends React.Component {
+class PrincipalLetterScreen extends React.Component {
   constructor() {
     super();
     this.FetchService = new FetchService();
@@ -23,25 +23,26 @@ class LetterMagnaScreen extends React.Component {
     this._loadClient();
   }
 
-  _loadClient = async () => {
-    this.setState({ loading: true })
-    const res = await this.FetchService.getSource("CartaMagna");
-
-    if (res === false) {
-      Alert.alert(
-        "Erro de autenticação de sessão",
-        "Faça login novamente no aplicativo",
-        [{ text: "OK", onPress: () => this.props.navigation.navigate("Home") }]
-      );
-    } else {
-      this.setState({ phrase: res.link })
-      this.setState({ loading: false })
-    }
-  }
-
   backButtonHandler = () => {
     this.props.navigation.navigate("NormsRegulations");
     return true;
+  }
+
+  _loadClient = async () => {
+    this.setState({ loading: true })
+    const res = await this.FetchService.getSource("CartaDePrincipios");
+    if (res === null) {
+      this.ResponseHandler.nullResponse();
+      this.setState({ loading: false })
+      this.props.navigation.navigate('Home');
+    } else if (res === false) {
+      this.ResponseHandler.falseResponse();
+      this.setState({ loading: false })
+      this.props.navigation.navigate('Home');
+    } else {
+      this.setState({ phrase: res.content.link })
+      this.setState({ loading: false })
+    }
   }
 
   error = async () => {
@@ -50,7 +51,7 @@ class LetterMagnaScreen extends React.Component {
       "Não foi possível abrir o arquivo a partir deste dispositivo. Tente entrar diretamente pressionando 'abrir' abaixo. Se o erro persistir, verifique sua conexão com a internet",
       [
         {
-           text: "ABRIR", onPress: () => Linking.openURL(this.state.phrase)
+          text: "ABRIR", onPress: () => Linking.openURL(this.state.phrase)
         },
         {
           text: "VOLTAR", onPress: () => this.props.navigation.navigate("CommonArea")
@@ -77,9 +78,9 @@ class LetterMagnaScreen extends React.Component {
             onWillFocus={() => this._start()}
             onWillBlur={() => this._end()} />
           <WebView
-            source={{uri: this.state.phrase}}
-            style={{flex: 1}}
-            onError={()=>this.error()}
+            source={{ uri: this.state.phrase }}
+            style={{ flex: 1 }}
+            onError={() => this.error()}
           />
         </View>
       );
@@ -93,4 +94,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default LetterMagnaScreen;
+export default PrincipalLetterScreen;

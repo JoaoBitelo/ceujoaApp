@@ -9,7 +9,7 @@ import {
   ActivityIndicator,
   Alert,
   SafeAreaView,
-  ScrollView 
+  ScrollView
 } from "react-native";
 import FetchService from "../services/FetchService";
 import { NavigationEvents } from 'react-navigation';
@@ -30,29 +30,20 @@ class EtiquetteRulesScreen extends React.Component {
 
   _loadClient = async () => {
     this.setState({ loading: true })
-    try {
-        const res = await this.FetchService.getSource("RegrasDeEtiqueta");
-
-        if (res === false) {
-            Alert.alert(
-                "Erro de autenticação de sessão",
-                "Faça login novamente no aplicativo",
-                [{ text: "OK", onPress: () => this.props.navigation.navigate("Home") }]
-            );
-        }else{
-            var temp = res.titulo.replace(/\\n/g,'\n');
-            this.setState({ titulo: temp })
-            temp = res.texto.replace(/\\n/g,'\n');
-            this.setState({ texto: temp })
-            this.setState({ loading: false })
-        }
-      } catch (error) {
-        Alert.alert(
-            "Erro de autenticação de sessão",
-            "Faça login novamente no aplicativo",
-            [{ text: "OK", onPress: () => this.props.navigation.navigate("Home") }]
-          );
-      }
+    const res = await this.FetchService.getSource("RegrasDeEtiqueta");
+    if (res === null) {
+      this.ResponseHandler.nullResponse();
+      this.props.navigation.navigate('Home');
+    } else if (res === false) {
+      this.ResponseHandler.falseResponse();
+      this.props.navigation.navigate('Home');
+    } else {
+      var temp = res.content.titulo.replace(/\\n/g, '\n');
+      this.setState({ titulo: temp })
+      temp = res.content.texto.replace(/\\n/g, '\n');
+      this.setState({ texto: temp })
+      this.setState({ loading: false })
+    }
   }
 
   backButtonHandler = () => {
@@ -82,20 +73,20 @@ class EtiquetteRulesScreen extends React.Component {
             style={styles.imageBackGround}>
 
             <SafeAreaView style={styles.viewFrontGround}>
-                <ScrollView>
-                    <View style={styles.textBox}>
-                        <Text style={styles.textTitle}>
-                            {this.state.titulo}
-                        </Text>
-                    </View>
+              <ScrollView>
+                <View style={styles.textBox}>
+                  <Text style={styles.textTitle}>
+                    {this.state.titulo}
+                  </Text>
+                </View>
 
-                    <View style={styles.textBox}>
-                        <Text style={styles.textCenter}>
-                            {this.state.texto} 
-                        </Text>
-                    </View>   
-                </ScrollView>
-            </SafeAreaView >    
+                <View style={styles.textBox}>
+                  <Text style={styles.textCenter}>
+                    {this.state.texto}
+                  </Text>
+                </View>
+              </ScrollView>
+            </SafeAreaView >
           </ImageBackground>
         </View>
       );
@@ -110,13 +101,13 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  viewFrontGround:{
+  viewFrontGround: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: 10,
   },
-  textBox:{
+  textBox: {
     backgroundColor: 'rgba(53, 87, 35, 0.5)',
     marginBottom: 20,
     borderRadius: 10,
@@ -124,14 +115,14 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     width: Dimensions.get("window").width * 0.9,
   },
-  textTitle:{
+  textTitle: {
     fontSize: 20,
     flexWrap: 'wrap',
     fontWeight: 'bold',
     color: "white",
     textAlign: 'center',
   },
-  textCenter:{
+  textCenter: {
     fontSize: 19,
     flexWrap: 'wrap',
     color: "white",

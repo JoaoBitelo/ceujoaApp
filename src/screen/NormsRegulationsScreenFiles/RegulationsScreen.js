@@ -9,7 +9,7 @@ import {
   Text,
   ImageBackground
 } from "react-native";
-import FetchService from "../services/FetchService";
+import FetchService from "../../services/FetchService";
 import { NavigationEvents } from 'react-navigation';
 import { Linking } from 'expo';
 
@@ -52,7 +52,7 @@ class RegulationsScreen extends React.Component {
       "Não foi possível abrir o arquivo a partir deste dispositivo. Tente entrar diretamente pressionando 'abrir' abaixo. Se o erro persistir, verifique sua conexão com a internet",
       [
         {
-           text: "ABRIR", onPress: () => Linking.openURL(this.state.phrase)
+          text: "ABRIR", onPress: () => Linking.openURL(this.state.phrase)
         },
         {
           text: "VOLTAR", onPress: () => this.props.navigation.navigate("CommonArea")
@@ -79,7 +79,7 @@ class RegulationsScreen extends React.Component {
             onWillFocus={() => this._start()}
             onWillBlur={() => this._end()} />
           <ImageBackground
-            source={require("../../assets/backgroundCalendar.jpg")}
+            source={require("../../../assets/backgroundCalendar.jpg")}
             style={styles.imageBackGround}>
             <View style={styles.upperView}>
               <View style={[styles.textBox]}>

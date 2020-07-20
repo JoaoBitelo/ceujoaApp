@@ -22,30 +22,26 @@ class HomeScreen extends React.Component {
 
   _start() {
     BackHandler.addEventListener('hardwareBackPress', this.backButtonHandler);
-    this._loadClient();
-    this.updateIndexMenu();
+    this._loadClient();    
   }
 
   _loadClient = async () => {
     this.setState({ loading: true })
     const res = await this.FetchService.getSource("AreaComum");
-
-    if (res === false) {
-      Alert.alert(
-        "Erro de autenticação de sessão",
-        "Faça login novamente no aplicativo",
-        [{ text: "OK", onPress: () => this.props.navigation.navigate("Home") }]
-      );
+    if (res === null) {
+      this.ResponseHandler.nullResponse();
+      this.setState({ loading: false })
+      this.props.navigation.navigate('Home');
+    } else if (res === false) {
+      this.ResponseHandler.falseResponse();
+      this.setState({ loading: false })
+      this.props.navigation.navigate('Home');
     } else {
-      var response = res.texto;
-      response = response.replace(/\\n/g,'\n');
+      var response = res.content.texto;
+      response = response.replace(/\\n/g, '\n');
       this.setState({ phrase: response })
       this.setState({ loading: false })
     }
-  }
-
-  updateIndexMenu = async () => {
-    await this.CurrentIndexMenu.setIndex(0);
   }
 
   backButtonHandler = () => {
@@ -65,7 +61,7 @@ class HomeScreen extends React.Component {
         </View>
       );
     } else {
-      return(
+      return (
         <View style={styles.viewBackground}>
           <NavigationEvents
             onWillFocus={() => this._start()}

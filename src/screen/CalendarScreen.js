@@ -8,7 +8,9 @@ import {
   Dimensions,
   FlatList,
   BackHandler,
-  ActivityIndicator
+  ActivityIndicator,
+  SafeAreaView,
+  ScrollView
 } from "react-native";
 import FetchService from "../services/FetchService";
 import { AsyncStorage } from "react-native";
@@ -82,29 +84,64 @@ class CalendarScreen extends React.Component {
           <ImageBackground
             source={require("../../assets/backgroundCalendar.jpg")}
             style={styles.imageBackGround}>
-            <View style={{ flex: 0.08 }}></View>
-            <FlatList style={{ flex: 3 }}
-              data={this.state.dados}
-              renderItem={({ item, index }) => (
-                <TouchableOpacity
-                  style={styles.TouchableOpacityEvent}
-                  onPress={() => this._buttonMethod(item)}>
-                  <View style={{ flex: 3, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
-                    <Text style={styles.atividade}>
-                      {item.Atividade}
+            <View style={{ flex: 0.01 }}></View>
+              <SafeAreaView style={styles.viewFrontGround}>
+                <ScrollView>
+                  <View style={styles.textBox}>
+                    <Text style={styles.textTitle}>
+                      Evento mai próximo
                     </Text>
                   </View>
+                  <FlatList style={{ flex: 3 }}
+                    data={this.state.dados}
+                    renderItem={({ item, index }) => (
+                      <TouchableOpacity
+                        style={styles.TouchableOpacityEvent}
+                        onPress={() => this._buttonMethod(item)}>
+                        <View style={{ flex: 3, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
+                          <Text style={styles.atividade}>
+                            {item.Atividade}
+                          </Text>
+                        </View>
 
-                  <View style={{ flex: 2, paddingBottom: 14, paddingTop: 14, paddingHorizontal: 2 }}>
-                    <Text style={styles.data}>
-                      {item.DataProvavel}
+                        <View style={{ flex: 2, paddingBottom: 14, paddingTop: 14, paddingHorizontal: 2 }}>
+                          <Text style={styles.data}>
+                            {item.DataProvavel}
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
+                    )}
+                    keyExtractor={(item, index) => index.toString()}
+                  />
+                  <View style={styles.textBox}>
+                    <Text style={styles.textTitle}>
+                      Demais eventos
                     </Text>
                   </View>
-                </TouchableOpacity>
-              )}
-              keyExtractor={(item, index) => index.toString()}
-            />
-            <View style={{ flex: 0.1 }}></View>
+                  <FlatList style={{ flex: 3 }}
+                    data={this.state.dados}
+                    renderItem={({ item, index }) => (
+                      <TouchableOpacity
+                        style={styles.TouchableOpacityEvent}
+                        onPress={() => this._buttonMethod(item)}>
+                        <View style={{ flex: 3, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
+                          <Text style={styles.atividade}>
+                            {item.Atividade}
+                          </Text>
+                        </View>
+
+                        <View style={{ flex: 2, paddingBottom: 14, paddingTop: 14, paddingHorizontal: 2 }}>
+                          <Text style={styles.data}>
+                            {item.DataProvavel}
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
+                    )}
+                    keyExtractor={(item, index) => index.toString()}
+                  />
+                </ScrollView>
+              </SafeAreaView > 
+            <View style={{ flex: 0.01 }}></View>
           </ImageBackground>
         </View>
       );
@@ -119,12 +156,18 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  viewFrontGround:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 10,
+  },
   TouchableOpacityEvent: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    backgroundColor: '#c7282d',
+    backgroundColor: 'rgba(53, 87, 35, 0.5)',
     marginBottom: 20,
     borderRadius: 10,
     alignSelf: "center",
@@ -153,6 +196,21 @@ const styles = StyleSheet.create({
     fontSize: 16,
     flexWrap: 'wrap',
     color: "white"
+  },
+  textBox:{
+    backgroundColor: 'rgba(0, 0, 0, 0.75)',
+    marginBottom: 20,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    alignSelf: "center",
+    width: Dimensions.get("window").width * 0.9,
+  },
+  textTitle:{
+    fontSize: 20,
+    flexWrap: 'wrap',
+    fontWeight: 'bold',
+    color: "white",
+    textAlign: 'center',
   }
 });
 

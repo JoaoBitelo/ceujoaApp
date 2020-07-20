@@ -7,7 +7,6 @@ import {
   ImageBackground,
   Image,
   Dimensions,
-  Alert,
   BackHandler,
   ActivityIndicator,
   KeyboardAvoidingView
@@ -15,31 +14,38 @@ import {
 import { TextInput } from "react-native-gesture-handler";
 import FetchService from "../services/FetchService";
 import { NavigationEvents } from 'react-navigation';
-import { AsyncStorage } from "react-native";
+import ResponseHandler from "../services/ResponseHandler";
 
 class HomeScreen extends React.Component<Props, State> {
   constructor() {
     super();
     this.FetchService = new FetchService();
-    this.state = { login: "joao2", password: "123", loading: false };
+    this.ResponseHandler = new ResponseHandler();
+    this.state = { login: "jbitelo", password: "12345678", loading: false };
   }
 
   _loginButtonMethod = async () => {
     this.setState({ loading: true })
-    const res = await this.FetchService.login(this.state.login, this.state.password);
-    this.setState({ loading: false })
-    if (res === false) {
-      Alert.alert(
-        "Erro durante a autenticação",
-        "Não foi possível conectar-se ao servidor, tente novamente mais tarde. Se o problema persistir, contate um administrador do sistema",
-        [{ text: "OK" }]
-      );
-    } else {
-      AsyncStorage.setItem('ID_l', this.state.login);
-      AsyncStorage.setItem('ID_p', this.state.password);
-      this.props.navigation.navigate('CommonArea');
+    const res = await this.FetchService.login(this.state.login, this.state.password);    
+    if(res===null){
+      this.setState({ loading: false })
+      this.ResponseHandler.nullResponse();
+      this.props.navigation.navigate('Home');
+    }else if(res===false){
+      this.setState({ loading: false })
+      this.ResponseHandler.falseResponse();
+      this.props.navigation.navigate('Home');
+    }else{
+      if(res.firstLogin===true) {
+        this.setState({ loading: false })
+        await this.ResponseHandler.loginResponse(this.state.login, res.token);
+        this.props.navigation.navigate('CommonArea');
+      } else {
+        this.setState({ loading: false })
+        await this.ResponseHandler.loginResponse(this.state.login, res);
+        this.props.navigation.navigate('CommonArea');
+      }
     }
-
   }
 
   _start() {
@@ -71,7 +77,7 @@ class HomeScreen extends React.Component<Props, State> {
 
           <ImageBackground source={require("../../assets/backgroundHome.jpg")}
             style={styles.imageBackGround}>
-            <View style={{ flex: 0.3 }}></View>
+            <View style={{ flex: 0.01 }}></View>
 
             <View style={styles.viewUpperGround}>
               <Image style={styles.image}
@@ -109,7 +115,7 @@ class HomeScreen extends React.Component<Props, State> {
               </TouchableOpacity>
             </View>
 
-            <View style={{ flex: 0.1 }}></View>
+            <View style={{ flex: 0.01 }}></View>
           </ImageBackground>
 
         </KeyboardAvoidingView>

@@ -74,7 +74,7 @@ class SpecificDegreeDetailScreen extends React.Component {
           <ImageBackground
             source={require("../../assets/backgroundCalendar.jpg")}
             style={styles.imageBackGround}>
-            <View style={{ flex: 0.08 }}></View>
+            <View style={{ flex: 0.01 }}></View>
 
             <View style={styles.viewFrontGround}>
               <View style={styles.textBox}>
@@ -104,7 +104,7 @@ class SpecificDegreeDetailScreen extends React.Component {
               
             </View>
             
-            <View style={{ flex: 0.1 }}></View>
+            <View style={{ flex: 0.01 }}></View>
           </ImageBackground>
         </View>
       );

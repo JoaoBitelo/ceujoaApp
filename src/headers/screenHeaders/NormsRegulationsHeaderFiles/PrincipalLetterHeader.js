@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
-import PrincipalLetterScreen from '../../screen/PrincipalLetterScreen';
+import PrincipalLetterScreen from '../../../screen/NormsRegulationsScreenFiles/PrincipalLetterScreen';
 import { HeaderBackButton } from 'react-navigation-stack';
 
 

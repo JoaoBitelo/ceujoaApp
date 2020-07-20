@@ -94,7 +94,7 @@ class SpecificDegreeScreen extends React.Component {
           <ImageBackground
             source={require("../../assets/backgroundCalendar.jpg")}
             style={styles.imageBackGround}>
-            <View style={{ flex: 0.08 }}></View>
+            <View style={{ flex: 0.01 }}></View>
             <FlatList style={{ flex: 3 }}
               data={this.state.dados}
               renderItem={({ item, index }) => (
@@ -110,7 +110,7 @@ class SpecificDegreeScreen extends React.Component {
               )}
               keyExtractor={(item, index) => index.toString()}
             />
-            <View style={{ flex: 0.1 }}></View>
+            <View style={{ flex: 0.01 }}></View>
           </ImageBackground>
         </View>
       );

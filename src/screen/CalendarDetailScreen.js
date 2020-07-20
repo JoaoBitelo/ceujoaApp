@@ -68,7 +68,7 @@ class CalendarDetailScreen extends React.Component {
           <ImageBackground
             source={require("../../assets/backgroundCalendar.jpg")}
             style={styles.imageBackGround}>
-            <View style={{ flex: 0.08 }}></View>
+            <View style={{ flex: 0.01 }}></View>
             <ScrollView style={styles.ScrollView}>
               <View
                 style={[styles.TouchableOpacityEvent, styles.flexDirection]}
@@ -135,7 +135,7 @@ class CalendarDetailScreen extends React.Component {
               </View>
 
             </ScrollView>
-            <View style={{ flex: 0.1 }}></View>
+            <View style={{ flex: 0.01 }}></View>
           </ImageBackground>
         </View>
       );

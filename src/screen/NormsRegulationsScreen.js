@@ -8,13 +8,11 @@ import {
   Dimensions,
   BackHandler,
 } from "react-native";
-import FetchService from "../services/FetchService";
 import { NavigationEvents } from 'react-navigation';
 
 class NormsRegulationsScreen extends React.Component {
   constructor() {
     super();
-    this.FetchService = new FetchService();
     this.state = {};
   }
 
