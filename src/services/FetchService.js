@@ -34,6 +34,30 @@ class FetchService {
       });
   }
 
+  firstLogin = async (firstInput) => {
+    const basicInfo = await this.getCurrentSessionInfo();
+    let url = BASE_URL + global.FIRSTLOGIN
+    return fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        input: firstInput,
+        login: basicInfo.login,
+        token: basicInfo.token
+      }),
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        return responseJson
+      })
+      .catch((error) => {
+        return null
+      });
+  }
+
   getSource = async (name) => {
     const basicInfo = await this.getCurrentSessionInfo();
     let url = BASE_URL + global.GET_SOURCE

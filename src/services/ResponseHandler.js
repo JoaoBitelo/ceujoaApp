@@ -15,6 +15,14 @@ class ResponseHandler {
         );
     }
 
+    falseLogin = async () => {
+        Alert.alert(
+            "Login ou senha incorreto",
+            "O login ou senha informados estão incorretos. Preencha-os novamente atentamente. Se o erro persistir, contate um administrador do sistema.",
+            [{ text: "OK"}]
+        );
+    }
+
     nullResponse = async () => {
         Alert.alert(
             "Erro de internet",

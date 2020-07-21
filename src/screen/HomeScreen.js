@@ -9,7 +9,7 @@ import {
   Dimensions,
   BackHandler,
   ActivityIndicator,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import FetchService from "../services/FetchService";
@@ -21,7 +21,7 @@ class HomeScreen extends React.Component<Props, State> {
     super();
     this.FetchService = new FetchService();
     this.ResponseHandler = new ResponseHandler();
-    this.state = { login: "jbitelo", password: "12345678", loading: false };
+    this.state = { login: "jbitelo", password: "pass", loading: false };
   }
 
   _loginButtonMethod = async () => {
@@ -33,13 +33,13 @@ class HomeScreen extends React.Component<Props, State> {
       this.props.navigation.navigate('Home');
     }else if(res===false){
       this.setState({ loading: false })
-      this.ResponseHandler.falseResponse();
+      this.ResponseHandler.falseLogin();
       this.props.navigation.navigate('Home');
     }else{
       if(res.firstLogin===true) {
         this.setState({ loading: false })
         await this.ResponseHandler.loginResponse(this.state.login, res.token);
-        this.props.navigation.navigate('CommonArea');
+        this.props.navigation.navigate('FirstLogin');
       } else {
         await this.ResponseHandler.loginResponse(this.state.login, res);
         this.props.navigation.navigate('CommonArea');
@@ -70,7 +70,7 @@ class HomeScreen extends React.Component<Props, State> {
       );
     } else {
       return (
-        <KeyboardAvoidingView style={styles.viewBackground} behavior="padding" enabled>
+        <View style={styles.viewBackground} behavior="padding" enabled>
           <NavigationEvents
             onWillFocus={() => this._start()}
             onWillBlur={() => this._end()} />
@@ -91,6 +91,7 @@ class HomeScreen extends React.Component<Props, State> {
                 value={this.state.text}
                 autoCapitalize='none'
                 placeholder="LOGIN "
+                returnKeyType="go"
                 placeholderTextColor="black"
                 onChangeText={(login) => { this.setState({ login }) }}
                 textAlign={'center'}
@@ -101,6 +102,7 @@ class HomeScreen extends React.Component<Props, State> {
                 value={this.state.text}
                 autoCapitalize='none'
                 placeholder="SENHA"
+                returnKeyType="done"
                 placeholderTextColor="black"
                 onChangeText={(password) => { this.setState({ password }) }}
                 textAlign={'center'}
@@ -118,7 +120,7 @@ class HomeScreen extends React.Component<Props, State> {
             <View style={{ flex: 0.01 }}></View>
           </ImageBackground>
 
-        </KeyboardAvoidingView>
+        </View>
       );
     }
   }

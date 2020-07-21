@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Dimensions, Text, TouchableOpacity } from "react-native";
+import { View } from "react-native";
 import { createStackNavigator } from 'react-navigation-stack';
 import FirstLoginScreen from '../../screen/FirstLoginScreen';
-import NavigationDrawerStructure from '../headerConfig/Structure'
+import { HeaderBackButton } from 'react-navigation-stack';
 
 const FirstLoginHeader = createStackNavigator({
     CalendarFilter: {
