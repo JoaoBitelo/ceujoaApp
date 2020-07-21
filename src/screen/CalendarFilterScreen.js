@@ -17,7 +17,7 @@ import { AsyncStorage } from "react-native";
 import { NavigationEvents } from 'react-navigation';
 import ResponseHandler from "../services/ResponseHandler";
 
-class CalendarScreen extends React.Component {
+class CalendarFilterScreen extends React.Component {
   constructor() {
     super();
     this.FetchService = new FetchService();
@@ -53,7 +53,7 @@ class CalendarScreen extends React.Component {
   }
 
   backButtonHandler = () => {
-    this.props.navigation.navigate("CommonArea");
+    this.props.navigation.navigate("Calendar");
     return true;
   }
 
@@ -220,4 +220,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CalendarScreen;
+export default CalendarFilterScreen;

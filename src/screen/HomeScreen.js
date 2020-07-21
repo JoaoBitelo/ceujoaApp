@@ -42,8 +42,8 @@ class HomeScreen extends React.Component<Props, State> {
         this.props.navigation.navigate('CommonArea');
       } else {
         await this.ResponseHandler.loginResponse(this.state.login, res);
-        this.setState({ loading: false })
         this.props.navigation.navigate('CommonArea');
+        this.setState({ loading: false })
       }
     }
   }

@@ -17,6 +17,7 @@ import ResponseHandler from "../../services/ResponseHandler";
 class RegulationsScreen extends React.Component {
   constructor() {
     super();
+    this.FetchService = new FetchService();
     this.ResponseHandler = new ResponseHandler();
     this.state = { phrase: "", loading: false };
   }
@@ -33,8 +34,7 @@ class RegulationsScreen extends React.Component {
 
   _loadClient = async () => {
     this.setState({ loading: true })
-    //const res = await this.FetchService.getSource("CartaDePrincipios");
-    const res = true;
+    const res = await this.FetchService.getSource("EstatutoSocial");
     if (res === null) {
       this.ResponseHandler.nullResponse();
       this.setState({ loading: false })
@@ -44,8 +44,8 @@ class RegulationsScreen extends React.Component {
       this.setState({ loading: false })
       this.props.navigation.navigate('Home');
     } else {
-      //this.setState({ phrase: res.content.link })
-      //await this.ResponseHandler.trueResponse(res.token);
+      await this.ResponseHandler.trueResponse(res.token);
+      this.setState({ phrase: res.content.link })
       this.setState({ loading: false })
     }
   }
@@ -53,7 +53,7 @@ class RegulationsScreen extends React.Component {
   error = async () => {
     Alert.alert(
       "Erro ao abrir",
-      "Não foi possível abrir o arquivo a partir deste dispositivo. Tente entrar diretamente pressionando 'abrir' abaixo. Se o erro persistir, verifique sua conexão com a internet",
+      "O celular que você está usando para tentar abrir este arquivo não possui um leitor PDF. Pressione 'abrir' abaixo para abrir usando a aplicação recomendada por seu celular ou voltar para retornar à tela anterior",
       [
         {
           text: "ABRIR", onPress: () => Linking.openURL(this.state.phrase)
@@ -78,21 +78,15 @@ class RegulationsScreen extends React.Component {
       );
     } else {
       return (
-        <View style={styles.viewBackground}>
+        <View style={styles.view}>
           <NavigationEvents
             onWillFocus={() => this._start()}
             onWillBlur={() => this._end()} />
-          <ImageBackground
-            source={require("../../../assets/backgroundCalendar.jpg")}
-            style={styles.imageBackGround}>
-            <View style={styles.upperView}>
-              <View style={[styles.textBox]}>
-                <Text style={styles.text}>
-                  Este conteúdo ainda não está disponivel
-                </Text>
-              </View>
-            </View>
-          </ImageBackground>
+          <WebView
+            source={{ uri: this.state.phrase }}
+            style={{ flex: 1 }}
+            onError={() => this.error()}
+          />
         </View>
       );
     }
@@ -103,26 +97,6 @@ const styles = StyleSheet.create({
   viewBackground: {
     flex: 1,
   },
-  imageBackGround: {
-    width: '100%',
-    height: '100%',
-  },
-  upperView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textBox: {
-    backgroundColor: 'rgba(53, 87, 35, 0.5)',
-    padding: 5
-  },
-  text: {
-    textAlign: 'center',
-    fontSize: 20,
-    flexWrap: 'wrap',
-    color: "white",
-    fontWeight: 'bold',
-  }
 });
 
 export default RegulationsScreen;

@@ -4,9 +4,11 @@ import { createAppContainer } from 'react-navigation';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import HeaderStyle from './src/headers/headerConfig/HeaderStyle';
 import HomeHeader from './src/headers/screenHeaders/HomeHeader';
+import FirstLoginHeader from './src/headers/screenHeaders/FirstLoginHeader';
 import CommonAreaHeader from './src/headers/screenHeaders/CommonAreaHeader';
 import CalendarHeader from './src/headers/screenHeaders/CalendarHeader';
 import CalendarDetailHeader from './src/headers/screenHeaders/CalendarDetailHeader';
+import CalendarFilterHeader from './src/headers/screenHeaders/CalendarFilterHeader';
 import NormsRegulationsHeader from './src/headers/screenHeaders/NormsRegulationsHeader';
 import RegulationsHeader from './src/headers/screenHeaders/NormsRegulationsHeaderFiles/RegulationsHeader';
 import PrincipalLetterHeader from './src/headers/screenHeaders/NormsRegulationsHeaderFiles/PrincipalLetterHeader';
@@ -18,8 +20,10 @@ import EtiquetteRulesHeader from './src/headers/screenHeaders/EtiquetteRulesHead
 import DonationsHeader from './src/headers/screenHeaders/DonationsHeader';
 
 const homeScreen = HomeHeader;
+const firstLoginScreen = FirstLoginHeader;
 const commonAreaScreen = CommonAreaHeader;
 const calendarScreen = CalendarHeader;
+const calendarFilterScreen = CalendarFilterHeader;
 const calendarDetailScreen = CalendarDetailHeader;
 const normsRegulationsScreen = NormsRegulationsHeader;
 const regulationsScreen = RegulationsHeader;
@@ -47,8 +51,10 @@ const DrawerNavigator = createDrawerNavigator(
         disableGestures: true,
       },
     },
+    FirstLogin: { screen: firstLoginScreen },
     CommonArea: { screen: commonAreaScreen },
     Calendar: { screen: calendarScreen },
+    CalendarFilter: { screen: calendarFilterScreen },
     CalendarDetail: { screen: calendarDetailScreen },
     NormsRegulations: { screen: normsRegulationsScreen },
     Regulations: { screen: regulationsScreen },

@@ -1,14 +1,14 @@
 import React from 'react';
 import { View, Dimensions, Text, TouchableOpacity } from "react-native";
 import { createStackNavigator } from 'react-navigation-stack';
-import CalendarScreen from '../../screen/CalendarScreen';
+import CalendarFilterScreen from '../../screen/CalendarFilterScreen';
 import NavigationDrawerStructure from '../headerConfig/Structure'
 
-const CalendarHeader = createStackNavigator({
-    Calendar: {
-        screen: CalendarScreen,
+const CalendarFilterHeader = createStackNavigator({
+    CalendarFilter: {
+        screen: CalendarFilterScreen,
         navigationOptions: ({ navigation }) => ({
-            title: "Calendário",
+            title: "Calendárioooooo",
             //header todo
             headerStyle: {
                 backgroundColor: '#c7282d',
@@ -31,7 +31,7 @@ const CalendarHeader = createStackNavigator({
                     style={{
                         paddingHorizontal: Dimensions.get("window").width * 0.05,
                     }}
-                    onPress={() => navigation.navigate("CalendarFilter")}
+                    onPress={() => navigation.navigate("Home")}
                     >
                     <Text style={{ color: 'white', textAlign: "center", flexWrap: 'wrap' }}>FILTRO</Text>
                 </TouchableOpacity>
@@ -40,4 +40,4 @@ const CalendarHeader = createStackNavigator({
     },
 });
 
-export default CalendarHeader
+export default CalendarFilterHeader
