@@ -3,6 +3,7 @@ module.exports = {
     LOGIN: 'login',
     FIRSTLOGIN: 'firstLogin',
     GET_CALENDAR: 'getCalendar',
+    GET_CALENDAR_FILTER: 'getCalendarFilter',
     GET_PHRASE:'getPhrase',
     GET_DEGREE: 'getAreaDeEnsino',
     GET_DEGREE_SPECIFIC: 'getAreaDeEnsinoEspecifico',

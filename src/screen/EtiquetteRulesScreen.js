@@ -13,11 +13,13 @@ import {
 } from "react-native";
 import FetchService from "../services/FetchService";
 import { NavigationEvents } from 'react-navigation';
+import ResponseHandler from "../services/ResponseHandler";
 
 class EtiquetteRulesScreen extends React.Component {
   constructor() {
     super();
     this.FetchService = new FetchService();
+    this.ResponseHandler = new ResponseHandler();
     this.state = {
       loading: false, titulo: "", texto: ""
     };
@@ -38,6 +40,7 @@ class EtiquetteRulesScreen extends React.Component {
       this.ResponseHandler.falseResponse();
       this.props.navigation.navigate('Home');
     } else {
+      await this.ResponseHandler.trueResponse(res.token);
       var temp = res.content.titulo.replace(/\\n/g, '\n');
       this.setState({ titulo: temp })
       temp = res.content.texto.replace(/\\n/g, '\n');

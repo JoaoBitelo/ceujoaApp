@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from "react-native";
 import { createStackNavigator } from 'react-navigation-stack';
-import CalendarDetailScreen from '../../screen/CalendarDetailScreen';
+import CalendarDetailScreen from '../../../screen/CalendarScreenFiles/CalendarDetailScreen';
 import { HeaderBackButton } from 'react-navigation-stack';
 
 const CalendarDetailHeader = createStackNavigator({

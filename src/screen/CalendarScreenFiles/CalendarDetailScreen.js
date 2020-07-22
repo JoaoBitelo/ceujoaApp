@@ -66,7 +66,7 @@ class CalendarDetailScreen extends React.Component {
             onWillFocus={() => this._start()}
             onWillBlur={() => this._end()} />
           <ImageBackground
-            source={require("../../assets/backgroundCalendar.jpg")}
+            source={require("../../../assets/backgroundCalendar.jpg")}
             style={styles.imageBackGround}>
             <View style={{ flex: 0.01 }}></View>
             <ScrollView style={styles.ScrollView}>

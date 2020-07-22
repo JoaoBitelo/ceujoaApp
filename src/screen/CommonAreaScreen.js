@@ -11,6 +11,7 @@ import { Icon } from 'react-native-elements';
 import FetchService from "../services/FetchService";
 import { NavigationEvents } from 'react-navigation';
 import ResponseHandler from "../services/ResponseHandler";
+import { AsyncStorage } from "react-native";
 
 class HomeScreen extends React.Component {
   constructor() {
@@ -22,6 +23,7 @@ class HomeScreen extends React.Component {
 
   _start() {
     BackHandler.addEventListener('hardwareBackPress', this.backButtonHandler);
+    AsyncStorage.setItem('datePicked', "false");
     this.updateIndexMenu();
     this._loadClient();    
   }

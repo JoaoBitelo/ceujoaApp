@@ -105,6 +105,32 @@ class FetchService {
       });
   }
 
+  getCalendarFilter = async (data) => {
+    const basicInfo = await this.getCurrentSessionInfo();
+    let url = BASE_URL + global.GET_CALENDAR_FILTER
+    console.log(data)
+    return fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        login: basicInfo.login,
+        token: basicInfo.token,
+        date: data
+      }),
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson)
+        return responseJson
+      })
+      .catch((error) => {
+        return null
+      });
+  }
+
   getDegree = async () => {
     const login = await this.getCurrentSessionInfo();
     let url = BASE_URL + global.GET_DEGREE

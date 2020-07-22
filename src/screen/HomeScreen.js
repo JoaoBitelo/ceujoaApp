@@ -16,7 +16,7 @@ import FetchService from "../services/FetchService";
 import { NavigationEvents } from 'react-navigation';
 import ResponseHandler from "../services/ResponseHandler";
 
-class HomeScreen extends React.Component<Props, State> {
+class HomeScreen extends React.Component {
   constructor() {
     super();
     this.FetchService = new FetchService();
