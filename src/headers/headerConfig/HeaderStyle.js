@@ -21,8 +21,6 @@ class HeaderStyle extends React.Component {
 
     _start = async () => {
         console.log("a")
-        console.log(this.CurrentIndexMenu.getIndex())
-        this.setState({ currentScreen: 6 })
       }
 
     _updateScreen = async (value) => {
@@ -54,20 +52,11 @@ class HeaderStyle extends React.Component {
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
                         </View>
 
-                        <View style={[styles.viewButton, this.state.currentScreen === 7 ? styles.backViewButton2 : styles.backViewButton1]}>
-                            <TouchableOpacity
-                                style={styles.button}
-                                onPress={() => { this._updateScreen(7); this.props.navigation.navigate('EtiquetteRules') }}>
-                                <Text style={styles.buttonText}>Regras de Etiqueta</Text>
-                            </TouchableOpacity>
-                            <Icon style={styles.icon} name='keyboard-arrow-right' />
-                        </View>
-
                         <View style={[styles.viewButton, this.state.currentScreen === 1 ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => { this._updateScreen(1); this.props.navigation.navigate('Calendar') }}>
-                                <Text style={styles.buttonText}>Calendário</Text>
+                                onPress={() => { this._updateScreen(1); this.props.navigation.navigate('EtiquetteRules') }}>
+                                <Text style={styles.buttonText}>Regras de Etiqueta</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
                         </View>
@@ -75,8 +64,8 @@ class HeaderStyle extends React.Component {
                         <View style={[styles.viewButton, this.state.currentScreen === 2 ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => { this._updateScreen(2); this.props.navigation.navigate('Degree') }}>
-                                <Text style={styles.buttonText}>Área de Ensino</Text>
+                                onPress={() => { this._updateScreen(2); this.props.navigation.navigate('Calendar') }}>
+                                <Text style={styles.buttonText}>Calendário</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
                         </View>
@@ -84,8 +73,8 @@ class HeaderStyle extends React.Component {
                         <View style={[styles.viewButton, this.state.currentScreen === 3 ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => { this._updateScreen(3); this.props.navigation.navigate('Calendar') }}>
-                                <Text style={styles.buttonText}>Área Financeira(por fazer)</Text>
+                                onPress={() => { this._updateScreen(3); this.props.navigation.navigate('Degree') }}>
+                                <Text style={styles.buttonText}>Área de Ensino</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
                         </View>
@@ -94,7 +83,7 @@ class HeaderStyle extends React.Component {
                             <TouchableOpacity
                                 style={styles.button}
                                 onPress={() => { this._updateScreen(4); this.props.navigation.navigate('Calendar') }}>
-                                <Text style={styles.buttonText}>Área Ritualística(por fazer)</Text>
+                                <Text style={styles.buttonText}>Área Financeira(por fazer)</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
                         </View>
@@ -112,6 +101,24 @@ class HeaderStyle extends React.Component {
                             <TouchableOpacity
                                 style={styles.button}
                                 onPress={() => { this._updateScreen(6); this.props.navigation.navigate('NormsRegulations') }}>
+                                <Text style={styles.buttonText}>Aniversários(por fazer)</Text>
+                            </TouchableOpacity>
+                            <Icon style={styles.icon} name='keyboard-arrow-right' />
+                        </View>
+
+                        <View style={[styles.viewButton, this.state.currentScreen === 7 ? styles.backViewButton2 : styles.backViewButton1]}>
+                            <TouchableOpacity
+                                style={styles.button}
+                                onPress={() => { this._updateScreen(7); this.props.navigation.navigate('NormsRegulations') }}>
+                                <Text style={styles.buttonText}>Materiais Litúrgicos(por fazer)</Text>
+                            </TouchableOpacity>
+                            <Icon style={styles.icon} name='keyboard-arrow-right' />
+                        </View>
+
+                        <View style={[styles.viewButton, this.state.currentScreen === 8 ? styles.backViewButton2 : styles.backViewButton1]}>
+                            <TouchableOpacity
+                                style={styles.button}
+                                onPress={() => { this._updateScreen(8); this.props.navigation.navigate('NormsRegulations') }}>
                                 <Text style={styles.buttonText}>Estatuto Social e Regimento Interno</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />

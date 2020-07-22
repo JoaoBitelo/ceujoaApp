@@ -23,7 +23,6 @@ class HomeScreen extends React.Component {
 
   _start() {
     BackHandler.addEventListener('hardwareBackPress', this.backButtonHandler);
-    AsyncStorage.setItem('datePicked', "false");
     this.updateIndexMenu();
     this._loadClient();    
   }

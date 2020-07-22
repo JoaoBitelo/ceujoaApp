@@ -108,7 +108,6 @@ class FetchService {
   getCalendarFilter = async (data) => {
     const basicInfo = await this.getCurrentSessionInfo();
     let url = BASE_URL + global.GET_CALENDAR_FILTER
-    console.log(data)
     return fetch(url, {
       method: 'POST',
       headers: {
@@ -123,7 +122,6 @@ class FetchService {
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        console.log(responseJson)
         return responseJson
       })
       .catch((error) => {

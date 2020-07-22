@@ -25,13 +25,15 @@ class CalendarFilterScreen extends React.Component {
     this.FetchService = new FetchService();
     this.ResponseHandler = new ResponseHandler();
     this.state = {
-      loading: false, showDatePicker: true, date: new Date()
+      loading: false, allEvents: [], date: new Date()
     };
   }
 
   _start = async () => {
+    this.setState({ loading: true })
     BackHandler.addEventListener('hardwareBackPress', this.backButtonHandler);
     await this.datePickerRef.onPressDate()
+    this.setState({ loading: false })
   }
 
   backButtonHandler = async () => {
@@ -43,45 +45,93 @@ class CalendarFilterScreen extends React.Component {
     BackHandler.removeEventListener('hardwareBackPress', this.backButtonHandler);
   }
 
-  _buttonMethod = async (date) => {
-    await AsyncStorage.setItem('datePicked', date).then(() => {
-      this.props.navigation.navigate("Calendar");
-    })
-      .catch(() => {
-        Alert.alert(
-          "Erro de autenticação de sessão",
-          "Faça login novamente no aplicativo",
-          [{ text: "OK", onPress: () => this.props.navigation.navigate("Home") }]
-        );
-      })
+  _buttonMethod = async (datePicked) => {
+    this.setState({ loading: true })
+    res = await this.FetchService.getCalendarFilter(datePicked);
+    if (res === null) {
+      this.ResponseHandler.nullResponse();
+      this.setState({ loading: false })
+      this.props.navigation.navigate('Home');
+    } else if (res === false) {
+      this.ResponseHandler.falseResponse();
+      this.setState({ loading: false })
+      this.props.navigation.navigate('Home');
+    } else {
+      await this.ResponseHandler.trueResponse(res.token);
+      this.setState({ allEvents: res.allEvents })
+      this.setState({ loading: false })
+    }
   }
 
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={styles.viewBackground}>
         <NavigationEvents
           onWillFocus={() => this._start()}
           onWillBlur={() => this._end()} />
         <ImageBackground
           source={require("../../../assets/backgroundCalendar.jpg")}
           style={styles.imageBackGround}>
-          <DatePicker
-            style={{ width: Dimensions.get("window").width * 0.75, paddingTop: 20, paddingBottom: 10 }}
-            mode="date"
-            format="DD-MM-YY"
-            confirmBtnText="Confirm"
-            cancelBtnText="Cancel"
-            onDateChange={(date) => { this._buttonMethod(date) }}
-            showIcon={false}
-            hideText={true}
-            ref={(ref) => this.datePickerRef = ref}
-          />
+          <View style={{ flex: 0.01 }}></View>
+          <SafeAreaView style={styles.viewFrontGround}>
+            <ScrollView>
+                <View style={styles.textBox}>
+                  <Text style={styles.textTitle}>
+                    Eventos encontrados no dia selecionado
+                  </Text>
+                </View>
+                {this.state.allEvents.length === 0 
+                  ?
+                  <View style={styles.TouchableOpacityEvent}>
+                    <Text style={styles.data}>
+                      Nenhum evento encontrado nesta data
+                    </Text>
+                  </View>
+                  :
+                  <FlatList style={{ flex: 3 }}
+                    data={this.state.allEvents}
+                    renderItem={({ item, index }) => (
+                      <TouchableOpacity
+                        style={styles.TouchableOpacityEvent}
+                        onPress={() => this._buttonMethod(item)}>
+                        <View style={{ flex: 3, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
+                          <Text style={styles.atividade}>
+                            {item.atividade}
+                          </Text>
+                        </View>
+
+                        <View style={{ flex: 2, paddingBottom: 14, paddingTop: 14, paddingHorizontal: 2 }}>
+                          <Text style={styles.data}>
+                            {item.dataProvavel}
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
+                    )}
+                    keyExtractor={(item, index) => index.toString()}
+                  />
+                }
+                <DatePicker
+                  mode="date"
+                  format="DD-MM-YY"
+                  confirmBtnText="Confirm"
+                  cancelBtnText="Cancel"
+                  onDateChange={(date) => { this._buttonMethod(date) }}
+                  showIcon={false}
+                  hideText={true}
+                  ref={(ref) => this.datePickerRef = ref}
+                />
+            </ScrollView>
+          </SafeAreaView >
+          <View style={{ flex: 0.01 }}></View>
         </ImageBackground>
       </View>
     );
   }
 }
 const styles = StyleSheet.create({
+  viewBackground: {
+    flex: 1,
+  },
   imageBackGround: {
     width: '100%',
     height: '100%',
@@ -92,11 +142,34 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 10,
   },
-  datePickerBox: {
+  TouchableOpacityEvent: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
     backgroundColor: 'rgba(53, 87, 35, 0.5)',
-    width: Dimensions.get("window").width * 0.8,
+    marginBottom: 20,
+    borderRadius: 10,
+    alignSelf: "center",
+    width: Dimensions.get("window").width * 0.75,
+
+    borderColor: 'black',
+    borderWidth: 1,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.30,
+    shadowRadius: 4.65,
+    elevation: 8,
+  },
+  atividade: {
+    textAlign: 'center',
+    fontSize: 18,
+    flexWrap: 'wrap',
+    fontWeight: 'bold',
+    color: "white"
   },
   data: {
     textAlign: 'center',
@@ -104,6 +177,21 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     color: "white"
   },
+  textBox: {
+    backgroundColor: 'rgba(0, 0, 0, 0.75)',
+    marginBottom: 20,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    alignSelf: "center",
+    width: Dimensions.get("window").width * 0.9,
+  },
+  textTitle: {
+    fontSize: 20,
+    flexWrap: 'wrap',
+    fontWeight: 'bold',
+    color: "white",
+    textAlign: 'center',
+  }
 });
 
 export default CalendarFilterScreen;

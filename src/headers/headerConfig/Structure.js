@@ -24,10 +24,8 @@ export default class NavigationDrawerStructure extends React.Component {
 
   }
 
-
   toggleDrawer = async () => {
     BackHandler.addEventListener('hardwareBackPress', this.backButtonHandler);
-    console.log("abriur")
     this.setState({ menuOpen: true })
     this.props.navigation.toggleDrawer();
   };

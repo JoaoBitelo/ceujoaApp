@@ -23,7 +23,7 @@ class CalendarScreen extends React.Component {
     this.FetchService = new FetchService();
     this.ResponseHandler = new ResponseHandler();
     this.state = {
-      loading: false, allEvents: [], nextEvents: [], filter: false, dateToShow: ""
+      loading: false, allEvents: [], nextEvents: [],
     };
   }
 
@@ -34,15 +34,8 @@ class CalendarScreen extends React.Component {
 
   _loadClient = async () => {
     this.setState({ loading: true })
-    const datePicked = await AsyncStorage.getItem('datePicked')
-    var res = null;
-    if (datePicked === "false") {
-      this.setState({ filter: false })
-      res = await this.FetchService.getCalendar();
-    } else {
-      this.setState({ filter: true })
-      res = await this.FetchService.getCalendarFilter(datePicked);
-    }
+    var res = await this.FetchService.getCalendar();
+    //res = await this.FetchService.getCalendarFilter(datePicked);
     if (res === null) {
       this.ResponseHandler.nullResponse();
       this.setState({ loading: false })
@@ -54,7 +47,6 @@ class CalendarScreen extends React.Component {
     } else {
       await this.ResponseHandler.trueResponse(res.token);
       this.setState({ allEvents: res.allEvents })
-      this.setState({ dateToShow: datePicked })
       this.setState({ nextEvents: res.nextEvents })
       this.setState({ loading: false })
     }
@@ -101,50 +93,45 @@ class CalendarScreen extends React.Component {
             <View style={{ flex: 0.01 }}></View>
             <SafeAreaView style={styles.viewFrontGround}>
               <ScrollView>
-                {
-                  this.state.filter === false &&
-                  <View>
-                    <View style={styles.textBox}>
-                      <Text style={styles.textTitle}>
-                        Eventos dos próximos 7 dias
-                      </Text>
-                    </View>
-                    <FlatList style={{ flex: 3 }}
-                      data={this.state.nextEvents}
-                      renderItem={({ item, index }) => (
-                        <TouchableOpacity
-                          style={styles.TouchableOpacityEvent}
-                          onPress={() => this._buttonMethod(item)}>
-                          <View style={{ flex: 3, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
-                            <Text style={styles.atividade}>
-                              {item.atividade}
-                            </Text>
-                          </View>
-
-                          <View style={{ flex: 2, paddingBottom: 14, paddingTop: 14, paddingHorizontal: 2 }}>
-                            <Text style={styles.data}>
-                              {item.dataProvavel}
-                            </Text>
-                          </View>
-                        </TouchableOpacity>
-                      )}
-                      keyExtractor={(item, index) => index.toString()}
-                    />
+                  <View style={styles.textBox}>
+                    <Text style={styles.textTitle}>
+                      Eventos dos próximos 7 dias
+                    </Text>
                   </View>
+                  {this.state.nextEvents.length === 0 
+                  ?
+                  <View style={styles.TouchableOpacityEvent}>
+                    <Text style={styles.data}>
+                      Não há nenhum evento nos próximos 7 dias
+                    </Text>
+                  </View>
+                  :
+                  <FlatList style={{ flex: 3 }}
+                    data={this.state.nextEvents}
+                    renderItem={({ item, index }) => (
+                      <TouchableOpacity
+                        style={styles.TouchableOpacityEvent}
+                        onPress={() => this._buttonMethod(item)}>
+                        <View style={{ flex: 3, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
+                          <Text style={styles.atividade}>
+                            {item.atividade}
+                          </Text>
+                        </View>
 
-                }
-                <View style={styles.textBox}>
-                  {this.state.filter===false 
-                    ?
-                    <Text style={styles.textTitle}>
-                      Próximos eventos
-                    </Text>
-                    :
-                    <Text style={styles.textTitle}>
-                      Eventos encontrados do dia {this.state.dateToShow}
-                    </Text>
+                        <View style={{ flex: 2, paddingBottom: 14, paddingTop: 14, paddingHorizontal: 2 }}>
+                          <Text style={styles.data}>
+                            {item.dataProvavel}
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
+                    )}
+                    keyExtractor={(item, index) => index.toString()}
+                  />
                   }
-                  
+                <View style={styles.textBox}>
+                  <Text style={styles.textTitle}>
+                    Próximos eventos
+                  </Text>
                 </View>
                 <FlatList style={{ flex: 3 }}
                   data={this.state.allEvents}
