@@ -18,6 +18,7 @@ import SpecificDegreeHeader from './src/headers/screenHeaders/SpecificDegreeHead
 import SpecificDegreeDetailHeader from './src/headers/screenHeaders/SpecificDegreeDetailHeader';
 import EtiquetteRulesHeader from './src/headers/screenHeaders/EtiquetteRulesHeader';
 import DonationsHeader from './src/headers/screenHeaders/DonationsHeader';
+import BirthDaysHeader from './src/headers/screenHeaders/BirthDaysHeader'
 
 const homeScreen = HomeHeader;
 const firstLoginScreen = FirstLoginHeader;
@@ -33,7 +34,8 @@ const degree = DegreeHeader;
 const specificDegree = SpecificDegreeHeader;
 const specificDegreeDetail = SpecificDegreeDetailHeader;
 const etiquetteRules = EtiquetteRulesHeader;
-const donations = DonationsHeader
+const donations = DonationsHeader;
+const birthDays = BirthDaysHeader;
 
 const DrawerConfig = {
   drawerWidth: Dimensions.get('window').width * 0.7,
@@ -64,7 +66,8 @@ const DrawerNavigator = createDrawerNavigator(
     SpecificDegree: { screen : specificDegree },
     SpecificDegreeDetail: { screen: specificDegreeDetail },
     EtiquetteRules: { screen: etiquetteRules },
-    Donations: { screen: donations }
+    Donations: { screen: donations },
+    BirthDays: { screen: birthDays }
   },
   DrawerConfig
 );

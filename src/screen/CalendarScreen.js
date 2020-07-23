@@ -35,7 +35,6 @@ class CalendarScreen extends React.Component {
   _loadClient = async () => {
     this.setState({ loading: true })
     var res = await this.FetchService.getCalendar();
-    //res = await this.FetchService.getCalendarFilter(datePicked);
     if (res === null) {
       this.ResponseHandler.nullResponse();
       this.setState({ loading: false })
