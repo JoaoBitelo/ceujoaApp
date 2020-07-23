@@ -99,7 +99,7 @@ class CalendarScreen extends React.Component {
                   </View>
                   {this.state.nextEvents.length === 0 
                   ?
-                  <View style={styles.TouchableOpacityEvent}>
+                  <View style={styles.textBox}>
                     <Text style={styles.data}>
                       Não há nenhum evento nos próximos 7 dias
                     </Text>
