@@ -79,8 +79,6 @@ class BirthDaysScreen extends React.Component {
     }
 
     _monthListReturner(array) {
-        console.log("enctrouuuuuuuuu")
-        console.log(array)
         if (array.length > 0) {
             return (
                 <FlatList style={{ flex: 3 }}

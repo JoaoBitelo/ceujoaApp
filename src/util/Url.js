@@ -8,5 +8,6 @@ module.exports = {
     GET_DEGREE: 'getAreaDeEnsino',
     GET_DEGREE_SPECIFIC: 'getAreaDeEnsinoEspecifico',
     GET_SOURCE: 'getSource',
-    GET_BIRTHDAYS: 'getBirthDays'
+    GET_BIRTHDAYS: 'getBirthDays',
+    GET_MONTHLY_PAYMENT: 'getMonthlyPayment'
   };
