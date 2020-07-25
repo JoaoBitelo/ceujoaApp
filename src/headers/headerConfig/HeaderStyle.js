@@ -110,7 +110,7 @@ class HeaderStyle extends React.Component {
                             <TouchableOpacity
                                 style={styles.button}
                                 onPress={() => { this._updateScreen(7); this.props.navigation.navigate('NormsRegulations') }}>
-                                <Text style={styles.buttonText}>Materiais Litúrgicos(por fazer)</Text>
+                                <Text style={styles.buttonText}>Material Litúrgico(por fazer)</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
                         </View>

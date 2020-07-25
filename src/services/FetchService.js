@@ -129,6 +129,79 @@ class FetchService {
       });
   }
 
+  getCalendarEvent = async (id) => {
+    const basicInfo = await this.getCurrentSessionInfo();
+    let url = BASE_URL + global.GET_CALENDAR_EVENT
+    return fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        login: basicInfo.login,
+        token: basicInfo.token,
+        eventID: id
+      }),
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        return responseJson
+      })
+      .catch((error) => {
+        return null
+      });
+  }
+
+  getATA = async (id) => {
+    const basicInfo = await this.getCurrentSessionInfo();
+    let url = BASE_URL + global.GET_ATA
+    return fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        login: basicInfo.login,
+        token: basicInfo.token,
+        eventID: id
+      }),
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        return responseJson
+      })
+      .catch((error) => {
+        return null
+      });
+  }
+
+  updateATA = async (id, users) => {
+    const basicInfo = await this.getCurrentSessionInfo();
+    let url = BASE_URL + global.UPDATE_ATA
+    return fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        login: basicInfo.login,
+        token: basicInfo.token,
+        eventID: id,
+        users: users
+      }),
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        return responseJson
+      })
+      .catch((error) => {
+        return null
+      });
+  }
+
   getDegree = async () => {
     const login = await this.getCurrentSessionInfo();
     let url = BASE_URL + global.GET_DEGREE

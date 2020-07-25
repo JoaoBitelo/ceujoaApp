@@ -10,7 +10,8 @@ import {
   BackHandler,
   ActivityIndicator,
   SafeAreaView,
-  ScrollView
+  ScrollView,
+  Alert
 } from "react-native";
 import FetchService from "../services/FetchService";
 import { AsyncStorage } from "react-native";
@@ -61,7 +62,7 @@ class CalendarScreen extends React.Component {
   }
 
   _buttonMethod = async (item) => {
-    await AsyncStorage.setItem('currentEvent', JSON.stringify(item)).then(() => {
+    await AsyncStorage.setItem('currentEvent', JSON.stringify(item._id)).then(() => {
       this.props.navigation.navigate("CalendarDetail");
     })
       .catch(() => {
@@ -99,10 +100,12 @@ class CalendarScreen extends React.Component {
                   </View>
                   {this.state.nextEvents.length === 0 
                   ?
-                  <View style={styles.textBox}>
-                    <Text style={styles.data}>
-                      Não há nenhum evento nos próximos 7 dias
-                    </Text>
+                  <View style={styles.TouchableOpacityEvent}>
+                    <View style={{ flex: 3, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 5 }}>
+                      <Text style={styles.data}>
+                        Não há nenhum evento nos próximos 7 dias
+                      </Text>
+                    </View>
                   </View>
                   :
                   <FlatList style={{ flex: 3 }}
@@ -207,12 +210,13 @@ const styles = StyleSheet.create({
   },
   data: {
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 18,
     flexWrap: 'wrap',
     color: "white"
   },
   textBox: {
-    backgroundColor: 'rgba(0, 0, 0, 0.75)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    //backgroundColor: 'rgba(53, 87, 35, 0.5)',
     marginBottom: 20,
     borderRadius: 10,
     paddingHorizontal: 10,

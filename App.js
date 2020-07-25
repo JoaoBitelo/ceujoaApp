@@ -20,6 +20,7 @@ import EtiquetteRulesHeader from './src/headers/screenHeaders/EtiquetteRulesHead
 import DonationsHeader from './src/headers/screenHeaders/DonationsHeader';
 import BirthDaysHeader from './src/headers/screenHeaders/BirthDaysHeader'
 import FinancialHeader from './src/headers/screenHeaders/FinancialHeader';
+import ATAHeader from './src/headers/screenHeaders/ATAHeader'
 
 const homeScreen = HomeHeader;
 const firstLoginScreen = FirstLoginHeader;
@@ -38,6 +39,7 @@ const etiquetteRules = EtiquetteRulesHeader;
 const donationsScreen = DonationsHeader;
 const birthDaysScreen = BirthDaysHeader;
 const financialScreen = FinancialHeader;
+const ata = ATAHeader;
 
 const DrawerConfig = {
   drawerWidth: Dimensions.get('window').width * 0.7,
@@ -70,7 +72,8 @@ const DrawerNavigator = createDrawerNavigator(
     EtiquetteRules: { screen: etiquetteRules },
     Donations: { screen: donationsScreen },
     BirthDays: { screen: birthDaysScreen },
-    Financial: { screen: financialScreen }
+    Financial: { screen: financialScreen },
+    ATA: { screen: ata }
   },
   DrawerConfig
 );

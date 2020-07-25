@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from "react-native";
+import { Dimensions, Text, TouchableOpacity } from "react-native";
 import { createStackNavigator } from 'react-navigation-stack';
 import CalendarDetailScreen from '../../../screen/CalendarScreenFiles/CalendarDetailScreen';
 import { HeaderBackButton } from 'react-navigation-stack';
@@ -26,9 +26,14 @@ const CalendarDetailHeader = createStackNavigator({
                     onPress={() => navigation.navigate("Calendar")} />
             ),
             headerRight: (
-                <View style={{ flex: 1 }}>
-
-                </View>
+                <TouchableOpacity
+                    style={{
+                        paddingHorizontal: Dimensions.get("window").width * 0.05,
+                    }}
+                    onPress={() => navigation.navigate("ATA")}
+                >
+                    <Text style={{ color: 'white', textAlign: "center", flexWrap: 'wrap' }}>ADM</Text>
+                </TouchableOpacity>
             )
         }),
     },

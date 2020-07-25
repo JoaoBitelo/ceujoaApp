@@ -38,7 +38,7 @@ class DonationsScreen extends React.Component {
       this.ResponseHandler.falseResponse();
       this.props.navigation.navigate('Home');
     } else {
-      console.log(res)
+      await this.ResponseHandler.trueResponse(res.token);
       var temp = res.content.titulo.replace(/\\n/g, '\n');
       this.setState({ titulo: temp })
       temp = res.content.texto.replace(/\\n/g, '\n');

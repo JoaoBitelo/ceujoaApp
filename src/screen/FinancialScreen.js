@@ -61,14 +61,14 @@ class FinancialScreen extends React.Component {
     _buttonMethod = (item) => {
         const title = "Situação: " + item.status
         if(item.status==="PENDENTE"){
-            const text = "Algum texto pra dizer que nao foi feito o pagamento no valor de " + item.value
+            const text = "Nosso sistema acusa que sua contribuição está pendente. Caso tenha sido efetuada entre em contato com a tesouraria."
             Alert.alert(
                 title,
                 text,
                 [{ text: "OK"}]
             );
         } else {
-            const text = "Algum texto pra dizer que foi feito o pagamento de " + item.value + ", no dia " + item.date
+            const text = "Gratidão! Recebemos sua colaboração em " + item.date
             Alert.alert(
                 title,
                 text,

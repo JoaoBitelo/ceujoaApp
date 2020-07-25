@@ -11,11 +11,15 @@ import {
 } from "react-native";
 import { AsyncStorage } from "react-native";
 import { NavigationEvents } from 'react-navigation';
+import FetchService from "../../services/FetchService";
+import ResponseHandler from "../../services/ResponseHandler";
 
 class CalendarDetailScreen extends React.Component {
   constructor() {
     super();
-    this.state = { event: "", loading: false };
+    this.FetchService = new FetchService();
+    this.ResponseHandler = new ResponseHandler();
+    this.state = { event: "", presenca: "", loading: false };
   }
 
   _start() {
@@ -25,21 +29,26 @@ class CalendarDetailScreen extends React.Component {
 
   _retrieveData = async () => {
     this.setState({ loading: true })
-    try {
-      const value = await AsyncStorage.getItem('currentEvent');
-      if (value !== null) {
-        const item = JSON.parse(value);
-        this.setState({ event: item })
-        this.setState({ loading: false })
-      }
-    } catch (error) {
-      Alert.alert(
-        "Erro!",
-        "Ocorreu um erro inesperado",
-        [{ text: "OK" }]
-      );
+    var itemID = await AsyncStorage.getItem('currentEvent');
+    itemID = JSON.parse(itemID);
+    var res = await this.FetchService.getCalendarEvent(itemID.$oid);
+    if (res === null) {
+      this.ResponseHandler.nullResponse();
       this.setState({ loading: false })
-      this.props.navigation.navigate("Home");
+      this.props.navigation.navigate('Home');
+    } else if (res === false) {
+      this.ResponseHandler.falseResponse();
+      this.setState({ loading: false })
+      this.props.navigation.navigate('Home');
+    } else {
+      await this.ResponseHandler.trueResponse(res.token);
+      this.setState({ event: res.event })
+      if(this.state.event.presenca.avaliacao===null){
+        this.setState({ presenca: "Não avaliado" })
+      }else{
+        this.setState({ presenca: this.state.event.presenca.isRated })
+      }
+      this.setState({ loading: false })
     }
   };
 
@@ -70,14 +79,12 @@ class CalendarDetailScreen extends React.Component {
             style={styles.imageBackGround}>
             <View style={{ flex: 0.01 }}></View>
             <ScrollView style={styles.ScrollView}>
-              <View
-                style={[styles.TouchableOpacityEvent, styles.flexDirection]}
-              //onPress={()=> this.buttonMethod(item)}
-              >
+
+              <View style={[styles.TouchableOpacityEvent, styles.flexDirection]}>
                 <View style={{ flex: 1, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 10 }}>
                   <Text style={styles.titulo}>
                     Evento:
-                            </Text>
+                  </Text>
                 </View>
                 <View style={{ flex: 1, paddingBottom: 14, paddingTop: 14, paddingHorizontal: 10 }}>
                   <Text style={styles.descricao}>
@@ -86,10 +93,7 @@ class CalendarDetailScreen extends React.Component {
                 </View>
               </View>
 
-              <View
-                style={styles.TouchableOpacityEvent}
-              //onPress={()=> this.buttonMethod(item)}
-              >
+              <View style={styles.TouchableOpacityEvent}>
                 <View style={{ flex: 1, paddingBottom: 5, paddingTop: 10, paddingHorizontal: 10 }}>
                   <Text style={styles.titulo}>
                     Atividade:
@@ -97,39 +101,46 @@ class CalendarDetailScreen extends React.Component {
                 </View>
                 <View style={{ flex: 1, paddingBottom: 14, paddingTop: 7, paddingHorizontal: 10 }}>
                   <Text style={styles.descricao}>
-                    {this.state.event.Atividade}
+                    {this.state.event.atividade}
                   </Text>
                 </View>
               </View>
 
-              <View
-                style={styles.TouchableOpacityEvent}
-              //onPress={()=> this.buttonMethod(item)}
-              >
+              <View style={styles.TouchableOpacityEvent}>
                 <View style={{ flex: 1, paddingBottom: 5, paddingTop: 10, paddingHorizontal: 10 }}>
                   <Text style={styles.titulo}>
                     Data/hora:
-                            </Text>
+                  </Text>
                 </View>
                 <View style={{ flex: 1, paddingBottom: 14, paddingTop: 7, paddingHorizontal: 10 }}>
                   <Text style={styles.descricao}>
-                    {this.state.event.DataProvavel} - {this.state.event.Hora}
+                    {this.state.event.dataProvavel} - {this.state.event.hora}
                   </Text>
                 </View>
               </View>
 
-              <View
-                style={styles.TouchableOpacityEvent}
-              //onPress={()=> this.buttonMethod(item)}
-              >
+              <View style={[styles.TouchableOpacityEvent, styles.flexDirection]}>
+                <View style={{ flex: 1, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 10 }}>
+                  <Text style={styles.titulo}>
+                    Presença:
+                  </Text>
+                </View>
+                <View style={{ flex: 1, paddingBottom: 14, paddingTop: 14, paddingHorizontal: 10 }}>
+                  <Text style={styles.descricao}>
+                    {this.state.presenca}
+                  </Text>
+                </View>
+              </View>
+
+              <View style={styles.TouchableOpacityEvent}>
                 <View style={{ flex: 1, paddingBottom: 5, paddingTop: 10, paddingHorizontal: 10 }}>
                   <Text style={styles.titulo}>
                     Recados:
-                            </Text>
+                  </Text>
                 </View>
                 <View style={{ flex: 1, paddingBottom: 14, paddingTop: 7, paddingHorizontal: 10 }}>
                   <Text style={styles.descricao}>
-                    {this.state.event.Recados}
+                    {this.state.event.recados}
                   </Text>
                 </View>
               </View>
@@ -175,16 +186,16 @@ const styles = StyleSheet.create({
     color: "white"
   },
   descricao: {
-    fontSize: 20,
+    fontSize: 18,
     flexWrap: 'wrap',
     color: "white",
   },
   descricao2: {
-    fontSize: 20,
+    textAlign: 'center',
+    fontSize: 18,
     flexWrap: 'wrap',
-    color: "white",
-    textAlign: 'center'
-  }
+    color: "white"    
+  },
 });
 
 export default CalendarDetailScreen;
