@@ -8,9 +8,11 @@ module.exports = {
     GET_ATA: 'getATA',
     UPDATE_ATA: 'updateATA',
     GET_PHRASE: 'getPhrase',
-    GET_DEGREE: 'getAreaDeEnsino',
-    GET_DEGREE_SPECIFIC: 'getAreaDeEnsinoEspecifico',
+    GET_DEGREE: 'getDegrees',
+    GET_DEGREE_SPECIFIC: 'getSpecificDegree',
+    GET_DEGREE_SPECIFIC_CONTENT: 'getSpecificDegreeContent',
     GET_SOURCE: 'getSource',
     GET_BIRTHDAYS: 'getBirthDays',
-    GET_MONTHLY_PAYMENT: 'getMonthlyPayment'
+    GET_MONTHLY_PAYMENT: 'getMonthlyPayment',
+    GET_STOCK: 'getStock'
   };

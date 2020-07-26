@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
-import SpecificDegreeScreen from '../../screen/SpecificDegreeScreen';
+import SpecificDegreeScreen from '../../../screen/DegreeScreenFiles/SpecificDegreeScreen'
 import { HeaderBackButton } from 'react-navigation-stack';
 
 

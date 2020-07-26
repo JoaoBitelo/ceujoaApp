@@ -109,8 +109,8 @@ class HeaderStyle extends React.Component {
                         <View style={[styles.viewButton, this.state.currentScreen === 7 ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => { this._updateScreen(7); this.props.navigation.navigate('NormsRegulations') }}>
-                                <Text style={styles.buttonText}>Material Litúrgico(por fazer)</Text>
+                                onPress={() => { this._updateScreen(7); this.props.navigation.navigate('Stock') }}>
+                                <Text style={styles.buttonText}>Material Litúrgico</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
                         </View>

@@ -1,15 +1,14 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
-import SpecificDegreeDetailScreen from '../../screen/SpecificDegreeDetailScreen';
-import { HeaderBackButton } from 'react-navigation-stack';
+import StockScreen from '../../screen/StockScreen';
+import NavigationDrawerStructure from '../headerConfig/Structure';
 
-
-const SpecificDegreeDetailHeader = createStackNavigator({
-    SpecificDegreeDetail: {
-        screen: SpecificDegreeDetailScreen,
+const StockHeader = createStackNavigator({
+    Stock: {
+        screen: StockScreen,
         navigationOptions: ({ navigation }) => ({
-            title: "Detalhes",
+            title: "Material Litúrgico",
             //header todo
             headerStyle: {
                 backgroundColor: '#c7282d',
@@ -23,8 +22,9 @@ const SpecificDegreeDetailHeader = createStackNavigator({
                 fontWeight: 'bold'
             },
             headerLeft: (
-                <HeaderBackButton tintColor={'white'}
-                    onPress={() => navigation.navigate("SpecificDegree")} />
+                <View style={{ paddingHorizontal: Dimensions.get("window").width * 0.05 }}>
+                    <NavigationDrawerStructure navigation={navigation} />
+                </View>
             ),
             headerRight: (
                 <View style={{ flex: 1 }}>
@@ -35,4 +35,4 @@ const SpecificDegreeDetailHeader = createStackNavigator({
     },
 });
 
-export default SpecificDegreeDetailHeader
+export default StockHeader

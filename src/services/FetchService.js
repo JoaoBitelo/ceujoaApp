@@ -203,7 +203,7 @@ class FetchService {
   }
 
   getDegree = async () => {
-    const login = await this.getCurrentSessionInfo();
+    const basicInfo = await this.getCurrentSessionInfo();
     let url = BASE_URL + global.GET_DEGREE
     return fetch(url, {
       method: 'POST',
@@ -212,7 +212,8 @@ class FetchService {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        login: login
+        login: basicInfo.login,
+        token: basicInfo.token,
       }),
     })
       .then((response) => response.json())
@@ -224,8 +225,8 @@ class FetchService {
       });
   }
 
-  getDegreeSpecific = async (item) => {
-    const login = await this.getCurrentSessionInfo();
+  getDegreeSpecific = async (id) => {
+    const basicInfo = await this.getCurrentSessionInfo();
     let url = BASE_URL + global.GET_DEGREE_SPECIFIC
     return fetch(url, {
       method: 'POST',
@@ -234,8 +235,33 @@ class FetchService {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        login: login,
-        item: item
+        login: basicInfo.login,
+        token: basicInfo.token,
+        id: id
+      }),
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        return responseJson
+      })
+      .catch((error) => {
+        return false
+      });
+  }
+
+  getDegreeSpecificContent = async (id) => {
+    const basicInfo = await this.getCurrentSessionInfo();
+    let url = BASE_URL + global.GET_DEGREE_SPECIFIC_CONTENT
+    return fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        login: basicInfo.login,
+        token: basicInfo.token,
+        id: id
       }),
     })
       .then((response) => response.json())
@@ -273,6 +299,29 @@ class FetchService {
   getMonthlyPayment = async () => {
     const basicInfo = await this.getCurrentSessionInfo();
     let url = BASE_URL + global.GET_MONTHLY_PAYMENT
+    return fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        login: basicInfo.login,
+        token: basicInfo.token
+      }),
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        return responseJson
+      })
+      .catch((error) => {
+        return null
+      });
+  }
+
+  getStock = async () => {
+    const basicInfo = await this.getCurrentSessionInfo();
+    let url = BASE_URL + global.GET_STOCK
     return fetch(url, {
       method: 'POST',
       headers: {

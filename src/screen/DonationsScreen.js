@@ -12,12 +12,14 @@ import {
   ScrollView
 } from "react-native";
 import FetchService from "../services/FetchService";
+import ResponseHandler from "../services/ResponseHandler";
 import { NavigationEvents } from 'react-navigation';
 
 class DonationsScreen extends React.Component {
   constructor() {
     super();
     this.FetchService = new FetchService();
+    this.ResponseHandler = new ResponseHandler();
     this.state = {
       loading: false, titulo: "", texto: ""
     };

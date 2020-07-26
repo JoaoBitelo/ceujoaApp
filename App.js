@@ -14,13 +14,14 @@ import RegulationsHeader from './src/headers/screenHeaders/NormsRegulationsHeade
 import PrincipalLetterHeader from './src/headers/screenHeaders/NormsRegulationsHeaderFiles/PrincipalLetterHeader';
 import LetterMagnaHeader from './src/headers/screenHeaders/NormsRegulationsHeaderFiles/LetterMagnaHeader';
 import DegreeHeader from './src/headers/screenHeaders/DegreeHeader';
-import SpecificDegreeHeader from './src/headers/screenHeaders/SpecificDegreeHeader';
-import SpecificDegreeDetailHeader from './src/headers/screenHeaders/SpecificDegreeDetailHeader';
+import SpecificDegreeHeader from './src/headers/screenHeaders/DegreeHeaderFiles/SpecificDegreeHeader';
+import SpecificDegreeDetailHeader from './src/headers/screenHeaders/DegreeHeaderFiles/SpecificDegreeDetailHeader';
 import EtiquetteRulesHeader from './src/headers/screenHeaders/EtiquetteRulesHeader';
 import DonationsHeader from './src/headers/screenHeaders/DonationsHeader';
 import BirthDaysHeader from './src/headers/screenHeaders/BirthDaysHeader'
 import FinancialHeader from './src/headers/screenHeaders/FinancialHeader';
-import ATAHeader from './src/headers/screenHeaders/ATAHeader'
+import ATAHeader from './src/headers/screenHeaders/ATAHeader';
+import StockHeader from './src/headers/screenHeaders/StockHeader';
 
 const homeScreen = HomeHeader;
 const firstLoginScreen = FirstLoginHeader;
@@ -40,6 +41,7 @@ const donationsScreen = DonationsHeader;
 const birthDaysScreen = BirthDaysHeader;
 const financialScreen = FinancialHeader;
 const ata = ATAHeader;
+const stock = StockHeader;
 
 const DrawerConfig = {
   drawerWidth: Dimensions.get('window').width * 0.7,
@@ -73,7 +75,8 @@ const DrawerNavigator = createDrawerNavigator(
     Donations: { screen: donationsScreen },
     BirthDays: { screen: birthDaysScreen },
     Financial: { screen: financialScreen },
-    ATA: { screen: ata }
+    ATA: { screen: ata },
+    Stock: { screen: stock }
   },
   DrawerConfig
 );

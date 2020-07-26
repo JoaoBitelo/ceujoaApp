@@ -15,7 +15,6 @@ _saveChanges = async (navigation) => {
     itemID = JSON.parse(itemID);
     users = JSON.parse(users);
     var res = await this.FetchService.updateATA(itemID.$oid, users);
-    console.log("a resta foiiiiiiiii: " + JSON.stringify(res))
     if (res === null) {
       this.ResponseHandler.nullResponse();
       navigation.navigate('Home');

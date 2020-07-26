@@ -12,8 +12,9 @@ import {
     ScrollView
 } from "react-native";
 import FetchService from "../services/FetchService";
-import { NavigationEvents } from 'react-navigation';
 import ResponseHandler from "../services/ResponseHandler";
+import { NavigationEvents } from 'react-navigation';
+
 
 class BirthDaysScreen extends React.Component {
     constructor() {
@@ -93,7 +94,7 @@ class BirthDaysScreen extends React.Component {
                                     </Text>
                                 </View>
 
-                                <View style={{ flex: 2, paddingBottom: 14, paddingTop: 14, paddingHorizontal: 2 }}>
+                                <View style={{ flex: 1, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
                                     <Text style={styles.data}>
                                         {item.birthday}
                                     </Text>

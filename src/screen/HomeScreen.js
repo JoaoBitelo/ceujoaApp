@@ -21,7 +21,7 @@ class HomeScreen extends React.Component {
     super();
     this.FetchService = new FetchService();
     this.ResponseHandler = new ResponseHandler();
-    this.state = { login: "jbitelo", password: "pass", loading: false };
+    this.state = { login: "joao2", password: "pass", loading: false };
   }
 
   _loginButtonMethod = async () => {

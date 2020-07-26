@@ -7,16 +7,19 @@ import {
   Dimensions,
   BackHandler,
   ActivityIndicator,
-  Alert
 } from "react-native";
 import { AsyncStorage } from "react-native";
 import { NavigationEvents } from 'react-navigation';
+import FetchService from "../../services/FetchService";
+import ResponseHandler from "../../services/ResponseHandler";
 
 class SpecificDegreeDetailScreen extends React.Component {
   constructor() {
     super();
+    this.FetchService = new FetchService();
+    this.ResponseHandler = new ResponseHandler();
     this.state = {
-      loading: false, dados: [], Descricao: "", FontesAdicionais: ""
+      loading: false, name: "", description: "", additional: ""
     };
   }
 
@@ -27,26 +30,26 @@ class SpecificDegreeDetailScreen extends React.Component {
 
   _loadClient = async () => {
     this.setState({ loading: true })
-    try {
-        const value = await AsyncStorage.getItem('SpecificDegreeDetail');
-        var res = JSON.parse(value)
-        if (value !== null) {
-            var temp = res.Adicional.replace(/\\n/g,'\n');
-            this.setState({ FontesAdicionais: temp })
-            temp = res.Descricao.replace(/\\n/g,'\n');
-            this.setState({ Descricao: temp })
-
-            this.setState({ dados: res })
-            this.setState({ loading: false })
-          return value;
-        }
-      } catch (error) {
-        Alert.alert(
-            "Erro de autenticação de sessão",
-            "Faça login novamente no aplicativo",
-            [{ text: "OK", onPress: () => this.props.navigation.navigate("Home") }]
-          );
-      }
+    var itemID = await AsyncStorage.getItem('currentDegreeDetail');
+    itemID = JSON.parse(itemID);
+    var res = await this.FetchService.getDegreeSpecificContent(itemID.$oid);
+    if (res === null) {
+      this.ResponseHandler.nullResponse();
+      this.setState({ loading: false })
+      this.props.navigation.navigate('Home');
+    } else if (res === false) {
+      this.ResponseHandler.falseResponse();
+      this.setState({ loading: false })
+      this.props.navigation.navigate('Home');
+    } else {
+      await this.ResponseHandler.trueResponse(res.token);
+      this.setState({ name: res.degrees.name })
+      var temp = res.degrees.description.replace(/\\n/g, '\n');
+      this.setState({ description: temp })
+      temp = res.degrees.additional.replace(/\\n/g, '\n');
+      this.setState({ additional: temp })
+      this.setState({ loading: false })
+    }
   }
 
   backButtonHandler = () => {
@@ -72,7 +75,7 @@ class SpecificDegreeDetailScreen extends React.Component {
             onWillFocus={() => this._start()}
             onWillBlur={() => this._end()} />
           <ImageBackground
-            source={require("../../assets/backgroundCalendar.jpg")}
+            source={require("../../../assets/backgroundCalendar.jpg")}
             style={styles.imageBackGround}>
             <View style={{ flex: 0.01 }}></View>
 
@@ -82,7 +85,7 @@ class SpecificDegreeDetailScreen extends React.Component {
                   Titulo:
                 </Text>
                 <Text style={styles.textCenter}>
-                  {this.state.dados.Nome}
+                  {this.state.name}
                 </Text>
               </View>
               <View style={styles.textBox}>
@@ -90,7 +93,7 @@ class SpecificDegreeDetailScreen extends React.Component {
                   Descrição:
                 </Text>
                 <Text style={styles.textCenter}>
-                  {this.state.Descricao} 
+                  {this.state.description}
                 </Text>
               </View>
               <View style={styles.textBox}>
@@ -98,12 +101,12 @@ class SpecificDegreeDetailScreen extends React.Component {
                   Fontes Adicionais:
                 </Text>
                 <Text style={styles.textCenter}>
-                  {this.state.FontesAdicionais} 
+                  {this.state.additional}
                 </Text>
               </View>
-              
+
             </View>
-            
+
             <View style={{ flex: 0.01 }}></View>
           </ImageBackground>
         </View>
@@ -119,32 +122,31 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  viewFrontGround:{
+  viewFrontGround: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  textBox:{
+  textBox: {
     backgroundColor: 'rgba(53, 87, 35, 0.5)',
     marginBottom: 20,
     borderRadius: 10,
-    paddingBottom: 5, 
-    paddingTop: 10, 
+    paddingBottom: 5,
+    paddingTop: 10,
     paddingHorizontal: 10,
     alignSelf: "center",
     width: Dimensions.get("window").width * 0.75,
   },
-  textTitle:{
+  textTitle: {
     fontSize: 20,
     flexWrap: 'wrap',
     fontWeight: 'bold',
     color: "white"
   },
-  textCenter:{
+  textCenter: {
     fontSize: 19,
     flexWrap: 'wrap',
     color: "white",
-    //paddingLeft: 20
   }
 });
 
