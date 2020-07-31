@@ -90,11 +90,14 @@ class CalendarScreen extends React.Component {
                 source={require("../../assets/logo.jpg")}
               />
             </View>
-            <View style={styles.viewMiddleGround}>
+            <KeyboardAvoidingView style={styles.viewMiddleGround}>
               <TextInput style={styles.textField}
                 onSubmitEditing={() => { this.secondTextInput.focus(); }}
                 value={this.state.text}
                 autoCapitalize='none'
+                autoCorrect={false}
+                autoCompleteType="off"
+                secureTextEntry={true}
                 placeholder="Nova senha "
                 returnKeyType="go"
                 placeholderTextColor="black"
@@ -105,20 +108,23 @@ class CalendarScreen extends React.Component {
                 ref={(input) => { this.secondTextInput = input; }}
                 value={this.state.text}
                 autoCapitalize='none'
+                autoCorrect={false}
+                autoCompleteType="off"
+                secureTextEntry={true}
                 placeholder="Confirme a senha"
                 returnKeyType="done"
                 placeholderTextColor="black"
                 onChangeText={(secondInput) => { this.setState({ secondInput }) }}
                 textAlign={'center'}
               />
-            </View>
-            <View style={styles.viewBottomGround}>
+            </KeyboardAvoidingView>
+            <KeyboardAvoidingView style={styles.viewBottomGround}>
               <TouchableOpacity
                 style={styles.button}
                 onPress={this._buttonMethod}>
                 <Text style={styles.buttonText}>AVANÇAR</Text>
               </TouchableOpacity>
-            </View>
+            </KeyboardAvoidingView>
             <View style={{ flex: 0.5 }}></View>
           </ImageBackground>
         </View>

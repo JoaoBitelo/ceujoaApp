@@ -147,26 +147,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    backgroundColor: 'rgba(53, 87, 35, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.25)',
     marginBottom: 20,
     borderRadius: 10,
+    padding: 10,
     alignSelf: "center",
     width: Dimensions.get("window").width * 0.75,
-
     borderColor: 'black',
     borderWidth: 1,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.30,
-    shadowRadius: 4.65,
-    elevation: 8,
   },
   atividade: {
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 16,
     flexWrap: 'wrap',
     fontWeight: 'bold',
     color: "white"
@@ -178,7 +170,7 @@ const styles = StyleSheet.create({
     color: "white"
   },
   textBox: {
-    backgroundColor: 'rgba(0, 0, 0, 0.75)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     marginBottom: 20,
     borderRadius: 10,
     paddingHorizontal: 10,
@@ -186,7 +178,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width * 0.9,
   },
   textTitle: {
-    fontSize: 20,
+    fontSize: 16,
     flexWrap: 'wrap',
     fontWeight: 'bold',
     color: "white",

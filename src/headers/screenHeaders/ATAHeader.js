@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, Text, TouchableOpacity, Alert } from "react-native";
+import { Dimensions, Text, TouchableOpacity } from "react-native";
 import { createStackNavigator } from 'react-navigation-stack';
 import ATAScreen from '../../screen/ATAScreen';
 import { HeaderBackButton } from 'react-navigation-stack';
@@ -55,7 +55,7 @@ const ATAHeader = createStackNavigator({
                     }}
                     onPress={() => this._saveChanges(navigation)}
                 >
-                    <Text style={{ color: 'white', textAlign: "center", flexWrap: 'wrap' }}>SALVAR</Text>
+                    <Text style={{ color: 'white', textAlign: "center", flexWrap: 'wrap' }}>salvar</Text>
                 </TouchableOpacity>
             )
         }),

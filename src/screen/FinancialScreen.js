@@ -92,7 +92,7 @@ class FinancialScreen extends React.Component {
                                 </Text>
                             </View>
 
-                            <View style={{ flex: 2, paddingBottom: 14, paddingTop: 14, paddingHorizontal: 2 }}>
+                            <View style={{ flex: 2, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
                                 <Text style={item.status === "PAGO"
                                         ? styles.dataGreen
                                         : styles.dataRed
@@ -174,26 +174,32 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
-        backgroundColor: 'rgba(53, 87, 35, 0.5)',
+        backgroundColor: 'rgba(0, 0, 0, 0.25)',
         marginBottom: 20,
         borderRadius: 10,
         alignSelf: "center",
-        width: Dimensions.get("window").width * 0.75,
-
+        width: Dimensions.get("window").width * 0.8,
         borderColor: 'black',
         borderWidth: 1,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 4,
-        },
-        shadowOpacity: 0.30,
-        shadowRadius: 4.65,
-        elevation: 8,
+    },
+    textBox: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        marginBottom: 20,
+        borderRadius: 10,
+        paddingHorizontal: 10,
+        alignSelf: "center",
+        width: Dimensions.get("window").width * 0.9,
+    },
+    textTitle: {
+        fontSize: 16,
+        flexWrap: 'wrap',
+        fontWeight: 'bold',
+        color: "white",
+        textAlign: 'center',
     },
     dataStandard: {
         textAlign: 'center',
-        fontSize: 18,
+        fontSize: 16,
         flexWrap: 'wrap',
         color: "white"
     },
@@ -202,30 +208,13 @@ const styles = StyleSheet.create({
         fontSize: 16,
         flexWrap: 'wrap',
         color: "#92d36e",
-        fontWeight: 'bold',
     },
     dataRed: {
         textAlign: 'center',
         fontSize: 16,
         flexWrap: 'wrap',
         color: "#ff3823",
-        fontWeight: 'bold',
     },
-    textBox: {
-        backgroundColor: 'rgba(53, 87, 35, 0.5)',
-        marginBottom: 20,
-        borderRadius: 10,
-        paddingHorizontal: 10,
-        alignSelf: "center",
-        width: Dimensions.get("window").width * 0.9,
-    },
-    textTitle: {
-        fontSize: 20,
-        flexWrap: 'wrap',
-        fontWeight: 'bold',
-        color: "white",
-        textAlign: 'center',
-    }
 });
 
 export default FinancialScreen;

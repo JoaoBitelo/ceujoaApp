@@ -7,11 +7,9 @@ import {
   BackHandler,
   ActivityIndicator,
 } from "react-native";
-import { Icon } from 'react-native-elements';
 import FetchService from "../services/FetchService";
 import { NavigationEvents } from 'react-navigation';
 import ResponseHandler from "../services/ResponseHandler";
-import { AsyncStorage } from "react-native";
 
 class HomeScreen extends React.Component {
   constructor() {
@@ -23,8 +21,7 @@ class HomeScreen extends React.Component {
 
   _start() {
     BackHandler.addEventListener('hardwareBackPress', this.backButtonHandler);
-    this.updateIndexMenu();
-    this._loadClient();    
+    this._loadClient();
   }
 
   _loadClient = async () => {
@@ -76,18 +73,7 @@ class HomeScreen extends React.Component {
           <ImageBackground
             source={require("../../assets/backgroundCalendar.jpg")}
             style={styles.imageBackGround}>
-            <View style={styles.upperView}>
-              <View style={{ flexDirection: 'row' }}>
-                <View style={[styles.textBox, { flex: 0.1 }]}>
-                  <Icon
-                    name='arrow-upward'
-                    color='white' />
-                </View>
-                <View style={[styles.textBox, { flex: 1 }]}>
-                  <Text style={styles.warning}>Utilize o botão do menu para navegar pelo aplicativo</Text>
-                </View>
-              </View>
-            </View>
+            <View style={{ flex: 1 }}></View>
             <View style={styles.middleView}>
               <View style={styles.textBox}>
                 <Text style={styles.phrase}>"{this.state.phrase}"</Text>
@@ -109,30 +95,19 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  upperView: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-  },
   middleView: {
-    flex: 3,
+    flex: 4,
     justifyContent: 'center',
     alignItems: 'center',
 
   },
   textBox: {
-    backgroundColor: 'rgba(53, 87, 35, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.25)',
     padding: 5
-  },
-  warning: {
-    textAlign: 'center',
-    fontSize: 16,
-    flexWrap: 'wrap',
-    color: "white"
   },
   phrase: {
     textAlign: 'center',
-    fontSize: 19,
+    fontSize: 16,
     flexWrap: 'wrap',
     color: "white",
     fontStyle: 'italic',

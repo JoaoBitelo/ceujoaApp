@@ -7,6 +7,8 @@ import {
   Dimensions,
   BackHandler,
   ActivityIndicator,
+  SafeAreaView,
+  ScrollView
 } from "react-native";
 import { AsyncStorage } from "react-native";
 import { NavigationEvents } from 'react-navigation';
@@ -79,34 +81,36 @@ class SpecificDegreeDetailScreen extends React.Component {
             style={styles.imageBackGround}>
             <View style={{ flex: 0.01 }}></View>
 
-            <View style={styles.viewFrontGround}>
-              <View style={styles.textBox}>
-                <Text style={styles.textTitle}>
-                  Titulo:
-                </Text>
-                <Text style={styles.textCenter}>
-                  {this.state.name}
-                </Text>
-              </View>
-              <View style={styles.textBox}>
-                <Text style={styles.textTitle}>
-                  Descrição:
-                </Text>
-                <Text style={styles.textCenter}>
-                  {this.state.description}
-                </Text>
-              </View>
-              <View style={styles.textBox}>
-                <Text style={styles.textTitle}>
-                  Fontes Adicionais:
-                </Text>
-                <Text style={styles.textCenter}>
-                  {this.state.additional}
-                </Text>
-              </View>
-
-            </View>
-
+            <SafeAreaView style={styles.viewFrontGround}>
+              <ScrollView>
+                <View style={styles.viewFrontGround}>
+                  <View style={styles.textBox}>
+                    <Text style={styles.textTitle}>
+                      Titulo:
+                  </Text>
+                    <Text style={styles.textCenter}>
+                      {this.state.name}
+                    </Text>
+                  </View>
+                  <View style={styles.textBox}>
+                    <Text style={styles.textTitle}>
+                      Descrição:
+                  </Text>
+                    <Text style={styles.textCenter}>
+                      {this.state.description}
+                    </Text>
+                  </View>
+                  <View style={styles.textBox}>
+                    <Text style={styles.textTitle}>
+                      Fontes Adicionais:
+                  </Text>
+                    <Text style={styles.textCenter}>
+                      {this.state.additional}
+                    </Text>
+                  </View>
+                </View>
+              </ScrollView>
+            </SafeAreaView>
             <View style={{ flex: 0.01 }}></View>
           </ImageBackground>
         </View>
@@ -128,7 +132,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textBox: {
-    backgroundColor: 'rgba(53, 87, 35, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.25)',
     marginBottom: 20,
     borderRadius: 10,
     paddingBottom: 5,
@@ -138,13 +142,13 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width * 0.75,
   },
   textTitle: {
-    fontSize: 20,
+    fontSize: 16,
     flexWrap: 'wrap',
     fontWeight: 'bold',
     color: "white"
   },
   textCenter: {
-    fontSize: 19,
+    fontSize: 16,
     flexWrap: 'wrap',
     color: "white",
   }

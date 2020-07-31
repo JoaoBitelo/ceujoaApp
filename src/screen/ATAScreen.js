@@ -250,7 +250,7 @@ class ATAScreen extends React.Component {
             return (
                 <Icon
                     name='check-circle'
-                    color='#ff3823'
+                    color='#ff4f54'
                 />
             );
         } else if (item === "Falta justificada") {
@@ -284,7 +284,7 @@ class ATAScreen extends React.Component {
                         }
                         onPress={() => this._selectionButtonMethod(index.toString(), item, nameOfTheList)}>
                         <View style={{ flex: 4, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
-                            <Text style={styles.data}>
+                            <Text style={styles.text}>
                                 {item.user.name}
                             </Text>
                         </View>
@@ -357,7 +357,7 @@ class ATAScreen extends React.Component {
                                 <TouchableOpacity style={styles.evluationButton}
                                     onPress={() => this._modificationButtonMethod("Presente")}>
                                     <View style={{ flex: 4, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
-                                        <Text style={styles.data}>
+                                        <Text style={styles.text}>
                                             Presente
                                         </Text>
                                     </View>
@@ -369,7 +369,7 @@ class ATAScreen extends React.Component {
                                 <TouchableOpacity style={styles.evluationButton}
                                     onPress={() => this._modificationButtonMethod("Ausente")}>
                                     <View style={{ flex: 4, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
-                                        <Text style={styles.data}>
+                                        <Text style={styles.text}>
                                             Ausente
                                         </Text>
                                     </View>
@@ -383,7 +383,7 @@ class ATAScreen extends React.Component {
                                 <TouchableOpacity style={styles.evluationButton}
                                     onPress={() => this._modificationButtonMethod("Falta justificada")}>
                                     <View style={{ flex: 4, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
-                                        <Text style={styles.data}>
+                                        <Text style={styles.text}>
                                             Justificado
                                         </Text>
                                     </View>
@@ -395,7 +395,7 @@ class ATAScreen extends React.Component {
                                 <TouchableOpacity style={styles.evluationButton}
                                     onPress={() => this._modificationButtonMethod("Dispensado")}>
                                     <View style={{ flex: 4, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
-                                        <Text style={styles.data}>
+                                        <Text style={styles.text}>
                                             Dispensado
                                         </Text>
                                     </View>
@@ -432,7 +432,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
-        backgroundColor: 'rgba(53, 87, 35, 0.5)',
+        backgroundColor: 'rgba(0, 0, 0, 0.25)',
         marginBottom: 20,
         borderRadius: 10,
         alignSelf: "center",
@@ -459,33 +459,11 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         alignSelf: "center",
         width: Dimensions.get("window").width * 0.75,
-
         borderColor: 'black',
         borderWidth: 1,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 4,
-        },
-        shadowOpacity: 0.30,
-        shadowRadius: 4.65,
-        elevation: 8,
-    },
-    atividade: {
-        textAlign: 'center',
-        fontSize: 18,
-        flexWrap: 'wrap',
-        fontWeight: 'bold',
-        color: "white"
-    },
-    data: {
-        textAlign: 'center',
-        fontSize: 18,
-        flexWrap: 'wrap',
-        color: "white"
     },
     textBox: {
-        backgroundColor: 'rgba(53, 87, 35, 0.5)',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
         marginBottom: 20,
         borderRadius: 10,
         paddingHorizontal: 10,
@@ -493,11 +471,17 @@ const styles = StyleSheet.create({
         width: Dimensions.get("window").width * 0.9,
     },
     textTitle: {
-        fontSize: 20,
+        fontSize: 16,
         flexWrap: 'wrap',
         fontWeight: 'bold',
         color: "white",
         textAlign: 'center',
+    },
+    text: {
+        textAlign: 'center',
+        fontSize: 16,
+        flexWrap: 'wrap',
+        color: "white"
     },
     viewAllButtons: {
         flex: 1,

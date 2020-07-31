@@ -9,32 +9,16 @@ import {
     ScrollView,
 } from "react-native";
 import { Icon } from 'react-native-elements'
-import { NavigationEvents } from 'react-navigation';
-import CurrentIndexMenu from  './CurrentIndexMenu';
 
 class HeaderStyle extends React.Component {
     constructor(props) {
         super(props);   
-        this.CurrentIndexMenu = new CurrentIndexMenu();
-        this.state = { currentScreen: 0 };
-    }
-
-    _start = async () => {
-        console.log("a")
-      }
-
-    _updateScreen = async (value) => {
-        await this.CurrentIndexMenu.setIndex(value)
-        const aa = await this.CurrentIndexMenu.getIndex()
-        console.log(aa)
-        this.setState({ currentScreen: value })
+        this.state = { };
     }
 
     render() {
         return (
             <View style={styles.mainView}>
-                <NavigationEvents
-                    onWillFocus={() => this._start()}/>
                 <View style={{ flex: 0.1 }}></View>
                 <View style={styles.viewUpperGround}>
                     <Image style={styles.image}
@@ -43,82 +27,82 @@ class HeaderStyle extends React.Component {
                 </View>
                 <View style={styles.viewMiddleGround}>
                     <ScrollView style={styles.ScrollView}>
-                        <View style={[styles.viewButton, this.state.currentScreen === 0 ? styles.backViewButton2 : styles.backViewButton1]}>
+                        <View style={[styles.viewButton, this.props.navigation.state.routeName == "CommonArea" ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => { this._updateScreen(0); this.props.navigation.navigate('CommonArea') }}>
+                                onPress={() => {this.props.navigation.navigate('CommonArea')}}>
                                 <Text style={styles.buttonText}>Início</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
                         </View>
 
-                        <View style={[styles.viewButton, this.state.currentScreen === 1 ? styles.backViewButton2 : styles.backViewButton1]}>
+                        <View style={[styles.viewButton, this.props.navigation.state.routeName === "EtiquetteRules" ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => { this._updateScreen(1); this.props.navigation.navigate('EtiquetteRules') }}>
+                                onPress={() => {this.props.navigation.navigate('EtiquetteRules')}}>
                                 <Text style={styles.buttonText}>Regras de Etiqueta</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
                         </View>
 
-                        <View style={[styles.viewButton, this.state.currentScreen === 2 ? styles.backViewButton2 : styles.backViewButton1]}>
+                        <View style={[styles.viewButton, this.props.navigation.state.routeName === "Calendar" ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => { this._updateScreen(2); this.props.navigation.navigate('Calendar') }}>
+                                onPress={() => {this.props.navigation.navigate('Calendar')}}>
                                 <Text style={styles.buttonText}>Calendário</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
                         </View>
 
-                        <View style={[styles.viewButton, this.state.currentScreen === 3 ? styles.backViewButton2 : styles.backViewButton1]}>
+                        <View style={[styles.viewButton, this.props.navigation.state.routeName === "Degree" ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => { this._updateScreen(3); this.props.navigation.navigate('Degree') }}>
+                                onPress={() => {this.props.navigation.navigate('Degree')}}>
                                 <Text style={styles.buttonText}>Área de Ensino</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
                         </View>
 
-                        <View style={[styles.viewButton, this.state.currentScreen === 4 ? styles.backViewButton2 : styles.backViewButton1]}>
+                        <View style={[styles.viewButton, this.props.navigation.state.routeName === "Financial" ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => { this._updateScreen(4); this.props.navigation.navigate('Financial') }}>
+                                onPress={() => {this.props.navigation.navigate('Financial')}}>
                                 <Text style={styles.buttonText}>Área Financeira</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
                         </View>
 
-                        <View style={[styles.viewButton, this.state.currentScreen === 5 ? styles.backViewButton2 : styles.backViewButton1]}>
+                        <View style={[styles.viewButton, this.props.navigation.state.routeName === "Donations" ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => { this._updateScreen(5); this.props.navigation.navigate('Donations') }}>
+                                onPress={() => {this.props.navigation.navigate('Donations')}}>
                                 <Text style={styles.buttonText}>Ações sociais - Projeto Joaquinas</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
                         </View>
 
-                        <View style={[styles.viewButton, this.state.currentScreen === 6 ? styles.backViewButton2 : styles.backViewButton1]}>
+                        <View style={[styles.viewButton, this.props.navigation.state.routeName === "BirthDays" ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => { this._updateScreen(6); this.props.navigation.navigate('BirthDays') }}>
+                                onPress={() => {this.props.navigation.navigate('BirthDays')}}>
                                 <Text style={styles.buttonText}>Aniversários</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
                         </View>
 
-                        <View style={[styles.viewButton, this.state.currentScreen === 7 ? styles.backViewButton2 : styles.backViewButton1]}>
+                        <View style={[styles.viewButton, this.props.navigation.state.routeName === "Stock" ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => { this._updateScreen(7); this.props.navigation.navigate('Stock') }}>
+                                onPress={() => {this.props.navigation.navigate('Stock')}}>
                                 <Text style={styles.buttonText}>Material Litúrgico</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
                         </View>
 
-                        <View style={[styles.viewButton, this.state.currentScreen === 8 ? styles.backViewButton2 : styles.backViewButton1]}>
+                        <View style={[styles.viewButton, this.props.navigation.state.routeName === "NormsRegulations" ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => { this._updateScreen(8); this.props.navigation.navigate('NormsRegulations') }}>
+                                onPress={() => {this.props.navigation.navigate('NormsRegulations')}}>
                                 <Text style={styles.buttonText}>Estatuto Social e Regimento Interno</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
@@ -158,7 +142,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     viewButton: {
-        height: 65,
+        height: 90,
         width: Dimensions.get("window").width * 0.7,
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -169,7 +153,7 @@ const styles = StyleSheet.create({
     backViewButton1: {
         backgroundColor: '#c7282d',
     },
-    backViewButton2: {
+    backViewButton2: { //descontinuado
         backgroundColor: '#a82226',
     },
     button: {
@@ -177,7 +161,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         textAlign: 'center',
-        fontSize: 20,
+        fontSize: 16,
         flexWrap: 'wrap',
         color: "white"
     },

@@ -37,9 +37,9 @@ class HomeScreen extends React.Component {
       this.props.navigation.navigate('Home');
     }else{
       if(res.firstLogin===true) {
-        this.setState({ loading: false })
         await this.ResponseHandler.loginResponse(this.state.login, res.token);
         this.props.navigation.navigate('FirstLogin');
+        this.setState({ loading: false })
       } else {
         await this.ResponseHandler.loginResponse(this.state.login, res);
         this.props.navigation.navigate('CommonArea');
@@ -85,11 +85,13 @@ class HomeScreen extends React.Component {
               />
             </View>
 
-            <View style={styles.viewMiddleGround}>
+            <KeyboardAvoidingView style={styles.viewMiddleGround}>
               <TextInput style={styles.textField}
                 onSubmitEditing={() => { this.secondTextInput.focus(); }}
                 value={this.state.text}
                 autoCapitalize='none'
+                autoCorrect={false}
+                autoCompleteType="off"
                 placeholder="LOGIN "
                 returnKeyType="go"
                 placeholderTextColor="black"
@@ -101,13 +103,16 @@ class HomeScreen extends React.Component {
                 ref={(input) => { this.secondTextInput = input; }}
                 value={this.state.text}
                 autoCapitalize='none'
+                autoCorrect={false}
+                autoCompleteType="off"
+                secureTextEntry={true}
                 placeholder="SENHA"
                 returnKeyType="done"
                 placeholderTextColor="black"
                 onChangeText={(password) => { this.setState({ password }) }}
                 textAlign={'center'}
               />
-            </View>
+            </KeyboardAvoidingView>
 
             <View style={styles.viewBottomGround}>
               <TouchableOpacity
@@ -191,19 +196,8 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").height * 0.07,
     backgroundColor: '#c7282d',
     borderRadius: 50,
-
     borderColor: 'black',
     borderWidth: 1,
-
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.30,
-    shadowRadius: 4.65,
-
-    elevation: 8,
   },
   buttonText: {
     textAlign: "center",

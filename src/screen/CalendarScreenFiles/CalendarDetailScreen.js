@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
   },
   TouchableOpacityEvent: {
     flex: 1,
-    backgroundColor: 'rgba(53, 87, 35, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.25)',
     marginBottom: 20,
     borderRadius: 10,
     alignSelf: "center",
@@ -180,19 +180,19 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   titulo: {
-    fontSize: 20,
+    fontSize: 16,
     flexWrap: 'wrap',
     fontWeight: 'bold',
     color: "white"
   },
   descricao: {
-    fontSize: 18,
+    fontSize: 16,
     flexWrap: 'wrap',
     color: "white",
   },
   descricao2: {
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 16,
     flexWrap: 'wrap',
     color: "white"    
   },

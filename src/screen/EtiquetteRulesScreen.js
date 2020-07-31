@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   textBox: {
-    backgroundColor: 'rgba(53, 87, 35, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.25)',
     marginBottom: 20,
     borderRadius: 10,
     paddingHorizontal: 10,
@@ -119,14 +119,14 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width * 0.9,
   },
   textTitle: {
-    fontSize: 20,
+    fontSize: 16,
     flexWrap: 'wrap',
     fontWeight: 'bold',
     color: "white",
     textAlign: 'center',
   },
   textCenter: {
-    fontSize: 19,
+    fontSize: 16,
     flexWrap: 'wrap',
     color: "white",
   }

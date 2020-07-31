@@ -142,23 +142,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignSelf: "center",
     width: Dimensions.get("window").width * 0.75,
-
     borderColor: 'black',
     borderWidth: 1,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.30,
-    shadowRadius: 4.65,
-    elevation: 8,
   },
   nome: {
     textAlign: 'center',
     fontSize: 18,
     flexWrap: 'wrap',
-    fontWeight: 'bold',
     color: "white"
   }
 });

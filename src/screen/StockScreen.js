@@ -81,15 +81,15 @@ class StockScreen extends React.Component {
                                     renderItem={({ item, index }) => (
                                         <View style={styles.textBox}>
                                             <View style={styles.textBoxLineWithBottomLine}>
-                                                <Text style={styles.textTitle}>ITEM: </Text>
+                                                <Text style={styles.textTitle}>item: </Text>
                                                 <Text style={styles.text}>{item.name}</Text>
                                             </View>
                                             <View style={styles.textBoxLineWithBottomLine}>
-                                                <Text style={styles.textTitle}>NECESSIDADE: </Text>
+                                                <Text style={styles.textTitle}>necessidade: </Text>
                                                 <Text style={styles.text}>{item.need}</Text>
                                             </View>
                                             <View style={styles.textBoxLine}>
-                                                <Text style={styles.textTitle}>ESTOQUE: </Text>
+                                                <Text style={styles.textTitle}>estoque: </Text>
                                                 {parseInt(item.stock, 10)>=parseInt(item.need, 10)
                                                     ?
                                                     <Text style={styles.textGreen}>{item.stock}</Text>
@@ -126,12 +126,10 @@ const styles = StyleSheet.create({
     textBox: {
         flex: 1,
         alignItems: 'flex-start',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        //backgroundColor: 'rgba(53, 87, 35, 0.5)',
+        backgroundColor: 'rgba(0, 0, 0, 0.25)',
         marginBottom: 20,
         borderRadius: 10,
-        paddingHorizontal: 10,
-        //alignSelf: "center",
+        padding: 10,
         width: Dimensions.get("window").width * 0.9,
     },
     textBoxLineWithBottomLine:{
@@ -148,7 +146,7 @@ const styles = StyleSheet.create({
     },
     textTitle: {
         flex: 1,
-        fontSize: 20,
+        fontSize: 16,
         flexWrap: 'wrap',
         fontWeight: 'bold',
         color: "white",
@@ -157,23 +155,26 @@ const styles = StyleSheet.create({
     text: {
         flex: 1,
         textAlign: 'center',
-        fontSize: 18,
+        fontSize: 16,
         flexWrap: 'wrap',
-        color: "white"
+        color: "white",
+        fontWeight: 'bold',
     },
     textGreen: {
         flex: 1,
         textAlign: 'center',
-        fontSize: 18,
+        fontSize: 16,
         flexWrap: 'wrap',
-        color: "#92d36e"
+        color: "#92d36e",
+        fontWeight: 'bold',
     },
     textRed: {
         flex: 1,
         textAlign: 'center',
-        fontSize: 18,
+        fontSize: 16,
         flexWrap: 'wrap',
-        color: "#ff3823"
+        color: "#ff4f54",
+        fontWeight: 'bold',
     },
 });
 

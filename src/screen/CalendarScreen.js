@@ -101,11 +101,9 @@ class CalendarScreen extends React.Component {
                   {this.state.nextEvents.length === 0 
                   ?
                   <View style={styles.TouchableOpacityEvent}>
-                    <View style={{ flex: 3, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 5 }}>
-                      <Text style={styles.data}>
+                    <Text style={styles.text}>
                         Não há nenhum evento nos próximos 7 dias
-                      </Text>
-                    </View>
+                    </Text>
                   </View>
                   :
                   <FlatList style={{ flex: 3 }}
@@ -115,13 +113,13 @@ class CalendarScreen extends React.Component {
                         style={styles.TouchableOpacityEvent}
                         onPress={() => this._buttonMethod(item)}>
                         <View style={{ flex: 3, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
-                          <Text style={styles.atividade}>
+                          <Text style={styles.text}>
                             {item.atividade}
                           </Text>
                         </View>
 
-                        <View style={{ flex: 2, paddingBottom: 14, paddingTop: 14, paddingHorizontal: 2 }}>
-                          <Text style={styles.data}>
+                        <View style={{ flex: 2, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
+                          <Text style={styles.text}>
                             {item.dataProvavel}
                           </Text>
                         </View>
@@ -142,13 +140,13 @@ class CalendarScreen extends React.Component {
                       style={styles.TouchableOpacityEvent}
                       onPress={() => this._buttonMethod(item)}>
                       <View style={{ flex: 3, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
-                        <Text style={styles.atividade}>
+                        <Text style={styles.text}>
                           {item.atividade}
                         </Text>
                       </View>
 
-                      <View style={{ flex: 2, paddingBottom: 14, paddingTop: 14, paddingHorizontal: 2 }}>
-                        <Text style={styles.data}>
+                      <View style={{ flex: 2, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
+                        <Text style={styles.text}>
                           {item.dataProvavel}
                         </Text>
                       </View>
@@ -184,52 +182,37 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    backgroundColor: 'rgba(53, 87, 35, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.25)',
     marginBottom: 20,
     borderRadius: 10,
     alignSelf: "center",
     width: Dimensions.get("window").width * 0.75,
-
     borderColor: 'black',
     borderWidth: 1,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.30,
-    shadowRadius: 4.65,
-    elevation: 8,
-  },
-  atividade: {
-    textAlign: 'center',
-    fontSize: 18,
-    flexWrap: 'wrap',
-    fontWeight: 'bold',
-    color: "white"
-  },
-  data: {
-    textAlign: 'center',
-    fontSize: 18,
-    flexWrap: 'wrap',
-    color: "white"
   },
   textBox: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    //backgroundColor: 'rgba(53, 87, 35, 0.5)',
     marginBottom: 20,
     borderRadius: 10,
-    paddingHorizontal: 10,
     alignSelf: "center",
     width: Dimensions.get("window").width * 0.9,
   },
   textTitle: {
-    fontSize: 20,
+    fontSize: 16,
     flexWrap: 'wrap',
     fontWeight: 'bold',
     color: "white",
     textAlign: 'center',
-  }
+  },
+  text: {
+    textAlign: 'center',
+    fontSize: 16,
+    flexWrap: 'wrap',
+    color: "white"
+  },
 });
 
 export default CalendarScreen;

@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   middleView: {
-    flex: 2,
+    flex: 3,
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -79,10 +79,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'row',
     backgroundColor: '#c7282d',
     borderRadius: 10,
     marginBottom: 20,
+    padding: 10,
     width: Dimensions.get("window").width * 0.75,
 
     borderColor: 'black',

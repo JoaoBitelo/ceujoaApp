@@ -9,15 +9,12 @@ export default class NavigationDrawerStructure extends React.Component {
   }
 
   backButtonHandler = () => {
-    console.log("bbbbbb")
     if (this.state.menuOpen === true) {
-      console.log("tava aberto")
       this.setState({ menuOpen: false })
       BackHandler.removeEventListener('hardwareBackPress', this.backButtonHandler);
       this.props.navigation.closeDrawer();
       return true;
     } else {
-      console.log("tava fechado")
       this.setState({ menuOpen: false })
       return false;
     }

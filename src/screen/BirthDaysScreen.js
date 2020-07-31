@@ -58,7 +58,7 @@ class BirthDaysScreen extends React.Component {
             this.setState({ fevereiro: res.birthDays[1] })
             this.setState({ marco: res.birthDays[2] })
             this.setState({ abril: res.birthDays[3] })
-            this.setState({ abril: res.birthDays[4] })
+            this.setState({ maio: res.birthDays[4] })
             this.setState({ junho: res.birthDays[5] })
             this.setState({ julho: res.birthDays[6] })
             this.setState({ agosto: res.birthDays[7] })
@@ -89,13 +89,13 @@ class BirthDaysScreen extends React.Component {
 
                             <View style={styles.TouchableOpacityEvent}>
                                 <View style={{ flex: 3, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
-                                    <Text style={styles.data}>
+                                    <Text style={styles.text}>
                                         {item.name}
                                     </Text>
                                 </View>
 
                                 <View style={{ flex: 1, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
-                                    <Text style={styles.data}>
+                                    <Text style={styles.text}>
                                         {item.birthday}
                                     </Text>
                                 </View>
@@ -277,38 +277,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
-        backgroundColor: 'rgba(53, 87, 35, 0.5)',
+        backgroundColor: 'rgba(0, 0, 0, 0.25)',
         marginBottom: 20,
         borderRadius: 10,
         alignSelf: "center",
         width: Dimensions.get("window").width * 0.75,
-
         borderColor: 'black',
         borderWidth: 1,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 4,
-        },
-        shadowOpacity: 0.30,
-        shadowRadius: 4.65,
-        elevation: 8,
-    },
-    atividade: {
-        textAlign: 'center',
-        fontSize: 18,
-        flexWrap: 'wrap',
-        fontWeight: 'bold',
-        color: "white"
-    },
-    data: {
-        textAlign: 'center',
-        fontSize: 16,
-        flexWrap: 'wrap',
-        color: "white"
     },
     textBox: {
-        backgroundColor: 'rgba(53, 87, 35, 0.5)',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
         marginBottom: 20,
         borderRadius: 10,
         paddingHorizontal: 10,
@@ -316,12 +294,18 @@ const styles = StyleSheet.create({
         width: Dimensions.get("window").width * 0.9,
     },
     textTitle: {
-        fontSize: 20,
+        fontSize: 16,
         flexWrap: 'wrap',
         fontWeight: 'bold',
         color: "white",
         textAlign: 'center',
-    }
+    },
+    text: {
+        textAlign: 'center',
+        fontSize: 16,
+        flexWrap: 'wrap',
+        color: "white"
+    },
 });
 
 export default BirthDaysScreen;

@@ -32,7 +32,7 @@ const CalendarDetailHeader = createStackNavigator({
                     }}
                     onPress={() => navigation.navigate("ATA")}
                 >
-                    <Text style={{ color: 'white', textAlign: "center", flexWrap: 'wrap' }}>ADM</Text>
+                    <Text style={{ color: 'white', textAlign: "center", flexWrap: 'wrap' }}>adm</Text>
                 </TouchableOpacity>
             )
         }),
