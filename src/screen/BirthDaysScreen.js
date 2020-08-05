@@ -54,18 +54,18 @@ class BirthDaysScreen extends React.Component {
             this.props.navigation.navigate('Home');
         } else {
             await this.ResponseHandler.trueResponse(res.token);
-            this.setState({ janeiro: res.birthDays[0] })
-            this.setState({ fevereiro: res.birthDays[1] })
-            this.setState({ marco: res.birthDays[2] })
-            this.setState({ abril: res.birthDays[3] })
-            this.setState({ maio: res.birthDays[4] })
-            this.setState({ junho: res.birthDays[5] })
-            this.setState({ julho: res.birthDays[6] })
-            this.setState({ agosto: res.birthDays[7] })
-            this.setState({ setembro: res.birthDays[8] })
-            this.setState({ outubro: res.birthDays[9] })
-            this.setState({ novembro: res.birthDays[10] })
-            this.setState({ dezembro: res.birthDays[11] })
+            this.setState({ janeiro: res.aniversarios[0] })
+            this.setState({ fevereiro: res.aniversarios[1] })
+            this.setState({ marco: res.aniversarios[2] })
+            this.setState({ abril: res.aniversarios[3] })
+            this.setState({ maio: res.aniversarios[4] })
+            this.setState({ junho: res.aniversarios[5] })
+            this.setState({ julho: res.aniversarios[6] })
+            this.setState({ agosto: res.aniversarios[7] })
+            this.setState({ setembro: res.aniversarios[8] })
+            this.setState({ outubro: res.aniversarios[9] })
+            this.setState({ novembro: res.aniversarios[10] })
+            this.setState({ dezembro: res.aniversarios[11] })
             this.setState({ loading: false })
         }
     }
@@ -90,13 +90,13 @@ class BirthDaysScreen extends React.Component {
                             <View style={styles.TouchableOpacityEvent}>
                                 <View style={{ flex: 3, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
                                     <Text style={styles.text}>
-                                        {item.name}
+                                        {item.nome}
                                     </Text>
                                 </View>
 
                                 <View style={{ flex: 1, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
                                     <Text style={styles.text}>
-                                        {item.birthday}
+                                        {item.aniversario}
                                     </Text>
                                 </View>
                             </View>

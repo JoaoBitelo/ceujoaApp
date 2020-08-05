@@ -31,7 +31,7 @@ const CalendarFilterHeader = createStackNavigator({
                         paddingHorizontal: Dimensions.get("window").width * 0.05,
                     }}
                     onPress={() => navigation.push("CalendarFilter")}
-                    >
+                >
                     <Text style={{ color: 'white', textAlign: "center", flexWrap: 'wrap' }}>filtro</Text>
                 </TouchableOpacity>
             )

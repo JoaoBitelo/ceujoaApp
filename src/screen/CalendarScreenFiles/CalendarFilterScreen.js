@@ -58,7 +58,7 @@ class CalendarFilterScreen extends React.Component {
       this.props.navigation.navigate('Home');
     } else {
       await this.ResponseHandler.trueResponse(res.token);
-      this.setState({ allEvents: res.allEvents })
+      this.setState({ allEvents: res.eventos })
       this.setState({ loading: false })
     }
   }
@@ -75,51 +75,51 @@ class CalendarFilterScreen extends React.Component {
           <View style={{ flex: 0.01 }}></View>
           <SafeAreaView style={styles.viewFrontGround}>
             <ScrollView>
-                <View style={styles.textBox}>
-                  <Text style={styles.textTitle}>
-                    Eventos encontrados no dia selecionado
+              <View style={styles.textBox}>
+                <Text style={styles.textTitle}>
+                  Eventos encontrados no dia selecionado
                   </Text>
-                </View>
-                {this.state.allEvents.length === 0 
-                  ?
-                  <View style={styles.TouchableOpacityEvent}>
-                    <Text style={styles.data}>
-                      Nenhum evento encontrado nesta data
+              </View>
+              {this.state.allEvents.length === 0
+                ?
+                <View style={styles.TouchableOpacityEvent}>
+                  <Text style={styles.data}>
+                    Nenhum evento encontrado nesta data
                     </Text>
-                  </View>
-                  :
-                  <FlatList style={{ flex: 3 }}
-                    data={this.state.allEvents}
-                    renderItem={({ item, index }) => (
-                      <TouchableOpacity
-                        style={styles.TouchableOpacityEvent}
-                        onPress={() => this._buttonMethod(item)}>
-                        <View style={{ flex: 3, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
-                          <Text style={styles.atividade}>
-                            {item.atividade}
-                          </Text>
-                        </View>
+                </View>
+                :
+                <FlatList style={{ flex: 3 }}
+                  data={this.state.allEvents}
+                  renderItem={({ item, index }) => (
+                    <TouchableOpacity
+                      style={styles.TouchableOpacityEvent}
+                      onPress={() => this._buttonMethod(item)}>
+                      <View style={{ flex: 3, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
+                        <Text style={styles.atividade}>
+                          {item.atividade}
+                        </Text>
+                      </View>
 
-                        <View style={{ flex: 2, paddingBottom: 14, paddingTop: 14, paddingHorizontal: 2 }}>
-                          <Text style={styles.data}>
-                            {item.dataProvavel}
-                          </Text>
-                        </View>
-                      </TouchableOpacity>
-                    )}
-                    keyExtractor={(item, index) => index.toString()}
-                  />
-                }
-                <DatePicker
-                  mode="date"
-                  format="DD-MM-YY"
-                  confirmBtnText="Confirm"
-                  cancelBtnText="Cancel"
-                  onDateChange={(date) => { this._buttonMethod(date) }}
-                  showIcon={false}
-                  hideText={true}
-                  ref={(ref) => this.datePickerRef = ref}
+                      <View style={{ flex: 2, paddingBottom: 14, paddingTop: 14, paddingHorizontal: 2 }}>
+                        <Text style={styles.data}>
+                          {item.dataProvavel}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                  )}
+                  keyExtractor={(item, index) => index.toString()}
                 />
+              }
+              <DatePicker
+                mode="date"
+                format="DD-MM-YY"
+                confirmBtnText="Confirm"
+                cancelBtnText="Cancel"
+                onDateChange={(date) => { this._buttonMethod(date) }}
+                showIcon={false}
+                hideText={true}
+                ref={(ref) => this.datePickerRef = ref}
+              />
             </ScrollView>
           </SafeAreaView >
           <View style={{ flex: 0.01 }}></View>

@@ -10,7 +10,8 @@ import {
     BackHandler,
     ActivityIndicator,
     SafeAreaView,
-    ScrollView
+    ScrollView,
+    Alert
 } from "react-native";
 import FetchService from "../services/FetchService";
 import { AsyncStorage } from "react-native";
@@ -44,21 +45,32 @@ class ATAScreen extends React.Component {
 
     _loadClient = async () => {
         this.setState({ loading: true })
-        var itemID = await AsyncStorage.getItem('currentEvent');
-        itemID = JSON.parse(itemID);
-        var res = await this.FetchService.getATA(itemID.$oid);
-        if (res === null) {
-            this.ResponseHandler.nullResponse();
+        var isADM = await AsyncStorage.getItem('ID_adm');
+        if (isADM !== "true") {
+            Alert.alert(
+                "Não autorizado",
+                "Desculpe, mas esta área é apenas para administradores",
+                [{ text: "OK" }]
+            );
             this.setState({ loading: false })
-            this.props.navigation.navigate('Home');
-        } else if (res === false) {
-            this.ResponseHandler.falseResponse();
-            this.setState({ loading: false })
-            this.props.navigation.navigate('Home');
+            this.props.navigation.navigate('CalendarDetail');
         } else {
-            await this.ResponseHandler.trueResponse(res.token);
-            await this._createObject(res.getAllUsersNames);
-            this.setState({ loading: false })
+            var itemID = await AsyncStorage.getItem('currentEvent');
+            itemID = JSON.parse(itemID);
+            var res = await this.FetchService.getATA(itemID.$oid);
+            if (res === null) {
+                this.ResponseHandler.nullResponse();
+                this.setState({ loading: false })
+                this.props.navigation.navigate('Home');
+            } else if (res === false) {
+                this.ResponseHandler.falseResponse();
+                this.setState({ loading: false })
+                this.props.navigation.navigate('Home');
+            } else {
+                await this.ResponseHandler.trueResponse(res.token);
+                await this._createObject(res.usuarios);
+                this.setState({ loading: false })
+            }
         }
     }
 
@@ -73,13 +85,13 @@ class ATAScreen extends React.Component {
                 user: res[index],
                 isSelected: false
             }
-            if (res[index].isRated === "Presente") {
+            if (res[index].presenca === "Presente") {
                 presentes.push(obj)
-            } else if (res[index].isRated === "Ausente") {
+            } else if (res[index].presenca === "Ausente") {
                 ausentes.push(obj)
-            } else if (res[index].isRated === "Falta justificada") {
+            } else if (res[index].presenca === "Falta justificada") {
                 justificados.push(obj)
-            } else if (res[index].isRated === "Dispensado") {
+            } else if (res[index].presenca === "Dispensado") {
                 dispensados.push(obj)
             } else {
                 naoAvaliados.push(obj)
@@ -207,22 +219,22 @@ class ATAScreen extends React.Component {
         if (listToMove.length > 0) {
             if (nameOfTheList === "Ausente") {
                 for (let index = 0; index < listToMove.length; index++) {
-                    listToMove[index].user.isRated = nameOfTheList
+                    listToMove[index].user.presenca = nameOfTheList
                 }
                 listToRemain.ausentes.push(...listToMove);
             } else if (nameOfTheList === "Falta justificada") {
                 for (let index = 0; index < listToMove.length; index++) {
-                    listToMove[index].user.isRated = nameOfTheList
+                    listToMove[index].user.presenca = nameOfTheList
                 }
                 listToRemain.justificados.push(...listToMove);
             } else if (nameOfTheList === "Presente") {
                 for (let index = 0; index < listToMove.length; index++) {
-                    listToMove[index].user.isRated = nameOfTheList
+                    listToMove[index].user.presenca = nameOfTheList
                 }
                 listToRemain.presentes.push(...listToMove);
             } else {
                 for (let index = 0; index < listToMove.length; index++) {
-                    listToMove[index].user.isRated = nameOfTheList
+                    listToMove[index].user.presenca = nameOfTheList
                 }
                 listToRemain.dispensados.push(...listToMove);
             }
@@ -232,7 +244,7 @@ class ATAScreen extends React.Component {
     }
 
     _isRatedReturner(item) {
-        if (item === false) {
+        if (item === "naoAvaliado") {
             return (
                 <Icon
                     name='panorama-fish-eye'
@@ -285,12 +297,12 @@ class ATAScreen extends React.Component {
                         onPress={() => this._selectionButtonMethod(index.toString(), item, nameOfTheList)}>
                         <View style={{ flex: 4, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
                             <Text style={styles.text}>
-                                {item.user.name}
+                                {item.user.nome}
                             </Text>
                         </View>
 
                         <View style={{ flex: 1, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
-                            {this._isRatedReturner(item.user.isRated)}
+                            {this._isRatedReturner(item.user.presenca)}
                         </View>
                     </TouchableOpacity>
                 )}

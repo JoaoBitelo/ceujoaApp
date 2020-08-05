@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   },
   phrase: {
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 18,
     flexWrap: 'wrap',
     color: "white",
     fontStyle: 'italic',

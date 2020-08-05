@@ -43,7 +43,7 @@ class StockScreen extends React.Component {
             this.props.navigation.navigate('Home');
         } else {
             await this.ResponseHandler.trueResponse(res.token);
-            this.setState({ data: res.stock })
+            this.setState({ data: res.materiais })
             this.setState({ loading: false })
         }
     }
@@ -82,19 +82,19 @@ class StockScreen extends React.Component {
                                         <View style={styles.textBox}>
                                             <View style={styles.textBoxLineWithBottomLine}>
                                                 <Text style={styles.textTitle}>item: </Text>
-                                                <Text style={styles.text}>{item.name}</Text>
+                                                <Text style={styles.text}>{item.nome}</Text>
                                             </View>
                                             <View style={styles.textBoxLineWithBottomLine}>
                                                 <Text style={styles.textTitle}>necessidade: </Text>
-                                                <Text style={styles.text}>{item.need}</Text>
+                                                <Text style={styles.text}>{item.necessidade}</Text>
                                             </View>
                                             <View style={styles.textBoxLine}>
                                                 <Text style={styles.textTitle}>estoque: </Text>
-                                                {parseInt(item.stock, 10)>=parseInt(item.need, 10)
+                                                {parseInt(item.estoque, 10) >= parseInt(item.necessidade, 10)
                                                     ?
-                                                    <Text style={styles.textGreen}>{item.stock}</Text>
+                                                    <Text style={styles.textGreen}>{item.estoque}</Text>
                                                     :
-                                                    <Text style={styles.textRed}>{item.stock}</Text>
+                                                    <Text style={styles.textRed}>{item.estoque}</Text>
                                                 }
                                             </View>
                                         </View>
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
         padding: 10,
         width: Dimensions.get("window").width * 0.9,
     },
-    textBoxLineWithBottomLine:{
+    textBoxLineWithBottomLine: {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',

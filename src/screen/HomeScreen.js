@@ -10,45 +10,51 @@ import {
   BackHandler,
   ActivityIndicator,
   KeyboardAvoidingView,
+  Platform
 } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import FetchService from "../services/FetchService";
 import { NavigationEvents } from 'react-navigation';
 import ResponseHandler from "../services/ResponseHandler";
+import { AsyncStorage } from "react-native";
 
 class HomeScreen extends React.Component {
   constructor() {
     super();
     this.FetchService = new FetchService();
     this.ResponseHandler = new ResponseHandler();
-    this.state = { login: "joao2", password: "pass", loading: false };
+    this.state = { login: "", password: "", loading: false };
   }
 
   _loginButtonMethod = async () => {
     this.setState({ loading: true })
-    const res = await this.FetchService.login(this.state.login, this.state.password);    
-    if(res===null){
+    const res = await this.FetchService.login(this.state.login, this.state.password);
+    if (res === null) {
       this.setState({ loading: false })
       this.ResponseHandler.nullResponse();
       this.props.navigation.navigate('Home');
-    }else if(res===false){
+    } else if (res === false) {
       this.setState({ loading: false })
       this.ResponseHandler.falseLogin();
       this.props.navigation.navigate('Home');
-    }else{
-      if(res.firstLogin===true) {
-        await this.ResponseHandler.loginResponse(this.state.login, res.token);
+    } else {
+      if (res.primeiroLogin === true) {
+        await this.ResponseHandler.loginResponse(this.state.login, res.token, res.ehADM);
         this.props.navigation.navigate('FirstLogin');
         this.setState({ loading: false })
       } else {
-        await this.ResponseHandler.loginResponse(this.state.login, res);
+        await this.ResponseHandler.loginResponse(this.state.login, res.token, res.ehADM);
         this.props.navigation.navigate('CommonArea');
         this.setState({ loading: false })
       }
     }
   }
 
-  _start() {
+  _start = async () => {
+    var loginStored = await AsyncStorage.getItem('ID_l')
+    if (loginStored !== null) {
+      this.setState({ login: loginStored })
+    }
     BackHandler.addEventListener('hardwareBackPress', this.backButtonHandler);
   }
 
@@ -70,7 +76,9 @@ class HomeScreen extends React.Component {
       );
     } else {
       return (
-        <View style={styles.viewBackground} behavior="padding" enabled>
+        <KeyboardAvoidingView 
+          behavior={Platform.OS == "ios" ? "padding" : "height"} 
+          style={styles.viewBackground}>
           <NavigationEvents
             onWillFocus={() => this._start()}
             onWillBlur={() => this._end()} />
@@ -85,10 +93,10 @@ class HomeScreen extends React.Component {
               />
             </View>
 
-            <KeyboardAvoidingView style={styles.viewMiddleGround}>
+            <View style={styles.viewMiddleGround}>
               <TextInput style={styles.textField}
                 onSubmitEditing={() => { this.secondTextInput.focus(); }}
-                value={this.state.text}
+                value={this.state.login}
                 autoCapitalize='none'
                 autoCorrect={false}
                 autoCompleteType="off"
@@ -101,7 +109,7 @@ class HomeScreen extends React.Component {
               </TextInput>
               <TextInput style={styles.textField}
                 ref={(input) => { this.secondTextInput = input; }}
-                value={this.state.text}
+                value={this.state.password}
                 autoCapitalize='none'
                 autoCorrect={false}
                 autoCompleteType="off"
@@ -112,7 +120,7 @@ class HomeScreen extends React.Component {
                 onChangeText={(password) => { this.setState({ password }) }}
                 textAlign={'center'}
               />
-            </KeyboardAvoidingView>
+            </View>
 
             <View style={styles.viewBottomGround}>
               <TouchableOpacity
@@ -122,10 +130,9 @@ class HomeScreen extends React.Component {
               </TouchableOpacity>
             </View>
 
-            <View style={{ flex: 0.01 }}></View>
+            <View style={{ flex: 0.05 }}></View>
           </ImageBackground>
-
-        </View>
+        </KeyboardAvoidingView>
       );
     }
   }
@@ -139,7 +146,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   viewUpperGround: {
-    flex: 2,
+    flex: 4,
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -150,20 +157,13 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     borderRadius: 200,
   },
-  textInfo: {
-    flex: 1,
-    color: "white",
-    fontSize: 12,
-    flexWrap: 'wrap',
-    textAlign: "center",
-  },
   viewMiddleGround: {
-    flex: 1,
+    flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
   },
   viewBottomGround: {
-    flex: 0.5,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -196,6 +196,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").height * 0.07,
     backgroundColor: '#c7282d',
     borderRadius: 50,
+
     borderColor: 'black',
     borderWidth: 1,
   },

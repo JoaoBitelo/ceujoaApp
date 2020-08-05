@@ -1,17 +1,23 @@
-import {Alert} from "react-native";
+import { Alert } from "react-native";
 import { AsyncStorage } from "react-native";
 
 class ResponseHandler {
-    loginResponse = async (login, token) => {
+    loginResponse = async (login, token, isADM) => {
         await AsyncStorage.setItem('ID_l', login);
         await AsyncStorage.setItem('ID_t', token);
+        if (isADM === true) {
+            await AsyncStorage.setItem('ID_adm', "true");
+        } else {
+            await AsyncStorage.setItem('ID_adm', "false");
+        }
+
     }
 
     falseResponse = async () => {
         Alert.alert(
             "Erro de autenticação da sessão",
             "Sessão expirada. Faça login novamente no aplicativo",
-            [{ text: "OK"}]
+            [{ text: "OK" }]
         );
     }
 
@@ -19,7 +25,7 @@ class ResponseHandler {
         Alert.alert(
             "Login ou senha incorreto",
             "O login ou senha informados estão incorretos. Preencha-os novamente atentamente. Se o erro persistir, contate um administrador do sistema.",
-            [{ text: "OK"}]
+            [{ text: "OK" }]
         );
     }
 
@@ -27,7 +33,7 @@ class ResponseHandler {
         Alert.alert(
             "Erro de internet",
             "Não foi possível realizar esta solicitação. Verifique sua conexão com a internet",
-            [{ text: "OK"}]
+            [{ text: "OK" }]
         );
     }
     trueResponse = async (token) => {

@@ -48,7 +48,7 @@ class SpecificDegreeScreen extends React.Component {
       this.props.navigation.navigate('Home');
     } else {
       await this.ResponseHandler.trueResponse(res.token);
-      this.setState({ dados: res.degrees })
+      this.setState({ dados: res.conteudoDoGrau })
       this.setState({ loading: false })
     }
   };
@@ -102,7 +102,7 @@ class SpecificDegreeScreen extends React.Component {
                       onPress={() => this._buttonMethod(item)}>
                       <View style={{ flex: 4, justifyContent: "center", paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
                         <Text style={styles.nome}>
-                          {item.name}
+                          {item.nome}
                         </Text>
                       </View>
                     </TouchableOpacity>

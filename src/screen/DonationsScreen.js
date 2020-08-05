@@ -7,7 +7,6 @@ import {
   Dimensions,
   BackHandler,
   ActivityIndicator,
-  Alert,
   SafeAreaView,
   ScrollView
 } from "react-native";

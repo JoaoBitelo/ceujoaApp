@@ -47,7 +47,7 @@ class DegreeScreen extends React.Component {
       this.props.navigation.navigate('Home');
     } else {
       await this.ResponseHandler.trueResponse(res.token);
-      this.setState({ dados: res.degrees })
+      this.setState({ dados: res.graus })
       this.setState({ loading: false })
     }
   }
@@ -109,18 +109,18 @@ class DegreeScreen extends React.Component {
                       onPress={() => this._buttonMethod(item)}>
                       <View style={{ flex: 4, justifyContent: "center", paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
                         <Text style={styles.nome}>
-                          {item.name}
+                          {item.nome}
                         </Text>
                       </View>
 
                       <View style={{ flex: 1, justifyContent: "center", paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
-                        {item.isAccessible === false &&
+                        {item.possuiAcesso === false &&
                           <Icon
                             name='lock'
                             color='white'
                           />
                         }
-                        {item.isAccessible === true &&
+                        {item.possuiAcesso === true &&
                           <Icon
                             name='lock-open'
                             color='white'

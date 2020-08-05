@@ -69,7 +69,7 @@ const DrawerNavigator = createDrawerNavigator(
     PrincipalLetter: { screen: principalLetter },
     LetterMagna: { screen: letterMagna },
     Degree: { screen: degree },
-    SpecificDegree: { screen : specificDegree },
+    SpecificDegree: { screen: specificDegree },
     SpecificDegreeDetail: { screen: specificDegreeDetail },
     EtiquetteRules: { screen: etiquetteRules },
     Donations: { screen: donationsScreen },

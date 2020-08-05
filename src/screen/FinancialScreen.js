@@ -43,8 +43,8 @@ class FinancialScreen extends React.Component {
             this.props.navigation.navigate('Home');
         } else {
             await this.ResponseHandler.trueResponse(res.token);
-            this.setState({ mensalidades: res.monthlyPayment })
-            this.setState({ contribuicoesAdicionais: res.additionalCharges })
+            this.setState({ mensalidades: res.mensalidades })
+            this.setState({ contribuicoesAdicionais: res.contribuicoesAdicionais })
             this.setState({ loading: false })
         }
     }
@@ -60,19 +60,19 @@ class FinancialScreen extends React.Component {
 
     _buttonMethod = (item) => {
         const title = "Situação: " + item.status
-        if(item.status==="PENDENTE"){
+        if (item.status === "PENDENTE") {
             const text = "Nosso sistema acusa que sua contribuição está pendente. Caso tenha sido efetuada entre em contato com a tesouraria."
             Alert.alert(
                 title,
                 text,
-                [{ text: "OK"}]
+                [{ text: "OK" }]
             );
         } else {
-            const text = "Gratidão! Recebemos sua colaboração em " + item.date
+            const text = "Gratidão! Recebemos sua colaboração em " + item.dataDoPagamento
             Alert.alert(
                 title,
                 text,
-                [{ text: "OK"}]
+                [{ text: "OK" }]
             );
         }
     }
@@ -88,15 +88,15 @@ class FinancialScreen extends React.Component {
                             onPress={() => this._buttonMethod(item)}>
                             <View style={{ flex: 3, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
                                 <Text style={styles.dataStandard}>
-                                    {item.name}
+                                    {item.nome}
                                 </Text>
                             </View>
 
                             <View style={{ flex: 2, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
                                 <Text style={item.status === "PAGO"
-                                        ? styles.dataGreen
-                                        : styles.dataRed
-                                    }>
+                                    ? styles.dataGreen
+                                    : styles.dataRed
+                                }>
                                     {item.status}
                                 </Text>
                             </View>
@@ -136,13 +136,13 @@ class FinancialScreen extends React.Component {
                                 <FlatList style={{ flex: 3 }}
                                     data={this.state.mensalidades}
                                     renderItem={({ item, index }) => (
-                                        <View style={{flex:1}}>
+                                        <View style={{ flex: 1 }}>
                                             <View style={styles.textBox}>
                                                 <Text style={styles.textTitle}>
-                                                    MENSALIDADES DE {item.year}
+                                                    MENSALIDADES DE {item.ano}
                                                 </Text>
                                             </View>
-                                            {this._flatLisRetuner(item.months)}
+                                            {this._flatLisRetuner(item.meses)}
                                         </View>
                                     )}
                                     keyExtractor={(item, index) => index.toString()}

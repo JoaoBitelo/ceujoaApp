@@ -46,8 +46,8 @@ class CalendarScreen extends React.Component {
       this.props.navigation.navigate('Home');
     } else {
       await this.ResponseHandler.trueResponse(res.token);
-      this.setState({ allEvents: res.allEvents })
-      this.setState({ nextEvents: res.nextEvents })
+      this.setState({ allEvents: res.eventos })
+      this.setState({ nextEvents: res.eventosDosProximosDias })
       this.setState({ loading: false })
     }
   }
@@ -93,16 +93,16 @@ class CalendarScreen extends React.Component {
             <View style={{ flex: 0.01 }}></View>
             <SafeAreaView style={styles.viewFrontGround}>
               <ScrollView>
-                  <View style={styles.textBox}>
-                    <Text style={styles.textTitle}>
-                      Eventos dos próximos 7 dias
+                <View style={styles.textBox}>
+                  <Text style={styles.textTitle}>
+                    Eventos dos próximos 7 dias
                     </Text>
-                  </View>
-                  {this.state.nextEvents.length === 0 
+                </View>
+                {this.state.nextEvents.length === 0
                   ?
                   <View style={styles.TouchableOpacityEvent}>
                     <Text style={styles.text}>
-                        Não há nenhum evento nos próximos 7 dias
+                      Não há nenhum evento nos próximos 7 dias
                     </Text>
                   </View>
                   :
@@ -127,7 +127,7 @@ class CalendarScreen extends React.Component {
                     )}
                     keyExtractor={(item, index) => index.toString()}
                   />
-                  }
+                }
                 <View style={styles.textBox}>
                   <Text style={styles.textTitle}>
                     Próximos eventos

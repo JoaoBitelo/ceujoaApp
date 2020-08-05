@@ -10,7 +10,8 @@ import {
   BackHandler,
   ActivityIndicator,
   Alert,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Platform
 } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import FetchService from "../services/FetchService";
@@ -42,7 +43,7 @@ class CalendarScreen extends React.Component {
 
   _buttonMethod = async () => {
     this.setState({ loading: true })
-    if(this.state.firstInput==this.state.secondInput && this.state.firstInput!==""){
+    if (this.state.firstInput == this.state.secondInput && this.state.firstInput !== "") {
       const res = await this.FetchService.firstLogin(this.state.firstInput);
       if (res === null) {
         this.setState({ loading: false })
@@ -57,13 +58,13 @@ class CalendarScreen extends React.Component {
         this.props.navigation.navigate('CommonArea');
         this.setState({ loading: false })
       }
-    }else{
+    } else {
       this.setState({ loading: false })
       Alert.alert(
         "Erro durante a troca de senha",
         "Os dados que você preencheu não coincidem. Preencha-os novamente com atenção e certifique-se que ambos são iguais",
-        [{ text: "OK", onPress: () => this.props.navigation.navigate('FirstLogin')}]
-    );
+        [{ text: "OK", onPress: () => this.props.navigation.navigate('FirstLogin') }]
+      );
     }
 
   }
@@ -77,23 +78,27 @@ class CalendarScreen extends React.Component {
       );
     } else {
       return (
-        <View style={styles.viewBackground}>
+        <KeyboardAvoidingView 
+          behavior={Platform.OS == "ios" ? "padding" : "height"} 
+          style={styles.viewBackground}>
           <NavigationEvents
             onWillFocus={() => this._start()}
             onWillBlur={() => this._end()} />
           <ImageBackground
             source={require("../../assets/backgroundCalendar.jpg")}
             style={styles.imageBackGround}>
-            <View style={{ flex: 1 }}></View>
+            <View style={{ flex: 0.01 }}></View>
+
             <View style={styles.viewUpperGround}>
               <Image style={styles.image}
                 source={require("../../assets/logo.jpg")}
               />
             </View>
-            <KeyboardAvoidingView style={styles.viewMiddleGround}>
+
+            <View style={styles.viewMiddleGround}>
               <TextInput style={styles.textField}
                 onSubmitEditing={() => { this.secondTextInput.focus(); }}
-                value={this.state.text}
+                value={this.state.firstInput}
                 autoCapitalize='none'
                 autoCorrect={false}
                 autoCompleteType="off"
@@ -106,7 +111,7 @@ class CalendarScreen extends React.Component {
               />
               <TextInput style={styles.textField}
                 ref={(input) => { this.secondTextInput = input; }}
-                value={this.state.text}
+                value={this.state.secondInput}
                 autoCapitalize='none'
                 autoCorrect={false}
                 autoCompleteType="off"
@@ -117,17 +122,19 @@ class CalendarScreen extends React.Component {
                 onChangeText={(secondInput) => { this.setState({ secondInput }) }}
                 textAlign={'center'}
               />
-            </KeyboardAvoidingView>
-            <KeyboardAvoidingView style={styles.viewBottomGround}>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={this._buttonMethod}>
-                <Text style={styles.buttonText}>AVANÇAR</Text>
-              </TouchableOpacity>
-            </KeyboardAvoidingView>
-            <View style={{ flex: 0.5 }}></View>
+
+              <View style={styles.viewBottomGround}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={this._buttonMethod}>
+                  <Text style={styles.buttonText}>AVANÇAR</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            <View style={{ flex: 0.05 }}></View>
           </ImageBackground>
-        </View>
+        </KeyboardAvoidingView>
       );
     }
   }
@@ -142,14 +149,14 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   viewUpperGround: {
-    flex: 4,
+    flex: 2,
     justifyContent: 'center',
     alignItems: 'center'
   },
   image: {
     flex: 1,
-    width: '80%',
-    height: '100%',
+    width: '70%',
+    height: '70%',
     resizeMode: 'contain',
     borderRadius: 200,
   },
@@ -157,7 +164,6 @@ const styles = StyleSheet.create({
     flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 100
   },
   textField: {
     color: "#000",
@@ -183,7 +189,7 @@ const styles = StyleSheet.create({
   viewBottomGround: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   button: {
     alignItems: 'center',
@@ -196,16 +202,6 @@ const styles = StyleSheet.create({
 
     borderColor: 'black',
     borderWidth: 1,
-
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.30,
-    shadowRadius: 4.65,
-
-    elevation: 8,
   },
   buttonText: {
     textAlign: "center",

@@ -45,10 +45,10 @@ class SpecificDegreeDetailScreen extends React.Component {
       this.props.navigation.navigate('Home');
     } else {
       await this.ResponseHandler.trueResponse(res.token);
-      this.setState({ name: res.degrees.name })
-      var temp = res.degrees.description.replace(/\\n/g, '\n');
+      this.setState({ name: res.conteudo.nome })
+      var temp = res.conteudo.descricao.replace(/\\n/g, '\n');
       this.setState({ description: temp })
-      temp = res.degrees.additional.replace(/\\n/g, '\n');
+      temp = res.conteudo.adicional.replace(/\\n/g, '\n');
       this.setState({ additional: temp })
       this.setState({ loading: false })
     }

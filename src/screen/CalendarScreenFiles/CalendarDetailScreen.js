@@ -42,11 +42,11 @@ class CalendarDetailScreen extends React.Component {
       this.props.navigation.navigate('Home');
     } else {
       await this.ResponseHandler.trueResponse(res.token);
-      this.setState({ event: res.event })
-      if(this.state.event.presenca.avaliacao===null){
+      this.setState({ event: res.evento })
+      if (this.state.event.presenca === null) {
         this.setState({ presenca: "Não avaliado" })
-      }else{
-        this.setState({ presenca: this.state.event.presenca.isRated })
+      } else {
+        this.setState({ presenca: this.state.event.presenca })
       }
       this.setState({ loading: false })
     }
@@ -100,7 +100,7 @@ class CalendarDetailScreen extends React.Component {
                   </Text>
                 </View>
                 <View style={{ flex: 1, paddingBottom: 14, paddingTop: 7, paddingHorizontal: 10 }}>
-                  <Text style={styles.descricao}>
+                  <Text style={styles.descricao2}>
                     {this.state.event.atividade}
                   </Text>
                 </View>
@@ -113,20 +113,20 @@ class CalendarDetailScreen extends React.Component {
                   </Text>
                 </View>
                 <View style={{ flex: 1, paddingBottom: 14, paddingTop: 7, paddingHorizontal: 10 }}>
-                  <Text style={styles.descricao}>
+                  <Text style={styles.descricao2}>
                     {this.state.event.dataProvavel} - {this.state.event.hora}
                   </Text>
                 </View>
               </View>
 
-              <View style={[styles.TouchableOpacityEvent, styles.flexDirection]}>
-                <View style={{ flex: 1, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 10 }}>
+              <View style={styles.TouchableOpacityEvent}>
+                <View style={{ flex: 1, paddingBottom: 5, paddingTop: 10, paddingHorizontal: 10 }}>
                   <Text style={styles.titulo}>
                     Presença:
                   </Text>
                 </View>
-                <View style={{ flex: 1, paddingBottom: 14, paddingTop: 14, paddingHorizontal: 10 }}>
-                  <Text style={styles.descricao}>
+                <View style={{ flex: 1, paddingBottom: 14, paddingTop: 7, paddingHorizontal: 10 }}>
+                  <Text style={styles.descricao2}>
                     {this.state.presenca}
                   </Text>
                 </View>
@@ -139,7 +139,7 @@ class CalendarDetailScreen extends React.Component {
                   </Text>
                 </View>
                 <View style={{ flex: 1, paddingBottom: 14, paddingTop: 7, paddingHorizontal: 10 }}>
-                  <Text style={styles.descricao}>
+                  <Text style={styles.descricao2}>
                     {this.state.event.recados}
                   </Text>
                 </View>
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     flexWrap: 'wrap',
-    color: "white"    
+    color: "white"
   },
 });
 

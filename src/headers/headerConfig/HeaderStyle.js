@@ -12,8 +12,8 @@ import { Icon } from 'react-native-elements'
 
 class HeaderStyle extends React.Component {
     constructor(props) {
-        super(props);   
-        this.state = { };
+        super(props);
+        this.state = {};
     }
 
     render() {
@@ -30,7 +30,7 @@ class HeaderStyle extends React.Component {
                         <View style={[styles.viewButton, this.props.navigation.state.routeName == "CommonArea" ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => {this.props.navigation.navigate('CommonArea')}}>
+                                onPress={() => { this.props.navigation.navigate('CommonArea') }}>
                                 <Text style={styles.buttonText}>Início</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
@@ -39,7 +39,7 @@ class HeaderStyle extends React.Component {
                         <View style={[styles.viewButton, this.props.navigation.state.routeName === "EtiquetteRules" ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => {this.props.navigation.navigate('EtiquetteRules')}}>
+                                onPress={() => { this.props.navigation.navigate('EtiquetteRules') }}>
                                 <Text style={styles.buttonText}>Regras de Etiqueta</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
@@ -48,7 +48,7 @@ class HeaderStyle extends React.Component {
                         <View style={[styles.viewButton, this.props.navigation.state.routeName === "Calendar" ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => {this.props.navigation.navigate('Calendar')}}>
+                                onPress={() => { this.props.navigation.navigate('Calendar') }}>
                                 <Text style={styles.buttonText}>Calendário</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
@@ -57,7 +57,7 @@ class HeaderStyle extends React.Component {
                         <View style={[styles.viewButton, this.props.navigation.state.routeName === "Degree" ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => {this.props.navigation.navigate('Degree')}}>
+                                onPress={() => { this.props.navigation.navigate('Degree') }}>
                                 <Text style={styles.buttonText}>Área de Ensino</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
@@ -66,7 +66,7 @@ class HeaderStyle extends React.Component {
                         <View style={[styles.viewButton, this.props.navigation.state.routeName === "Financial" ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => {this.props.navigation.navigate('Financial')}}>
+                                onPress={() => { this.props.navigation.navigate('Financial') }}>
                                 <Text style={styles.buttonText}>Área Financeira</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
@@ -75,7 +75,7 @@ class HeaderStyle extends React.Component {
                         <View style={[styles.viewButton, this.props.navigation.state.routeName === "Donations" ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => {this.props.navigation.navigate('Donations')}}>
+                                onPress={() => { this.props.navigation.navigate('Donations') }}>
                                 <Text style={styles.buttonText}>Ações sociais - Projeto Joaquinas</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
@@ -84,7 +84,7 @@ class HeaderStyle extends React.Component {
                         <View style={[styles.viewButton, this.props.navigation.state.routeName === "BirthDays" ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => {this.props.navigation.navigate('BirthDays')}}>
+                                onPress={() => { this.props.navigation.navigate('BirthDays') }}>
                                 <Text style={styles.buttonText}>Aniversários</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
@@ -93,7 +93,7 @@ class HeaderStyle extends React.Component {
                         <View style={[styles.viewButton, this.props.navigation.state.routeName === "Stock" ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => {this.props.navigation.navigate('Stock')}}>
+                                onPress={() => { this.props.navigation.navigate('Stock') }}>
                                 <Text style={styles.buttonText}>Material Litúrgico</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />
@@ -102,7 +102,7 @@ class HeaderStyle extends React.Component {
                         <View style={[styles.viewButton, this.props.navigation.state.routeName === "NormsRegulations" ? styles.backViewButton2 : styles.backViewButton1]}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => {this.props.navigation.navigate('NormsRegulations')}}>
+                                onPress={() => { this.props.navigation.navigate('NormsRegulations') }}>
                                 <Text style={styles.buttonText}>Estatuto Social e Regimento Interno</Text>
                             </TouchableOpacity>
                             <Icon style={styles.icon} name='keyboard-arrow-right' />

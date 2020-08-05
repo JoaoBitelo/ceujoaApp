@@ -8,7 +8,7 @@ class FetchService {
     const value = {
       login: await AsyncStorage.getItem('ID_l'),
       token: await AsyncStorage.getItem('ID_t')
-    };    
+    };
     return value;
   }
 
@@ -22,7 +22,7 @@ class FetchService {
       },
       body: JSON.stringify({
         login: login,
-        password: password
+        senha: password
       }),
     })
       .then((response) => response.json())
@@ -44,7 +44,7 @@ class FetchService {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        input: firstInput,
+        senha: firstInput,
         login: basicInfo.login,
         token: basicInfo.token
       }),
@@ -68,7 +68,7 @@ class FetchService {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name: name,
+        nome: name,
         login: basicInfo.login,
         token: basicInfo.token
       }),
@@ -105,7 +105,7 @@ class FetchService {
       });
   }
 
-  getCalendarFilter = async (data) => {
+  getCalendarFilter = async (date) => {
     const basicInfo = await this.getCurrentSessionInfo();
     let url = BASE_URL + global.GET_CALENDAR_FILTER
     return fetch(url, {
@@ -117,7 +117,7 @@ class FetchService {
       body: JSON.stringify({
         login: basicInfo.login,
         token: basicInfo.token,
-        date: data
+        data: date
       }),
     })
       .then((response) => response.json())
@@ -141,7 +141,7 @@ class FetchService {
       body: JSON.stringify({
         login: basicInfo.login,
         token: basicInfo.token,
-        eventID: id
+        idDoEvento: id
       }),
     })
       .then((response) => response.json())
@@ -165,7 +165,7 @@ class FetchService {
       body: JSON.stringify({
         login: basicInfo.login,
         token: basicInfo.token,
-        eventID: id
+        idDoEvento: id
       }),
     })
       .then((response) => response.json())
@@ -237,7 +237,7 @@ class FetchService {
       body: JSON.stringify({
         login: basicInfo.login,
         token: basicInfo.token,
-        id: id
+        idDoGrau: id
       }),
     })
       .then((response) => response.json())
@@ -261,7 +261,7 @@ class FetchService {
       body: JSON.stringify({
         login: basicInfo.login,
         token: basicInfo.token,
-        id: id
+        idDoItemQueSeraAlterado: id
       }),
     })
       .then((response) => response.json())
@@ -307,7 +307,8 @@ class FetchService {
       },
       body: JSON.stringify({
         login: basicInfo.login,
-        token: basicInfo.token
+        token: basicInfo.token,
+        loginParaProcurarMensalidadesContribuicoes: basicInfo.login
       }),
     })
       .then((response) => response.json())

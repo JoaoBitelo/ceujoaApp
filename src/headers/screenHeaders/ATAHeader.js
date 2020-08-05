@@ -16,14 +16,14 @@ _saveChanges = async (navigation) => {
     users = JSON.parse(users);
     var res = await this.FetchService.updateATA(itemID.$oid, users);
     if (res === null) {
-      this.ResponseHandler.nullResponse();
-      navigation.navigate('Home');
+        this.ResponseHandler.nullResponse();
+        navigation.navigate('Home');
     } else if (res === false) {
-      this.ResponseHandler.falseResponse();
-      navigation.navigate('Home');
+        this.ResponseHandler.falseResponse();
+        navigation.navigate('Home');
     } else {
-      await this.ResponseHandler.trueResponse(res);
-      navigation.navigate("CalendarDetail")
+        await this.ResponseHandler.trueResponse(res);
+        navigation.navigate("CalendarDetail")
     }
 }
 
