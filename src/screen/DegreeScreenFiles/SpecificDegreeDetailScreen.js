@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
   StyleSheet,
   View,
@@ -8,7 +8,10 @@ import {
   BackHandler,
   ActivityIndicator,
   SafeAreaView,
-  ScrollView
+  ScrollView,
+  Linking,
+  TouchableOpacity,
+  FlatList
 } from "react-native";
 import { AsyncStorage } from "react-native";
 import { NavigationEvents } from 'react-navigation';
@@ -21,7 +24,7 @@ class SpecificDegreeDetailScreen extends React.Component {
     this.FetchService = new FetchService();
     this.ResponseHandler = new ResponseHandler();
     this.state = {
-      loading: false, name: "", description: "", additional: ""
+      loading: false, name: "", description: "", additional: []
     };
   }
 
@@ -48,8 +51,7 @@ class SpecificDegreeDetailScreen extends React.Component {
       this.setState({ name: res.conteudo.nome })
       var temp = res.conteudo.descricao.replace(/\\n/g, '\n');
       this.setState({ description: temp })
-      temp = res.conteudo.adicional.replace(/\\n/g, '\n');
-      this.setState({ additional: temp })
+      this.setState({ additional: res.conteudo.adicional })
       this.setState({ loading: false })
     }
   }
@@ -95,7 +97,7 @@ class SpecificDegreeDetailScreen extends React.Component {
                   <View style={styles.textBox}>
                     <Text style={styles.textTitle}>
                       Descrição:
-                  </Text>
+                    </Text>
                     <Text style={styles.textCenter}>
                       {this.state.description}
                     </Text>
@@ -103,10 +105,19 @@ class SpecificDegreeDetailScreen extends React.Component {
                   <View style={styles.textBox}>
                     <Text style={styles.textTitle}>
                       Fontes Adicionais:
-                  </Text>
-                    <Text style={styles.textCenter}>
-                      {this.state.additional}
                     </Text>
+                    <FlatList
+                      data={this.state.additional}
+                      renderItem={({ item, index }) => (
+                        <View>
+                          <Text style={styles.textCenter}>
+                            {item.titulo}
+                          </Text>
+                          <OpenURLButton url={item.link}>{item.link}</OpenURLButton>
+                        </View>
+                      )}
+                      keyExtractor={(item, index) => index.toString()}
+                    />
                   </View>
                 </View>
               </ScrollView>
@@ -151,7 +162,40 @@ const styles = StyleSheet.create({
     fontSize: 16,
     flexWrap: 'wrap',
     color: "white",
+  },
+  textCenterBlue: {
+    fontSize: 16,
+    flexWrap: 'wrap',
+    color: "#7373FF",
+    fontStyle: 'italic',
+    textDecorationLine: 'underline'
   }
 });
 
 export default SpecificDegreeDetailScreen;
+
+const OpenURLButton = ({ url, children }) => {
+  const handlePress = useCallback(async () => {
+    // Checking if the link is supported for links with custom URL scheme.
+    const supported = await Linking.canOpenURL(url);
+
+    if (supported) {
+      // Opening the link with some app, if the URL scheme is "http" the web link should be opened
+      // by some browser in the mobile
+      await Linking.openURL(url);
+    } else {
+      Alert.alert(
+        "Erro ao abrir o link",
+        "Ocorreu um erro ao abrir o link, a 'URL' (endereço) é inválida. Por favor, entre em contato com um administrador",
+        [{ text: "OK", onPress: () => this.props.navigation.navigate("CommonArea") }]
+      );
+    }
+  }, [url]);
+  return (
+    <TouchableOpacity
+      style={styles.button}
+      onPress={handlePress}>
+      <Text style={styles.textCenterBlue}>{children}</Text>
+    </TouchableOpacity>
+  )
+}

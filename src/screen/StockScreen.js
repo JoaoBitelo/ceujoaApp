@@ -43,8 +43,17 @@ class StockScreen extends React.Component {
             this.props.navigation.navigate('Home');
         } else {
             await this.ResponseHandler.trueResponse(res.token);
-            this.setState({ data: res.materiais })
-            this.setState({ loading: false })
+            if (res.materiais === "invalido") {
+                this.setState({ loading: false })
+                Alert.alert(
+                    "Não autorizado",
+                    "Desculpe, mas esta área é apenas para associados",
+                    [{ text: "OK", onPress: () => this.props.navigation.navigate("CommonArea") }]
+                );
+            } else {
+                this.setState({ data: res.materiais })
+                this.setState({ loading: false })
+            }
         }
     }
 

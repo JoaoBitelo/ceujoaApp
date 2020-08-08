@@ -62,7 +62,7 @@ class DegreeScreen extends React.Component {
   }
 
   _buttonMethod = async (item) => {
-    if (item.isAccessible === false) {
+    if (item.possuiAcesso === false) {
       Alert.alert(
         "Aviso",
         "Você ainda não possui permissão para acessar essa área. Se você acredita que isto é um erro, contate um administrador.",

@@ -9,7 +9,8 @@ import {
     BackHandler,
     ActivityIndicator,
     SafeAreaView,
-    ScrollView
+    ScrollView,
+    Alert
 } from "react-native";
 import FetchService from "../services/FetchService";
 import ResponseHandler from "../services/ResponseHandler";
@@ -54,19 +55,29 @@ class BirthDaysScreen extends React.Component {
             this.props.navigation.navigate('Home');
         } else {
             await this.ResponseHandler.trueResponse(res.token);
-            this.setState({ janeiro: res.aniversarios[0] })
-            this.setState({ fevereiro: res.aniversarios[1] })
-            this.setState({ marco: res.aniversarios[2] })
-            this.setState({ abril: res.aniversarios[3] })
-            this.setState({ maio: res.aniversarios[4] })
-            this.setState({ junho: res.aniversarios[5] })
-            this.setState({ julho: res.aniversarios[6] })
-            this.setState({ agosto: res.aniversarios[7] })
-            this.setState({ setembro: res.aniversarios[8] })
-            this.setState({ outubro: res.aniversarios[9] })
-            this.setState({ novembro: res.aniversarios[10] })
-            this.setState({ dezembro: res.aniversarios[11] })
-            this.setState({ loading: false })
+            if(res.aniversarios==="invalido"){
+                this.setState({ loading: false })
+                Alert.alert(
+                    "Não autorizado",
+                    "Desculpe, mas esta área é apenas para associados",
+                    [{ text: "OK", onPress: () => this.props.navigation.navigate("CommonArea") }]
+                  );
+            }else{
+                this.setState({ janeiro: res.aniversarios[0] })
+                this.setState({ fevereiro: res.aniversarios[1] })
+                this.setState({ marco: res.aniversarios[2] })
+                this.setState({ abril: res.aniversarios[3] })
+                this.setState({ maio: res.aniversarios[4] })
+                this.setState({ junho: res.aniversarios[5] })
+                this.setState({ julho: res.aniversarios[6] })
+                this.setState({ agosto: res.aniversarios[7] })
+                this.setState({ setembro: res.aniversarios[8] })
+                this.setState({ outubro: res.aniversarios[9] })
+                this.setState({ novembro: res.aniversarios[10] })
+                this.setState({ dezembro: res.aniversarios[11] })
+                this.setState({ loading: false })
+            }
+            
         }
     }
 

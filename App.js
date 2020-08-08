@@ -10,9 +10,6 @@ import CalendarHeader from './src/headers/screenHeaders/CalendarHeader';
 import CalendarDetailHeader from './src/headers/screenHeaders/CalendarHeaderFiles/CalendarDetailHeader';
 import CalendarFilterHeader from './src/headers/screenHeaders/CalendarHeaderFiles/CalendarFilterHeader';
 import NormsRegulationsHeader from './src/headers/screenHeaders/NormsRegulationsHeader';
-import RegulationsHeader from './src/headers/screenHeaders/NormsRegulationsHeaderFiles/RegulationsHeader';
-import PrincipalLetterHeader from './src/headers/screenHeaders/NormsRegulationsHeaderFiles/PrincipalLetterHeader';
-import LetterMagnaHeader from './src/headers/screenHeaders/NormsRegulationsHeaderFiles/LetterMagnaHeader';
 import DegreeHeader from './src/headers/screenHeaders/DegreeHeader';
 import SpecificDegreeHeader from './src/headers/screenHeaders/DegreeHeaderFiles/SpecificDegreeHeader';
 import SpecificDegreeDetailHeader from './src/headers/screenHeaders/DegreeHeaderFiles/SpecificDegreeDetailHeader';
@@ -30,9 +27,6 @@ const calendarScreen = CalendarHeader;
 const calendarFilterScreen = CalendarFilterHeader;
 const calendarDetailScreen = CalendarDetailHeader;
 const normsRegulationsScreen = NormsRegulationsHeader;
-const regulationsScreen = RegulationsHeader;
-const principalLetter = PrincipalLetterHeader;
-const letterMagna = LetterMagnaHeader;
 const degree = DegreeHeader;
 const specificDegree = SpecificDegreeHeader;
 const specificDegreeDetail = SpecificDegreeDetailHeader;
@@ -65,9 +59,6 @@ const DrawerNavigator = createDrawerNavigator(
     CalendarFilter: { screen: calendarFilterScreen },
     CalendarDetail: { screen: calendarDetailScreen },
     NormsRegulations: { screen: normsRegulationsScreen },
-    Regulations: { screen: regulationsScreen },
-    PrincipalLetter: { screen: principalLetter },
-    LetterMagna: { screen: letterMagna },
     Degree: { screen: degree },
     SpecificDegree: { screen: specificDegree },
     SpecificDegreeDetail: { screen: specificDegreeDetail },

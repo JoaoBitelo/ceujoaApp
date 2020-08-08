@@ -59,21 +59,53 @@ class FinancialScreen extends React.Component {
     }
 
     _buttonMethod = (item) => {
-        const title = "Situação: " + item.status
         if (item.status === "PENDENTE") {
+            const title = "Situação: " + item.status
             const text = "Nosso sistema acusa que sua contribuição está pendente. Caso tenha sido efetuada entre em contato com a tesouraria."
             Alert.alert(
                 title,
                 text,
                 [{ text: "OK" }]
             );
-        } else {
+        } else if (item.status === "PAGO") {
+            const title = "Situação: " + item.status
             const text = "Gratidão! Recebemos sua colaboração em " + item.dataDoPagamento
             Alert.alert(
                 title,
                 text,
                 [{ text: "OK" }]
             );
+        } else {
+            const title = "Situação: " + item.status
+            const text = "Isenção em" + item.dataDoPagamento + ". Procure a tesouraria para manter a sua situação regularizada."
+            Alert.alert(
+                title,
+                text,
+                [{ text: "OK" }]
+            );
+        }
+    }
+
+    _getStyle = (item) => {
+        if (item === "PAGO") {
+            return (
+                <Text style={styles.dataGreen}>
+                    {item}
+                </Text>
+            )
+
+        } else if (item === "PENDENTE") {
+            return (
+                <Text style={styles.dataRed}>
+                    {item}
+                </Text>
+            )
+        } else {
+            return (
+                <Text style={styles.dataBlue}>
+                    {item}
+                </Text>
+            )
         }
     }
 
@@ -93,12 +125,7 @@ class FinancialScreen extends React.Component {
                             </View>
 
                             <View style={{ flex: 2, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
-                                <Text style={item.status === "PAGO"
-                                    ? styles.dataGreen
-                                    : styles.dataRed
-                                }>
-                                    {item.status}
-                                </Text>
+                                {this._getStyle(item.status)}
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -207,14 +234,23 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 16,
         flexWrap: 'wrap',
+        fontWeight: 'bold',
         color: "#92d36e",
     },
     dataRed: {
         textAlign: 'center',
         fontSize: 16,
         flexWrap: 'wrap',
+        fontWeight: 'bold',
         color: "#ff3823",
     },
+    dataBlue: {
+        textAlign: 'center',
+        fontSize: 16,
+        flexWrap: 'wrap',
+        fontWeight: 'bold',
+        color: "#31B7D2",
+    }
 });
 
 export default FinancialScreen;

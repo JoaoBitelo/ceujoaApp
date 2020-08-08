@@ -30,10 +30,8 @@ class CalendarFilterScreen extends React.Component {
   }
 
   _start = async () => {
-    this.setState({ loading: true })
     BackHandler.addEventListener('hardwareBackPress', this.backButtonHandler);
     await this.datePickerRef.onPressDate()
-    this.setState({ loading: false })
   }
 
   backButtonHandler = async () => {
@@ -45,7 +43,7 @@ class CalendarFilterScreen extends React.Component {
     BackHandler.removeEventListener('hardwareBackPress', this.backButtonHandler);
   }
 
-  _buttonMethod = async (datePicked) => {
+  _datePickerbuttonMethod = async (datePicked) => {
     this.setState({ loading: true })
     res = await this.FetchService.getCalendarFilter(datePicked);
     if (res === null) {
@@ -63,69 +61,90 @@ class CalendarFilterScreen extends React.Component {
     }
   }
 
+  _buttonMethod = async (item) => {
+    await AsyncStorage.setItem('currentEvent', JSON.stringify(item._id)).then(() => {
+      this.props.navigation.navigate("CalendarDetail");
+    })
+      .catch(() => {
+        Alert.alert(
+          "Erro de autenticação de sessão",
+          "Faça login novamente no aplicativo",
+          [{ text: "OK", onPress: () => this.props.navigation.navigate("Home") }]
+        );
+      })
+  }
+
   render() {
-    return (
-      <View style={styles.viewBackground}>
-        <NavigationEvents
-          onWillFocus={() => this._start()}
-          onWillBlur={() => this._end()} />
-        <ImageBackground
-          source={require("../../../assets/backgroundCalendar.jpg")}
-          style={styles.imageBackGround}>
-          <View style={{ flex: 0.01 }}></View>
-          <SafeAreaView style={styles.viewFrontGround}>
-            <ScrollView>
-              <View style={styles.textBox}>
-                <Text style={styles.textTitle}>
-                  Eventos encontrados no dia selecionado
-                  </Text>
-              </View>
-              {this.state.allEvents.length === 0
-                ?
-                <View style={styles.TouchableOpacityEvent}>
-                  <Text style={styles.data}>
-                    Nenhum evento encontrado nesta data
+    if (this.state.loading === true) {
+      return (
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.viewBackground}>
+          <NavigationEvents
+            onWillFocus={() => this._start()}
+            onWillBlur={() => this._end()} />
+          <ImageBackground
+            source={require("../../../assets/backgroundCalendar.jpg")}
+            style={styles.imageBackGround}>
+            <View style={{ flex: 0.01 }}></View>
+            <SafeAreaView style={styles.viewFrontGround}>
+              <ScrollView>
+                <View style={styles.textBox}>
+                  <Text style={styles.textTitle}>
+                    Eventos encontrados no dia selecionado
                     </Text>
                 </View>
-                :
-                <FlatList style={{ flex: 3 }}
-                  data={this.state.allEvents}
-                  renderItem={({ item, index }) => (
-                    <TouchableOpacity
-                      style={styles.TouchableOpacityEvent}
-                      onPress={() => this._buttonMethod(item)}>
-                      <View style={{ flex: 3, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
-                        <Text style={styles.atividade}>
-                          {item.atividade}
-                        </Text>
-                      </View>
+                {this.state.allEvents.length === 0
+                  ?
+                  <View style={styles.TouchableOpacityEvent}>
+                    <Text style={styles.data}>
+                      Nenhum evento encontrado nesta data
+                      </Text>
+                  </View>
+                  :
+                  <FlatList style={{ flex: 3 }}
+                    data={this.state.allEvents}
+                    renderItem={({ item, index }) => (
+                      <TouchableOpacity
+                        style={styles.TouchableOpacityEvent}
+                        onPress={() => this._buttonMethod(item)}>
+                        <View style={{ flex: 3, paddingBottom: 10, paddingTop: 10, paddingHorizontal: 2 }}>
+                          <Text style={styles.atividade}>
+                            {item.atividade}
+                          </Text>
+                        </View>
 
-                      <View style={{ flex: 2, paddingBottom: 14, paddingTop: 14, paddingHorizontal: 2 }}>
-                        <Text style={styles.data}>
-                          {item.dataProvavel}
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-                  )}
-                  keyExtractor={(item, index) => index.toString()}
+                        <View style={{ flex: 2, paddingBottom: 14, paddingTop: 14, paddingHorizontal: 2 }}>
+                          <Text style={styles.data}>
+                            {item.dataProvavel}
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
+                    )}
+                    keyExtractor={(item, index) => index.toString()}
+                  />
+                }
+                <DatePicker
+                  mode="date"
+                  format="DD-MM-YY"
+                  confirmBtnText="Confirm"
+                  cancelBtnText="Cancel"
+                  onDateChange={(date) => { this._datePickerbuttonMethod(date) }}
+                  showIcon={false}
+                  hideText={true}
+                  ref={(ref) => this.datePickerRef = ref}
                 />
-              }
-              <DatePicker
-                mode="date"
-                format="DD-MM-YY"
-                confirmBtnText="Confirm"
-                cancelBtnText="Cancel"
-                onDateChange={(date) => { this._buttonMethod(date) }}
-                showIcon={false}
-                hideText={true}
-                ref={(ref) => this.datePickerRef = ref}
-              />
-            </ScrollView>
-          </SafeAreaView >
-          <View style={{ flex: 0.01 }}></View>
-        </ImageBackground>
-      </View>
-    );
+              </ScrollView>
+            </SafeAreaView >
+            <View style={{ flex: 0.01 }}></View>
+          </ImageBackground>
+        </View>
+      );
+    }
   }
 }
 const styles = StyleSheet.create({
