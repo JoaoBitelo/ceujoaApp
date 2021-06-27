@@ -33,8 +33,8 @@ class HomeScreen extends React.Component {
             let response = res.content.texto;
             response = response.replace(/\\n/g, "\n");
             this.setState({ phrase: response });
-            this.setState({ loading: false });
         }
+        this.setState({ loading: false });
     };
 
     backButtonHandler = () => {

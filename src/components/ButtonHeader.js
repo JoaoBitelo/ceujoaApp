@@ -38,14 +38,13 @@ const styles = StyleSheet.create({
         alignItems: "center",
         width: "90%",
         paddingTop: 2,
-        paddingBottom: 2
-        
+        paddingBottom: 2,
     },
     buttonText: {
         fontSize: 16,
         flexWrap: "wrap",
         color: "white",
-        textAlign: 'center',
+        textAlign: "center",
     },
 });
 

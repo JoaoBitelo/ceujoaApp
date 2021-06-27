@@ -19,48 +19,64 @@ class HeaderStyle extends React.Component {
                 </View>
                 <View style={styles.viewMiddleGround}>
                     <ScrollView style={{ flex: 1 }}>
-                        <Button targetScreen={"CommonArea"} text={"Início"} />
+                        <Button
+                            targetScreen={"CommonArea"}
+                            text={"Início"}
+                            navigation={this.props.navigation}
+                        />
 
                         <Button
                             targetScreen={"EtiquetteRules"}
                             text={"Regras de Etiqueta"}
+                            navigation={this.props.navigation}
                         />
 
-                        <Button targetScreen={"Calendar"} text={"Calendário"} />
+                        <Button
+                            targetScreen={"Calendar"}
+                            text={"Calendário"}
+                            navigation={this.props.navigation}
+                        />
 
                         <Button
                             targetScreen={"Degree"}
                             text={"Área de Ensino"}
+                            navigation={this.props.navigation}
                         />
 
                         <Button
                             targetScreen={"Financial"}
                             text={"Área Financeira"}
+                            navigation={this.props.navigation}
                         />
 
                         <Button
                             targetScreen={"Financial"}
                             text={"Área Financeira"}
+                            navigation={this.props.navigation}
                         />
 
                         <Button
                             targetScreen={"Donations"}
                             text={"Ações sociais - Projeto Joaquinas"}
+                            navigation={this.props.navigation}
                         />
 
                         <Button
                             targetScreen={"BirthDays"}
                             text={"Aniversários"}
+                            navigation={this.props.navigation}
                         />
 
                         <Button
                             targetScreen={"Stock"}
                             text={"Material Litúrgico"}
+                            navigation={this.props.navigation}
                         />
 
                         <Button
                             targetScreen={"NormsRegulations"}
                             text={"Estatuto Social e Regimento Interno"}
+                            navigation={this.props.navigation}
                         />
                     </ScrollView>
                 </View>
