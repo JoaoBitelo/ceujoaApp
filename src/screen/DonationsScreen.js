@@ -31,8 +31,6 @@ class DonationsScreen extends React.Component {
         this.setState({ loading: true });
         let res = await getText();
         res = await genericHandler(res);
-
-        console.log("res", res);
         if (!res) {
             this.props.navigation.navigate("Home");
         } else {

@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import { Icon } from "react-native-elements";
 
-class HeaderStyle extends React.Component {
+export default class ButtonMenu extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -47,5 +47,3 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
 });
-
-export default HeaderStyle;

@@ -9,7 +9,7 @@ import TextBox from "../components/TextBox";
 import { getText } from "../services/fetch/CommonArea";
 import { genericHandler } from "../services/responseHandler/GenericHandler";
 
-class HomeScreen extends React.Component {
+export default class HomeScreen extends React.Component {
     constructor() {
         super();
         this.state = { phrase: "", loading: false };
@@ -77,5 +77,3 @@ const styles = StyleSheet.create({
         fontStyle: "italic",
     },
 });
-
-export default HomeScreen;

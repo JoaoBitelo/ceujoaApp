@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Image, ScrollView } from "react-native";
-import Button from "../../components/ButtonHeader";
+import Button from "../../components/ButtonMenu";
 
 class HeaderStyle extends React.Component {
     constructor(props) {

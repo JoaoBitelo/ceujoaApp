@@ -21,7 +21,7 @@ import { getLogin } from "../util/LoadInfo";
 import { loginHandler } from "../services/responseHandler/LoginResponse";
 import { postlogin } from "../services/fetch/Login";
 
-class HomeScreen extends React.Component {
+export default class HomeScreen extends React.Component {
     constructor() {
         super();
         this.state = { login: "jbitelo", password: "pass", loading: false };
@@ -216,5 +216,3 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
 });
-
-export default HomeScreen;
