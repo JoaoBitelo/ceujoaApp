@@ -18,7 +18,7 @@ export async function genericHandler(response) {
 }
 
 async function responseTrue(token) {
-    await AsyncStorage.setItem('ID_t', token);
+    await AsyncStorage.setItem("ID_t", token);
 }
 
 function responseNull() {

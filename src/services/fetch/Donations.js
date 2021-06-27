@@ -12,7 +12,7 @@ export async function getText() {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            nome: "AreaComum",
+            nome: "Doacoes",
             login: basicInfo.login,
             token: basicInfo.token,
         }),
