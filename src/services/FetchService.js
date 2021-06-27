@@ -32,30 +32,6 @@ class FetchService {
       });
   }
 
-  getSource = async (name) => {
-    const basicInfo = await this.getCurrentSessionInfo();
-    let url = BASE_URL + global.GET_SOURCE
-    return fetch(url, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        nome: name,
-        login: basicInfo.login,
-        token: basicInfo.token
-      }),
-    })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        return responseJson
-      })
-      .catch((error) => {
-        return null
-      });
-  }
-
   getCalendar = async () => {
     const basicInfo = await this.getCurrentSessionInfo();
     let url = BASE_URL + global.GET_CALENDAR

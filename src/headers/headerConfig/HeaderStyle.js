@@ -50,12 +50,6 @@ class HeaderStyle extends React.Component {
                         />
 
                         <Button
-                            targetScreen={"Financial"}
-                            text={"Área Financeira"}
-                            navigation={this.props.navigation}
-                        />
-
-                        <Button
                             targetScreen={"Donations"}
                             text={"Ações sociais - Projeto Joaquinas"}
                             navigation={this.props.navigation}
