@@ -19,19 +19,18 @@ import LoadingScreen from "../components/LoadingScreen";
 import { NavigationEvents } from "react-navigation";
 import { getLogin } from "../util/LoadInfo";
 import { loginHandler } from "../services/responseHandler/LoginResponse";
-import { postlogin } from "../services/Login";
+import { postlogin } from "../services/fetch/Login";
 
 class HomeScreen extends React.Component {
     constructor() {
         super();
-        this.state = { login: "", password: "", loading: false };
+        this.state = { login: "jbitelo", password: "pass", loading: false };
     }
 
     _loginButtonMethod = async () => {
         this.setState({ loading: true });
         let res = await postlogin(this.state.login, this.state.password);
         res = await loginHandler(res, this.state.login);
-        console.log("resficou:", res);
         if (!res) {
             this.props.navigation.navigate("Home");
         } else {

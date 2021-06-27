@@ -5,33 +5,7 @@ const BASE_URL = global.BASE_URL;
 class FetchService {
 
   getCurrentSessionInfo = async () => {
-    const value = {
-      login: await AsyncStorage.getItem('ID_l'),
-      token: await AsyncStorage.getItem('ID_t')
-    };
-    return value;
-  }
-
-  login = async (login, password) => {
-    let url = BASE_URL + global.LOGIN
-    return fetch(url, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        login: login,
-        senha: password
-      }),
-    })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        return responseJson
-      })
-      .catch((error) => {
-        return null
-      });
+    return null;
   }
 
   firstLogin = async (firstInput) => {

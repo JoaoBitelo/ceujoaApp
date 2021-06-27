@@ -1,4 +1,4 @@
-const global = require("../util/Url");
+const global = require("../../util/Url");
 const BASE_URL = global.BASE_URL;
 
 export async function postlogin(login, password) {
