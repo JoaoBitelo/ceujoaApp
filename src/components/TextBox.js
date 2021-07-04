@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
-class HomeScreen extends React.Component {
+export default class TextBox extends React.Component {
     constructor() {
         super();
         this.state = {};
@@ -19,5 +19,3 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
 });
-
-export default HomeScreen;

@@ -222,29 +222,5 @@ class FetchService {
         return false
       });
   }
-
-  getMonthlyPayment = async () => {
-    const basicInfo = await this.getCurrentSessionInfo();
-    let url = BASE_URL + global.GET_MONTHLY_PAYMENT
-    return fetch(url, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        login: basicInfo.login,
-        token: basicInfo.token,
-        loginParaProcurarMensalidadesContribuicoes: basicInfo.login
-      }),
-    })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        return responseJson
-      })
-      .catch((error) => {
-        return null
-      });
-  }
 }
 export default FetchService;
