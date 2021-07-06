@@ -6,3 +6,11 @@ export async function currentSession() {
         token: await AsyncStorage.getItem("ID_t"),
     };
 }
+
+export async function setCurrentDegree(id) {
+    return AsyncStorage.setItem("currentDegree", JSON.stringify(id))
+}
+
+export async function getCurrentDegree(id) {
+    return AsyncStorage.setItem("currentDegree", JSON.stringify(id))
+}

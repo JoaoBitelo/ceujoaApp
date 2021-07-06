@@ -9,7 +9,7 @@ export default class BasicScreen extends React.Component {
         return (
             <View style={styles.viewBackground}>
                 <ImageBackground
-                    source={require("../../assets/backgroundCalendar.jpg")}
+                    source={require("../../../assets/backgroundCalendar.jpg")}
                     style={styles.imageBackGround}
                 >
                     <View style={styles.body}>{this.props.children}</View>

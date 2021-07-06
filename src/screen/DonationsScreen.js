@@ -3,7 +3,7 @@ import { StyleSheet, Text, BackHandler, ScrollView } from "react-native";
 import { NavigationEvents } from "react-navigation";
 //Componentes
 import LoadingScreen from "../components/LoadingScreen";
-import BasicScreen from "../components/BasicScreen";
+import BasicScreen from "../components/templates/BasicScreen";
 import TextBox from "../components/TextBox";
 //Handlers
 import { getText } from "../services/fetch/Donations";

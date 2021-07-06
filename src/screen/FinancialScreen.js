@@ -10,7 +10,7 @@ import {
 import { NavigationEvents } from "react-navigation";
 //Componentes
 import LoadingScreen from "../components/LoadingScreen";
-import BasicScreen from "../components/BasicScreen";
+import BasicScreen from "../components/templates/BasicScreen";
 import TextBoxTittle from "../components/TextBoxTittle";
 import FinancialVerticalList from "../components/FinancialVerticalList";
 //Handlers

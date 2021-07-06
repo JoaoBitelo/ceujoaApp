@@ -12,7 +12,7 @@ import {
 import { NavigationEvents } from "react-navigation";
 //Componentes
 import LoadingScreen from "../components/LoadingScreen";
-import BasicScreen from "../components/BasicScreen";
+import BasicScreen from "../components/templates/BasicScreen";
 //Handlers
 import { getStock } from "../services/fetch/Stock";
 import { genericHandler } from "../services/responseHandler/GenericHandler";

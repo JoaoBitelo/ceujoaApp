@@ -3,7 +3,7 @@ import { StyleSheet, View, BackHandler } from "react-native";
 import { NavigationEvents } from "react-navigation";
 //Componentes
 import LoadingScreen from "../components/LoadingScreen";
-import BasicScreen from "../components/BasicScreen";
+import BasicScreen from "../components/templates/BasicScreen";
 import ButtonNormsAndRegulation from "../components/ButtonNormsAndRegulation";
 
 export default class NormsRegulationsScreen extends React.Component {

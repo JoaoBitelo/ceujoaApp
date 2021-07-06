@@ -4,17 +4,16 @@ import {
     View,
     TouchableOpacity,
     Text,
-    ImageBackground,
     Image,
     Dimensions,
     BackHandler,
-    KeyboardAvoidingView,
-    Platform,
+    ImageBackground,
 } from "react-native";
 //Extra styles
 import { TextInput } from "react-native-gesture-handler";
 //Componentes
 import LoadingScreen from "../components/LoadingScreen";
+import KeyboardBasicScreen from "../components/templates/KeyboardBasicScreen";
 //Handlers
 import { NavigationEvents } from "react-navigation";
 import { getLogin } from "../util/LoadInfo";
@@ -24,7 +23,7 @@ import { postlogin } from "../services/fetch/Login";
 export default class HomeScreen extends React.Component {
     constructor() {
         super();
-        this.state = { login: "jbitelo", password: "pass", loading: false };
+        this.state = { login: "jbitelo", password: "12345678", loading: false };
     }
 
     _loginButtonMethod = async () => {
@@ -68,24 +67,15 @@ export default class HomeScreen extends React.Component {
 
     render() {
         return (
-            <KeyboardAvoidingView
-                behavior={Platform.OS == "ios" ? "padding" : "height"}
-                style={styles.viewBackground}
-            >
+            <KeyboardBasicScreen home={true}>
                 <NavigationEvents
                     onWillFocus={() => this._start()}
                     onWillBlur={() => this._end()}
                 />
-
                 {this.state.loading ? (
                     <LoadingScreen />
                 ) : (
-                    <ImageBackground
-                        source={require("../../assets/backgroundHome.jpg")}
-                        style={styles.imageBackGround}
-                    >
-                        <View style={{ flex: 0.01 }}></View>
-
+                    <View>
                         <View style={styles.viewUpperGround}>
                             <Image
                                 style={styles.image}
@@ -139,22 +129,13 @@ export default class HomeScreen extends React.Component {
                                 <Text style={styles.buttonText}>AVANÇAR</Text>
                             </TouchableOpacity>
                         </View>
-
-                        <View style={{ flex: 0.05 }}></View>
-                    </ImageBackground>
+                    </View>
                 )}
-            </KeyboardAvoidingView>
+            </KeyboardBasicScreen>
         );
     }
 }
 const styles = StyleSheet.create({
-    viewBackground: {
-        flex: 1,
-    },
-    imageBackGround: {
-        width: "100%",
-        height: "100%",
-    },
     viewUpperGround: {
         flex: 4,
         justifyContent: "center",
