@@ -4,13 +4,12 @@ import {
     FlatList,
     BackHandler,
     SafeAreaView,
-    ScrollView,
 } from "react-native";
 import { NavigationEvents } from "react-navigation";
 //Componentes
 import LoadingScreen from "../components/LoadingScreen";
 import BasicScreen from "../components/templates/BasicScreen";
-import ButtonDegree from "../components/ButtonDegree";
+import ButtonDegree from "../components/buttons/ButtonDegree";
 //Handlers
 import { getDegree } from "../services/fetch/Degree";
 import { genericHandler } from "../services/responseHandler/GenericHandler";
@@ -68,16 +67,17 @@ export default class DegreeScreen extends React.Component {
                     <LoadingScreen />
                 ) : (
                     <SafeAreaView style={styles.viewFrontGround}>
-                        <ScrollView>
-                            <FlatList
-                                style={{ flex: 1 }}
-                                data={this.state.dados}
-                                renderItem={({ item, index }) => (
-                                    <ButtonDegree item={item} />
-                                )}
-                                keyExtractor={(item, index) => index.toString()}
-                            />
-                        </ScrollView>
+                        <FlatList
+                            contentContainerStyle={{ flexGrow: 1, justifyContent: 'center'}}
+                            data={this.state.dados}
+                            renderItem={({ item, index }) => (
+                                <ButtonDegree
+                                    item={item}
+                                    navigation={this.props.navigation}
+                                />
+                            )}
+                            keyExtractor={(item, index) => index.toString()}
+                        />
                     </SafeAreaView>
                 )}
             </BasicScreen>

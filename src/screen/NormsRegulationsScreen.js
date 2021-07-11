@@ -4,7 +4,7 @@ import { NavigationEvents } from "react-navigation";
 //Componentes
 import LoadingScreen from "../components/LoadingScreen";
 import BasicScreen from "../components/templates/BasicScreen";
-import ButtonNormsAndRegulation from "../components/ButtonNormsAndRegulation";
+import ButtonNormsAndRegulation from "../components/buttons/ButtonNormsAndRegulation";
 
 export default class NormsRegulationsScreen extends React.Component {
     constructor() {

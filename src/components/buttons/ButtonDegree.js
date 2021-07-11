@@ -8,9 +8,8 @@ import {
     Dimensions,
 } from "react-native";
 import { Icon } from "react-native-elements";
-import { setCurrentDegree } from "../services/session/CurrentSessionInfo/";
 
-export default class ButtonNormsAndRegulation extends React.Component {
+export default class ButtonDegree extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -24,13 +23,9 @@ export default class ButtonNormsAndRegulation extends React.Component {
                 [{ text: "OK" }]
             );
         } else {
-            setCurrentDegree(item.id)
-                .then(() => {
-                    this.props.navigation.navigate("SpecificDegree");
-                })
-                .catch(() => {
-                    this.props.navigation.navigate("Home");
-                });
+            this.props.navigation.push("SpecificDegree", {
+                product: item.id,
+            });
         }
     };
 

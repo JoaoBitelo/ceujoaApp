@@ -8,8 +8,8 @@ import {
     Alert,
 } from "react-native";
 //Handlers
-import { getText } from "../services/fetch/NormsRegulations";
-import { genericHandler } from "../services/responseHandler/GenericHandler";
+import { getText } from "../../services/fetch/NormsRegulations";
+import { genericHandler } from "../../services/responseHandler/GenericHandler";
 
 export default class ButtonNormsAndRegulation extends React.Component {
     constructor(props) {

@@ -7,7 +7,6 @@ import {
     Image,
     Dimensions,
     BackHandler,
-    ImageBackground,
 } from "react-native";
 //Extra styles
 import { TextInput } from "react-native-gesture-handler";
@@ -23,7 +22,7 @@ import { postlogin } from "../services/fetch/Login";
 export default class HomeScreen extends React.Component {
     constructor() {
         super();
-        this.state = { login: "jbitelo", password: "12345678", loading: false };
+        this.state = { login: "jbitelo", password: "12", loading: false };
     }
 
     _loginButtonMethod = async () => {

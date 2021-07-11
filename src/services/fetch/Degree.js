@@ -24,3 +24,27 @@ export async function getDegree() {
             return false;
         });
 }
+
+export async function getDegreeContent(id) {
+    const basicInfo = await currentSession();
+    let url = BASE_URL + global.GET_DEGREE_SPECIFIC;
+    return fetch(url, {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            login: basicInfo.login,
+            token: basicInfo.token,
+            idDoGrau: id,
+        }),
+    })
+        .then((response) => response.json())
+        .then((responseJson) => {
+            return responseJson;
+        })
+        .catch((error) => {
+            return false;
+        });
+}
