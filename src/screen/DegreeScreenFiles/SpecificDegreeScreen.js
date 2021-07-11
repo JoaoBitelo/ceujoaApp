@@ -3,7 +3,6 @@ import {
     StyleSheet,
     FlatList,
     BackHandler,
-    Alert,
     SafeAreaView,
 } from "react-native";
 import { NavigationEvents } from "react-navigation";

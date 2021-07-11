@@ -11,7 +11,7 @@ import { NavigationEvents } from "react-navigation";
 //Componentes
 import LoadingScreen from "../components/LoadingScreen";
 import BasicScreen from "../components/templates/BasicScreen";
-import TextBoxTittle from "../components/TextBoxTittle";
+import TextBoxTittle from "../components/textboxes/TextBoxTittle";
 import FinancialVerticalList from "../components/FinancialVerticalList";
 //Handlers
 import { getFinancialDetail } from "../services/fetch/Financial";

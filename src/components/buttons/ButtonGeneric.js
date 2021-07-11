@@ -4,7 +4,6 @@ import {
     View,
     TouchableOpacity,
     Text,
-    Alert,
     Dimensions,
 } from "react-native";
 

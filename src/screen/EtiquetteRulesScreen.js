@@ -4,7 +4,7 @@ import { NavigationEvents } from "react-navigation";
 //Componentes
 import LoadingScreen from "../components/LoadingScreen";
 import BasicScreen from "../components/templates/BasicScreen";
-import TextBox from "../components/TextBox";
+import TextBox from "../components/textboxes/TextBox";
 //Handlers
 import { getText } from "../services/fetch/Etiquette";
 import { genericHandler } from "../services/responseHandler/GenericHandler";
