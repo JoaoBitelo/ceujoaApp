@@ -9,7 +9,7 @@ import { NavigationEvents } from "react-navigation";
 //Componentes
 import LoadingScreen from "../components/LoadingScreen";
 import BasicScreen from "../components/templates/BasicScreen";
-import ButtonDegree from "../components/buttons/ButtonDegree";
+import ButtonGenericAccess from "../components/buttons/ButtonGenericAccess";
 //Handlers
 import { getDegree } from "../services/fetch/Degree";
 import { genericHandler } from "../services/responseHandler/GenericHandler";
@@ -71,7 +71,7 @@ export default class DegreeScreen extends React.Component {
                             contentContainerStyle={{ flexGrow: 1, justifyContent: 'center'}}
                             data={this.state.dados}
                             renderItem={({ item, index }) => (
-                                <ButtonDegree
+                                <ButtonGenericAccess
                                     item={item}
                                     navigation={this.props.navigation}
                                 />

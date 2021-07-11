@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { Icon } from "react-native-elements";
 
-export default class ButtonDegree extends React.Component {
+export default class ButtonGenericAccess extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
