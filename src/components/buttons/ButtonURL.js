@@ -1,5 +1,11 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Text, Linking } from "react-native";
+import {
+    StyleSheet,
+    TouchableOpacity,
+    Text,
+    Linking,
+    Alert,
+} from "react-native";
 
 export default class ButtonURL extends React.Component {
     constructor(props) {
@@ -8,9 +14,9 @@ export default class ButtonURL extends React.Component {
     }
 
     _buttonMethod = async () => {
-        const supported = await Linking.canOpenURL(this.props.url);
+        const supported = await Linking.canOpenURL(this.props.text);
         if (supported) {
-            await Linking.openURL(this.props.url);
+            await Linking.openURL(this.props.text);
         } else {
             Alert.alert(
                 "Erro ao abrir o link",
